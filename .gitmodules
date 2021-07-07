@@ -1,0 +1,3 @@
+[submodule "ros2_docker/colcon_ws/src/ROS-TCP-Endpoint"]
+	path = ros2_docker/colcon_ws/src/ROS-TCP-Endpoint
+	url = git@github.com:Unity-Technologies/ROS-TCP-Endpoint.git

@@ -1,10 +1,10 @@
 import rclpy
 
-from ros2_tcp_endpoint.server import TcpServer
-from ros2_tcp_endpoint.publisher import RosPublisher
-from ros2_tcp_endpoint.subscriber import RosSubscriber
-from ros2_tcp_endpoint.service import RosService
-from ros2_tcp_endpoint.unity_service import UnityService
+from ros_tcp_endpoint.server import TcpServer
+from ros_tcp_endpoint.publisher import RosPublisher
+from ros_tcp_endpoint.subscriber import RosSubscriber
+from ros_tcp_endpoint.service import RosService
+from ros_tcp_endpoint.unity_service import UnityService
 
 from tf2_msgs.msg import TFMessage
 from geometry_msgs.msg import Twist
