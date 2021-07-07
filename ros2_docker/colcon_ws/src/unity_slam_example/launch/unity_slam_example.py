@@ -7,21 +7,23 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    return LaunchDescription([
-        Node(
-            package='unity_slam_example',
-            executable='server_endpoint',
-            parameters=[
-                {'/ROS_IP': '172.17.0.2'},
-                {'/ROS_TCP_PORT': 10000}
-            ],
+    package_name = 'unity_slam_example'
+    package_dir = get_package_share_directory(package_name)
+    param_file = os.path.join(package_dir, 'unity_params.yaml')
+
+    return LaunchDescription({
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('ros_tcp_endpoint'), 'endpoint.py')
+            ),
         ),
+
 
         Node(
             package='rviz2',
             executable='rviz2',
-            output='screen', 
-            arguments=['-d', os.path.join(get_package_share_directory('unity_slam_example'), 'nav2_unity.rviz')]
+            output='screen',
+            arguments=['-d', os.path.join(package_dir, 'nav2_unity.rviz')]
         ),
 
         IncludeLaunchDescription(
@@ -29,8 +31,8 @@ def generate_launch_description():
                 os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
             ),
             launch_arguments={
-                'use_sim_time': 'true',
-                'verbose': 'true'
+                'params_file': param_file,
+                'use_sim_time': 'true'
             }.items()
         ),
 
@@ -39,9 +41,8 @@ def generate_launch_description():
                 os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
             ),
             launch_arguments={
-                'use_sim_time': 'true',
-                'verbose': 'true'
+                'params_file': param_file,
+                'use_sim_time': 'true'
             }.items()
         )
-    ])
-    
+    })
