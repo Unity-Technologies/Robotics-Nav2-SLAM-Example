@@ -6676,9 +6676,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8444005593878882231, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
       propertyPath: m_Name
       value: Ceiling01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444005593878882231, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
@@ -10273,6 +10289,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01
@@ -10533,7 +10553,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -11034,6 +11054,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01
@@ -22477,6 +22505,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01

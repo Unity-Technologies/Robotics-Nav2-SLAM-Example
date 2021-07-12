@@ -14,7 +14,7 @@ def generate_launch_description():
     return LaunchDescription({
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('ros_tcp_endpoint'), 'endpoint.py')
+                os.path.join(get_package_share_directory('ros_tcp_endpoint'), 'launch', 'endpoint.py')
             ),
         ),
 

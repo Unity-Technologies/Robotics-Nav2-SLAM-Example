@@ -50,6 +50,8 @@ public class LaserScanSensor : MonoBehaviour
     [FormerlySerializedAs("MarkerGradient")] public Gradient ActiveMarkerGradient;
     public Gradient InActiveMarkerGradient;
 
+    [SerializeField]
+    bool m_RenderDebugVisuals;
     Queue<ScanMarker> m_MarkersActive = new Queue<ScanMarker>();
     Queue<ScanMarker> m_MarkersInactive = new Queue<ScanMarker>();
 
@@ -183,6 +185,11 @@ public class LaserScanSensor : MonoBehaviour
 
     void UpdateAllMarkers()
     {
+        if (!m_RenderDebugVisuals)
+        {
+            ResetMarkers();
+            return;
+        }
         var timeDelta = Clock.DeltaTimeSeconds;
         foreach (var marker in m_MarkersActive)
         {
@@ -230,24 +237,27 @@ public class LaserScanSensor : MonoBehaviour
             {
                 ranges.Add(hit.distance);
 
-                if (m_MarkersInactive.Count > 0)
+                if (m_RenderDebugVisuals)
                 {
-                    var marker = m_MarkersInactive.Dequeue();
-                    ActivateMarker(marker);
-                    marker.SceneObject.transform.position = hit.point;
-                }
-                else if (markerPrefab != null)
-                {
-                    var scanMarker = new ScanMarker
+                    if (m_MarkersInactive.Count > 0)
                     {
-                        SceneObject = Instantiate(markerPrefab, hit.point, Quaternion.identity),
-                    };
-                    ActivateMarker(scanMarker);
-                }
-                else if (!m_HaveWarnedNoMarkerPrefab)
-                {
-                    Debug.LogWarning("No marker prefabs available to instantiate - won't be able to visualize scan");
-                    m_HaveWarnedNoMarkerPrefab = true;
+                        var marker = m_MarkersInactive.Dequeue();
+                        ActivateMarker(marker);
+                        marker.SceneObject.transform.position = hit.point;
+                    }
+                    else if (markerPrefab != null)
+                    {
+                        var scanMarker = new ScanMarker
+                        {
+                            SceneObject = Instantiate(markerPrefab, hit.point, Quaternion.identity),
+                        };
+                        ActivateMarker(scanMarker);
+                    }
+                    else if (!m_HaveWarnedNoMarkerPrefab)
+                    {
+                        Debug.LogWarning("No marker prefabs available to instantiate - won't be able to visualize scan");
+                        m_HaveWarnedNoMarkerPrefab = true;
+                    }
                 }
             }
             else
@@ -258,7 +268,7 @@ public class LaserScanSensor : MonoBehaviour
             // Even if Raycast didn't find a valid hit, we still count it as a measurement
             ++m_NumMeasurementsTaken;
         }
-
+        
         UpdateAllMarkers();
 
         if (m_NumMeasurementsTaken >= NumMeasurementsPerScan)

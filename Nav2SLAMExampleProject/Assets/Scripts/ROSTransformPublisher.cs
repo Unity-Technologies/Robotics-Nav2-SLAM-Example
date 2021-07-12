@@ -8,6 +8,7 @@ using RosSharp.Urdf;
 using Unity.Robotics.Core;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using Unity.Robotics.SlamExample;
 using UnityEngine;
 
 public class ROSTransformPublisher : MonoBehaviour
