@@ -1,23 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosMessageTypes.Std;
 using RosMessageTypes.BuiltinInterfaces;
 using Unity.Robotics.Core;
 
 public class ROSClockPublisher : MonoBehaviour
 {
-    public float PublishRateHz = 100f;
+    [SerializeField]
+    Clock.ClockMode m_ClockMode;
 
-    float m_LastPublishTimeSeconds;
+    [SerializeField, HideInInspector]
+    Clock.ClockMode m_LastSetClockMode;
+    
+    [SerializeField] 
+    double m_PublishRateHz = 100f;
+
+    double m_LastPublishTimeSeconds;
 
     ROSConnection m_ROS;
 
-    float PublishPeriodSeconds => 1.0f / PublishRateHz;
+    double PublishPeriodSeconds => 1.0f / m_PublishRateHz;
 
-    bool ShouldPublishMessage => Clock.TimeSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
+    bool ShouldPublishMessage => Clock.FrameStartTimeInSeconds - PublishPeriodSeconds > m_LastPublishTimeSeconds;
 
     void OnValidate()
     {
@@ -26,24 +30,40 @@ public class ROSClockPublisher : MonoBehaviour
         {
             Debug.LogWarning("Found too many clock publishers in the scene, there should only be one!");
         }
+
+        if (Application.isPlaying && m_LastSetClockMode != m_ClockMode)
+        {
+            Debug.LogWarning("Can't change ClockMode during simulation! Setting it back...");
+            m_ClockMode = m_LastSetClockMode;
+        }
+        
+        SetClockMode(m_ClockMode);
+    }
+
+    void SetClockMode(Clock.ClockMode mode)
+    {
+        Clock.Mode = mode;
+        m_LastSetClockMode = mode;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        SetClockMode(m_ClockMode);
         m_ROS = ROSConnection.instance;
         m_ROS.RegisterPublisher("clock", "rosgraph_msgs/Clock");
     }
 
     void PublishMessage()
     {
+        var publishTime = Clock.time;
         var clockMsg = new TimeMsg
         {
-            sec = (int)Clock.TimeSeconds,
-            nanosec = (uint)((Clock.TimeSeconds - Math.Floor(Clock.TimeSeconds)) * 1000000000)
+            sec = (int)publishTime,
+            nanosec = (uint)((publishTime - Math.Floor(publishTime)) * Clock.k_NanoSecondsInSeconds)
         };
+        m_LastPublishTimeSeconds = publishTime;
         m_ROS.Send("clock", clockMsg);
-        m_LastPublishTimeSeconds = Clock.TimeSeconds;
     }
 
     void Update()
