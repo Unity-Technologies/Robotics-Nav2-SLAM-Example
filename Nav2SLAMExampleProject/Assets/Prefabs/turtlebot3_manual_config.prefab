@@ -1023,6 +1023,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  m_RenderDebugVisuals: 0
 --- !u!1 &1872241788244199460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,7 +1565,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1872241788697882704}
   - component: {fileID: 1872241788697882705}
-  - component: {fileID: 6423989793712371774}
   - component: {fileID: 1105056039470463669}
   - component: {fileID: 455435641689582853}
   m_Layer: 11
@@ -1604,20 +1604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 1
---- !u!114 &6423989793712371774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872241788697882711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e68f65278fa404640beeb137ab878606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PublishRateHz: 50
-  GlobalFrameID: odom
 --- !u!171741748 &1105056039470463669
 ArticulationBody:
   m_ObjectHideFlags: 0
