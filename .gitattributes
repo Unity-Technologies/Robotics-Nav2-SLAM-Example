@@ -1,0 +1,45 @@
+* text=auto eol=lf
+# EOL
+*.py eol=lf
+*.pl eol=lf
+*.pm eol=lf
+*.t eol=lf
+*.it eol=lf
+*.h eol=lf
+*.cpp eol=lf
+*.cs eol=lf
+*.c eol=lf
+*.txt eol=lf
+*.bindings eol=lf
+*.sh eol=lf
+*.jam eol=lf
+*.as eol=lf
+*.boo eol=lf
+*.java eol=lf
+*.js eol=lf
+Makefile eol=lf
+*.shader eol=lf
+*.cginc eol=lf
+*.glslinc eol=lf
+*.meta eol=lf
+*.mm eol=lf
+*.md eol=lf
+Runtime/Export/common_* eol=lf
+Repositories.ini eol=lf
+.hgignore eol=lf
+# vs can handle these as lf, but really wants them as crlf
+*.vcproj eol=crlf
+*.vcxproj eol=crlf
+*.vcxproj.filters eol=crlf
+*.csproj eol=crlf
+*.props eol=crlf
+*.targets eol=crlf
+*.sln eol=crlf
+*.sln.template eol=crlf
+*.bat eol=crlf
+*.cmd eol=crlf
+*.xaml eol=crlf
+# the templating parser will actually fail on lf, inexplicably setting every #line directive as '1'
+*.tt eol=crlf
+*.t4 eol=crlf
+*.ttinclude eol=crlf
