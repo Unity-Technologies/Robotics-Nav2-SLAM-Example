@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Std;
+using RosMessageTypes.Tf2;
+
 //using RosMessageTypes.Tf2;
 using RosSharp.Urdf;
 using Unity.Robotics.Core;
@@ -10,15 +12,18 @@ using UnityEngine;
 
 public class ROSTransformPublisher : MonoBehaviour
 {
-    public float PublishRateHz = 1f;
-    public string GlobalFrameID = "odom";
-
+    
+    [SerializeField]
+    float m_PublishRateHz = 20f;
+    [SerializeField]
+    List<string> m_GlobalFrameIds = new List<string> { "odom", "map" };
+    
     float m_LastPublishTimeSeconds;
 
     TransformTree m_TransformRoot;
     ROSConnection m_ROS;
 
-    float PublishPeriodSeconds => 1.0f / PublishRateHz;
+    float PublishPeriodSeconds => 1.0f / m_PublishRateHz;
 
     bool ShouldPublishMessage => Clock.TimeSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
@@ -49,16 +54,20 @@ public class ROSTransformPublisher : MonoBehaviour
     void PublishMessage()
     {
         var tfMessageList = new List<TransformStampedMsg>();
-        //var tfRootToGlobal = new TransformStampedMsg(
-        //    new HeaderMsg(Clock.TimeStamp, GlobalFrameID),
-        //    m_TransformRoot.name,
-        //    m_TransformRoot.Transform.To<FLU>());
-        //tfMessageList.Add(tfRootToGlobal);
-        //PopulateTFList(tfMessageList, m_TransformRoot);
+        foreach (var frameId in m_GlobalFrameIds)
+        {
+            var tfRootToGlobal = new TransformStampedMsg(
+                new HeaderMsg(Clock.TimeStamp, frameId),
+                m_TransformRoot.name,
+                m_TransformRoot.Transform.To<FLU>());
+            tfMessageList.Add(tfRootToGlobal);
+        }
 
-        //var tfMessage = new TFMessageMsg(tfMessageList.ToArray());
-        //m_ROS.Send("tf", tfMessage);
-        //m_LastPublishTimeSeconds = Clock.TimeSeconds;
+        PopulateTFList(tfMessageList, m_TransformRoot);
+
+        var tfMessage = new TFMessageMsg(tfMessageList.ToArray());
+        m_ROS.Send("tf", tfMessage);
+        m_LastPublishTimeSeconds = Clock.TimeSeconds;
     }
 
     void Update()

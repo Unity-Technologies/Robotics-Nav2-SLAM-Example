@@ -19,6 +19,15 @@ public class ROSClockPublisher : MonoBehaviour
 
     bool ShouldPublishMessage => Clock.TimeSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
+    void OnValidate()
+    {
+        var clocks = FindObjectsOfType<ROSClockPublisher>();
+        if (clocks.Length > 1)
+        {
+            Debug.LogWarning("Found too many clock publishers in the scene, there should only be one!");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
