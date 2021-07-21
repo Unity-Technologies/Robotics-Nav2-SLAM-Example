@@ -33,9 +33,8 @@ public class LaserScanSensor : MonoBehaviour
     }
 
     public string topic;
-    public bool ConnectToRos;
     [FormerlySerializedAs("TimeBetweenScansSeconds")]
-    public float PublishPeriodSeconds = 0.1f;
+    public double PublishPeriodSeconds = 0.1;
     public float RangeMetersMin = 0;
     public float RangeMetersMax = 1000;
     public float ScanAngleStartDegrees = -45;
@@ -50,40 +49,39 @@ public class LaserScanSensor : MonoBehaviour
     [FormerlySerializedAs("MarkerGradient")] public Gradient ActiveMarkerGradient;
     public Gradient InActiveMarkerGradient;
 
+    [SerializeField]
+    bool m_RenderDebugVisuals;
     Queue<ScanMarker> m_MarkersActive = new Queue<ScanMarker>();
     Queue<ScanMarker> m_MarkersInactive = new Queue<ScanMarker>();
 
     float m_CurrentScanAngleStart;
     float m_CurrentScanAngleEnd;
     ROSConnection m_Ros;
-    private bool m_HaveWarnedNoMarkerPrefab;
-    float m_TimeNextScanSeconds = -1;
-    private int m_NumMeasurementsTaken;
+    bool m_HaveWarnedNoMarkerPrefab;
+    double m_TimeNextScanSeconds = -1;
+    int m_NumMeasurementsTaken;
     List<float> ranges = new List<float>();
     LayerMask m_SelfMask;
 
     bool isScanning = false;
-    float m_TimeLastScanBeganSeconds = -1;
+    double m_TimeLastScanBeganSeconds = -1;
 
     protected virtual void Start()
     {
-        if (ConnectToRos)
-        {
-            m_Ros = ROSConnection.instance;
-            m_Ros.RegisterPublisher(topic, "sensor_msgs/LaserScan");
-        }
+        m_Ros = ROSConnection.instance;
+        m_Ros.RegisterPublisher(topic, "sensor_msgs/LaserScan");
 
         m_CurrentScanAngleStart = ScanAngleStartDegrees;
         m_CurrentScanAngleEnd = ScanAngleEndDegrees;
         m_SelfMask = LayerMask.GetMask(LayerMaskName);
 
-        m_TimeNextScanSeconds = Time.time + PublishPeriodSeconds;
+        m_TimeNextScanSeconds = Clock.Now + PublishPeriodSeconds;
     }
 
     void BeginScan()
     {
         isScanning = true;
-        m_TimeLastScanBeganSeconds = Clock.TimeSeconds;
+        m_TimeLastScanBeganSeconds = Clock.Now;
         m_TimeNextScanSeconds = m_TimeLastScanBeganSeconds + PublishPeriodSeconds;
         m_NumMeasurementsTaken = 0;
         ResetMarkers();
@@ -115,7 +113,7 @@ public class LaserScanSensor : MonoBehaviour
                              $"and recorded {ranges.Count} ranges.");
         }
 
-        var timestamp = Clock.TimeStamp;
+        var timestamp = new TimeStamp(Clock.time);
         // Invert the angle ranges when going from Unity to ROS
         var angleStartRos = -m_CurrentScanAngleStart * Mathf.Deg2Rad;
         var angleEndRos = -m_CurrentScanAngleEnd * Mathf.Deg2Rad;
@@ -145,18 +143,17 @@ public class LaserScanSensor : MonoBehaviour
             angle_max = angleEndRos,
             angle_increment = (angleEndRos - angleStartRos) / NumMeasurementsPerScan,
             time_increment = TimeBetweenMeasurementsSeconds,
-            scan_time = PublishPeriodSeconds,
+            scan_time = (float)PublishPeriodSeconds,
             intensities = new float[ranges.Count],
             ranges = ranges.ToArray(),
         };
-
-        if (ConnectToRos)
-            m_Ros.Send(topic, msg);
+        
+        m_Ros.Send(topic, msg);
 
         m_NumMeasurementsTaken = 0;
         ranges.Clear();
         isScanning = false;
-        var now = Clock.TimeSeconds;
+        var now = (float)Clock.time;
         if (now > m_TimeNextScanSeconds)
         {
             Debug.LogWarning($"Failed to complete scan started at {m_TimeLastScanBeganSeconds:F} before next scan was " +
@@ -183,18 +180,23 @@ public class LaserScanSensor : MonoBehaviour
 
     void UpdateAllMarkers()
     {
-        var timeDelta = Clock.DeltaTimeSeconds;
+        if (!m_RenderDebugVisuals)
+        {
+            ResetMarkers();
+            return;
+        }
+        var timeDelta = Clock.deltaTime;
         foreach (var marker in m_MarkersActive)
         {
             marker.TimeCurrentStateSeconds += timeDelta;
-            var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / PublishPeriodSeconds);
+            var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / (float)PublishPeriodSeconds);
             marker.SetColor(ActiveMarkerGradient.Evaluate(fadeAmount));
         }
 
         foreach (var marker in m_MarkersInactive)
         {
             marker.TimeCurrentStateSeconds += timeDelta;
-            var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / PublishPeriodSeconds);
+            var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / (float)PublishPeriodSeconds);
             marker.SetColor(InActiveMarkerGradient.Evaluate(fadeAmount));
         }
     }
@@ -203,15 +205,17 @@ public class LaserScanSensor : MonoBehaviour
     {
         if (!isScanning)
         {
-            if (Clock.TimeSeconds < m_TimeNextScanSeconds)
-                return; // do nothing while waiting for the next scan
+            if (Clock.NowTimeInSeconds < m_TimeNextScanSeconds)
+            {
+                return;
+            }
 
             BeginScan();
         }
 
 
         var measurementsSoFar = TimeBetweenMeasurementsSeconds == 0 ? NumMeasurementsPerScan :
-            1 + Mathf.FloorToInt((Clock.TimeSeconds - m_TimeLastScanBeganSeconds) / TimeBetweenMeasurementsSeconds);
+            1 + Mathf.FloorToInt((float)(Clock.time - m_TimeLastScanBeganSeconds) / TimeBetweenMeasurementsSeconds);
         if (measurementsSoFar > NumMeasurementsPerScan)
             measurementsSoFar = NumMeasurementsPerScan;
 
@@ -230,24 +234,27 @@ public class LaserScanSensor : MonoBehaviour
             {
                 ranges.Add(hit.distance);
 
-                if (m_MarkersInactive.Count > 0)
+                if (m_RenderDebugVisuals)
                 {
-                    var marker = m_MarkersInactive.Dequeue();
-                    ActivateMarker(marker);
-                    marker.SceneObject.transform.position = hit.point;
-                }
-                else if (markerPrefab != null)
-                {
-                    var scanMarker = new ScanMarker
+                    if (m_MarkersInactive.Count > 0)
                     {
-                        SceneObject = Instantiate(markerPrefab, hit.point, Quaternion.identity),
-                    };
-                    ActivateMarker(scanMarker);
-                }
-                else if (!m_HaveWarnedNoMarkerPrefab)
-                {
-                    Debug.LogWarning("No marker prefabs available to instantiate - won't be able to visualize scan");
-                    m_HaveWarnedNoMarkerPrefab = true;
+                        var marker = m_MarkersInactive.Dequeue();
+                        ActivateMarker(marker);
+                        marker.SceneObject.transform.position = hit.point;
+                    }
+                    else if (markerPrefab != null)
+                    {
+                        var scanMarker = new ScanMarker
+                        {
+                            SceneObject = Instantiate(markerPrefab, hit.point, Quaternion.identity),
+                        };
+                        ActivateMarker(scanMarker);
+                    }
+                    else if (!m_HaveWarnedNoMarkerPrefab)
+                    {
+                        Debug.LogWarning("No marker prefabs available to instantiate - won't be able to visualize scan");
+                        m_HaveWarnedNoMarkerPrefab = true;
+                    }
                 }
             }
             else
@@ -258,7 +265,7 @@ public class LaserScanSensor : MonoBehaviour
             // Even if Raycast didn't find a valid hit, we still count it as a measurement
             ++m_NumMeasurementsTaken;
         }
-
+        
         UpdateAllMarkers();
 
         if (m_NumMeasurementsTaken >= NumMeasurementsPerScan)

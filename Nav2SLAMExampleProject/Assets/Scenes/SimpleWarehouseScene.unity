@@ -6676,9 +6676,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649539588600495969, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8444005593878882231, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
       propertyPath: m_Name
       value: Ceiling01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444005593878882231, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b8647f248da544aaa38291fe7142a67, type: 3}
@@ -10273,6 +10289,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01
@@ -10533,7 +10553,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -11034,6 +11054,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01
@@ -18115,6 +18143,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1672295484303419316, guid: 29fc1af60598849809afd57941f8a6d6, type: 3}
     - target: {fileID: 2482983700755504926, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
+      propertyPath: topic
+      value: /scan
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482983700755504926, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -18125,6 +18157,10 @@ PrefabInstance:
     - target: {fileID: 2482983700755504926, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
       propertyPath: RangeMetersMax
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482983700755504926, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
+      propertyPath: m_RenderDebugVisuals
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2482983700755504926, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
       propertyPath: TimeBetweenMeasurementsSeconds
@@ -18192,6 +18228,7 @@ PrefabInstance:
       objectReference: {fileID: 1672295484303419316, guid: 29fc1af60598849809afd57941f8a6d6, type: 3}
     m_RemovedComponents:
     - {fileID: 8933833932395393313, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
+    - {fileID: 6423989793712371774, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
 --- !u!1001 &1160274738
 PrefabInstance:
@@ -22477,6 +22514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723721249}
     m_Modifications:
+    - target: {fileID: 151396882044669988, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1396547629514036516, guid: 2bf556854c75b4bacaa246d98bb9d648, type: 3}
       propertyPath: m_Name
       value: Skylight01
@@ -25859,6 +25900,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557198594}
   m_Mesh: {fileID: 8702659614552871817, guid: e783415d71fb07343bb01cc44db9d3dd, type: 3}
+--- !u!1 &1565238260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1872241788697882711, guid: 34effcfe811ae3149930f116567a9d19, type: 3}
+  m_PrefabInstance: {fileID: 1154388436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1565302667
 GameObject:
   m_ObjectHideFlags: 0
@@ -35435,8 +35481,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2096264932}
   - component: {fileID: 2096264931}
+  - component: {fileID: 2096264933}
   m_Layer: 0
-  m_Name: ClockPublisher
+  m_Name: ROSPublishers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35454,7 +35501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967f7747bd690dd41bfed4e6090ab213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PublishRateHz: 100
+  m_ClockMode: 0
+  m_LastSetClockMode: 0
+  m_PublishRateHz: 30
 --- !u!4 &2096264932
 Transform:
   m_ObjectHideFlags: 0
@@ -35469,6 +35518,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096264933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096264930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f65278fa404640beeb137ab878606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PublishRateHz: 10
+  m_GlobalFrameIds:
+  - map
+  - odom
+  m_RootGameObject: {fileID: 1565238260}
 --- !u!1001 &2097549483
 PrefabInstance:
   m_ObjectHideFlags: 0

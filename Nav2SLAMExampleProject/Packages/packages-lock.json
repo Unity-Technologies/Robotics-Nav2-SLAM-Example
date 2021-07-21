@@ -124,11 +124,10 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.robotics.ros-tcp-connector": {
-      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#dev",
+      "version": "file:C:\\Users\\Devin\\unity_ws\\amr-demo\\ROS-TCP-Connector\\com.unity.robotics.ros-tcp-connector",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "60d7e7cf4c30cc230578d304fb89d796cfae1297"
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.robotics.urdf-importer": {
       "version": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer",
