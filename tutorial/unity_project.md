@@ -32,4 +32,4 @@ In the ROS Settings panel:
 ---
 
 ## Continue to running the example
-Everything is now configured to [run the example](run_example.md). If you'd like to understand more about how this project is set up and what the different components are doing, you may skip to [Understanding the Project Components]()
+Everything is now configured to [run the example](run_example.md). If you'd like to understand more about how this project is set up and what the different components are doing, you may skip to [Understanding the Project Components](explanation.md)
