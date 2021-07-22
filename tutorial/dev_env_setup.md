@@ -1,7 +1,7 @@
 # Configure your Development Environment
 ---  
 ## Install the Unity Editor  
-You will need to download the version of Unity which matches the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1), which should be `2020.3.12f1`. You may download the editor either through the Unity Hub or directly from Unity's download site, both of which are located [here](https://unity3d.com/get-unity/download).
+You will need to download the version of Unity which matches the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1), which should be `2020.3.11f1`. You may download the editor either through the Unity Hub or directly from Unity's download site, both of which are located [here](https://unity3d.com/get-unity/download).
 
 ---
 
