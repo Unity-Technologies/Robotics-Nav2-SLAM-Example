@@ -20,7 +20,7 @@ This project should work with any appropriately configured ROS 2 environment, bu
 ```
 # From the repository root...
 cd ros2_docker && \
-docker build -t unity-robotics:slam-example ./
+docker build -t unity-robotics:nav2-slam-example ./
 ```
 >This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
 
