@@ -1,4 +1,3 @@
-# NOTE: This is an incomplete dev environment and isn't configured for IDE integration yet
 FROM ros:foxy-ros-core
 
 ENV DEV_NAME=rosdev
@@ -7,26 +6,22 @@ ENV ROS_DISTRO=foxy
 ENV GROUP_NAME=ros
 ENV WS_NAME=colcon_ws
 
-
-# Ensure dependencies we need are installed, even though they're likely in the base image
+ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 RUN apt-get update && apt-get install -y --no-install-recommends \
         sudo \
         curl \
         wget \
         vim \
-        python3-pip \
-    && rm -rf /var/lib/apt/lists/*
-
-ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
-# Install the "immutable" dependencies here, before we copy the build context in (so this step can be cached)
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
+        mesa-utils && \
+    # Had to install curl/wget first to support ROS install instructions...
+    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
+        python3-pip \
         python3-colcon-common-extensions \
         python3-vcstool \
-        python3-rosdep
-# TODO: Re-instate rm statement here
-#    && rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
+        python3-rosdep \
+    && rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
 
 RUN python3 -m pip install \
         ipython \
