@@ -51,12 +51,10 @@ USER ${DEV_NAME}
 RUN cd ~/${WS_NAME} && colcon build
 
 RUN echo ". /opt/ros/foxy/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
-    echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc && \
-    echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/${DEV_NAME}/${WS_NAME}/src/turtlebot3_simulations/turtlebot3_gazebo/models" >> /home/${DEV_NAME}/.bashrc
+    echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc
 
-ENV TURTLEBOT3_MODEL=waffle_pi
 
-# To bring up tb3 simulation example (from https://navigation.ros.org/tutorials/docs/navigation2_with_slam.html)
+# To bring up tb3 simulation example (from https://navigation.ros.org/tutorials/docs/navigation2_with_slam.html) 
 # cd catkin_ws && source install/setup.bash && ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 
 USER ${DEV_NAME}
