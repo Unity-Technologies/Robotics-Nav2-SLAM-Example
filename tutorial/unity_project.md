@@ -26,6 +26,7 @@ In the ROS Settings panel:
 * Check the `Connect on Startup` checkbox
 * Ensure `Protocol` is set to `ROS2`
 * Set your `ROS IP Address` to the address of the adapter your ROS2 environment is using. For those using a Docker container on the same machine as per our guidance from the [setup instructions](dev_env_setup), this will be the default: `127.0.0.1`  
+* Check the `Show HUD` checkbox to ensure you get visual feedback on the state of your ROS connection later
 
 ![ROS Settings Panel with appropriate settings](images/ros_settings_window.png)  
 
