@@ -1,7 +1,7 @@
 # Configure your Development Environment
 ---  
 ## Install the Unity Editor  
-You will need to download the version of Unity which matches the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1), which should be `2020.3.11f1`. You may download the editor either through the Unity Hub or directly from Unity's download site, both of which are located [here](https://unity3d.com/get-unity/download).
+This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases).
 
 ---
 
@@ -15,7 +15,7 @@ git clone --recurse-submodule git@github.com:Unity-Technologies/Robotics-Nav2-SL
 ---
 
 ## Set Up the ROS2 Environment
-This project should work with any appropriately configured ROS 2 environment, but we strongly encourage building the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), as we may be unable to provide adequate troubleshooting support for other environments. This section will assume you are setting up your environment using our Dockerfile.
+This project should work with any appropriately configured ROS 2 environment, but we strongly encourage installing Docker and building the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), as we may be unable to provide adequate troubleshooting support for other environments. This section will assume you are setting up your environment using our Dockerfile.
 ### Build the Docker container
 ```
 # From the repository root...

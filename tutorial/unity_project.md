@@ -1,14 +1,15 @@
 # Setting up the Unity Project
 
 ## Open the Unity Project
-Assuming you have already [configured your dev environment](dev_env_setup.md), you can open the `Nav2SLAMExampleProject` either by adding it to your Unity Hub or directly from an open editor. 
+Assuming you have already [configured your dev environment](dev_env_setup.md), you can open the `Nav2SLAMExampleProject` either by adding the directory to your Unity Hub via the `Add` button, or opening it directly from an open Editor. 
 
 ![Unity Hub with projects tab, showing the Nav2SLAMExampleProject](images/unity_hub_projects.png)
 
+> On Linux, you may encounter a bug in the Hub where, if you have no Projects in your list already, Add will not work properly. If you see this, create a New, empty project first, then try and Add Nav2SLAMExampleProject again.
 ---
 
 ## Open the SimpleWarehouseScene
-Find the example scene, SimpleWarehouseScene, in the project browser, located in the bottom left of the editor by default, and open it by double-clicking. 
+Find the example scene, SimpleWarehouseScene, in the project browser, located in the bottom left of the Editor by default, and open it by double-clicking. 
 
 ![Project Browser pointing to Scenes directory](images/browser_to_scene.png)   
 

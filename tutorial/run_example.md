@@ -31,7 +31,7 @@ If this doesn't work, you may need to first `colcon build` the workspace or `sou
 ## Start the Unity simulation
 >This section assumes you have already set up your Unity environment according to the guide [here](unity_project.md).  
 
-With the SimpleWareHouseScene open, simply press the Play button at the top of the editor.  
+With the SimpleWareHouseScene open, simply press the Play button at the top of the Editor.  
 ![animation of Play button being pressed and simulation starting](images/start_unity.gif)  
 
 If the ROS2 nodes were already launched, you should see flashing, non-red arrows in the top-left HUD to indicate Unity is communicating with ROS.
@@ -49,6 +49,8 @@ The TurtleBot is now localizing AND mapping, simultaneously!  Now, to do navigat
 ![animation of clicking 2D goal pose in RViz](images/goal_pose.gif)
 
 Congratulations! The TurtleBot is now navigating the map as it generates it from laserscan data published from Unity. 
+
+> While the Nav2 stack is pretty robust to most goal inputs, it may occasionally crash or otherwise reach a state where it no longer responds as expected. These issues can most of the time be fixed by simply killing and restarting the nav2 nodes, and pressing `Play` twice in Unity to stop and restart the simulation.
 
 ---
 ---
