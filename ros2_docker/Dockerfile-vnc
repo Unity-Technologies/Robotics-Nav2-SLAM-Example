@@ -1,0 +1,62 @@
+# adapted from: https://github.com/Tiryoh/docker-ros2-desktop-vnc
+
+FROM dorowu/ubuntu-desktop-lxde-vnc:focal
+LABEL maintainer="Unity Robotics <unity-robotics@unity3d.com>"
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEV_NAME=rosdev
+ENV ROS_DISTRO=foxy
+ENV GROUP_NAME=ros
+ENV WS_NAME=colcon_ws
+
+RUN echo "Set disable_coredump false" >> /etc/sudo.conf
+RUN apt-get update -q && \
+    apt-get upgrade -yq && \
+    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata gosu && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN useradd --create-home --home-dir /home/${DEV_NAME} --shell /bin/bash --user-group --groups adm,sudo ${DEV_NAME} && \
+    echo "$DEV_NAME:$DEV_NAME" | chpasswd && \
+    echo "$DEV_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+COPY ./ros-foxy-desktop.sh /ros-foxy-desktop.sh
+RUN mkdir -p /tmp/ros_setup_scripts_ubuntu && mv /ros-foxy-desktop.sh /tmp/ros_setup_scripts_ubuntu/ && \
+    gosu ${DEV_NAME} /tmp/ros_setup_scripts_ubuntu/ros-foxy-desktop.sh && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --chown=${DEV_NAME} colcon_ws /home/${DEV_NAME}/colcon_ws
+COPY --chown=${DEV_NAME} launch_example /usr/local/bin/
+
+RUN . /opt/ros/foxy/setup.sh && \
+    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
+    echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
+       /etc/apt/sources.list.d/ros2-latest.list && \
+    apt-get update && \
+    cd /home/${DEV_NAME}/${WS_NAME} && \
+    rm -rf /etc/ros/rosdep/sources.list.d/20-default.list && \
+    rosdep init && rosdep update && \
+    rosdep install -yrq --from-paths src --ignore-src --rosdistro foxy && \
+    rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list && \
+    chmod +x /usr/local/bin/launch_example
+
+
+USER ${DEV_NAME}
+RUN cd /home/${DEV_NAME}/${WS_NAME} && colcon build
+
+RUN echo ". /opt/ros/foxy/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
+    echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc && \
+    echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/${DEV_NAME}/${WS_NAME}/src/turtlebot3_simulations/turtlebot3_gazebo/models" >> /home/${DEV_NAME}/.bashrc
+
+ENV TURTLEBOT3_MODEL=waffle_pi
+
+# To bring up tb3 simulation example (from https://navigation.ros.org/tutorials/docs/navigation2_with_slam.html)
+# cd catkin_ws && source install/setup.bash && ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
+
+#USER ${DEV_NAME}
+#WORKDIR /home/${DEV_NAME}/${WS_NAME}
+
+USER root
+
+ENV USER ${DEV_NAME}
+
+#ENTRYPOINT ["/usr/local/bin/launch_example"]
