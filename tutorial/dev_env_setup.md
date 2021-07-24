@@ -54,17 +54,17 @@ docker build -f ./Dockerfile-vnc -t unity-robotics:nav2-slam-example-vnc .
 docker run -p 6080:80 -p 10000:10000 -p 5005:5005 --shm-size=1024m unity-robotics:nav2-slam-example-vnc
 ```
 
-- In a web browser connect to `http://127.0.0.1:6080`.
+- In a web browser connect to [http://127.0.0.1:6080](http://127.0.0.1:6080) and follow the steps below:
 
   - Click on the bottom left system menu and select `System Tools > LXTerminal`.
-
-  ![connecting to the docker container](images/start_docker_vnc.png)
-
+  
   - In the Terminal run 
   
   ```
   launch_example
   ```
+  
+  ![connecting to the docker container](images/start_docker_vnc.png)
 
 
 ### (Optional) Using an alternative ROS2 environment
