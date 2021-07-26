@@ -31,11 +31,12 @@ If this doesn't work, you may need to first `colcon build` the workspace or `sou
 ## Start the Unity simulation
 >This section assumes you have already set up your Unity environment according to the guide [here](unity_project.md).  
 
-With the SimpleWareHouseScene open, simply press the Play button at the top of the editor.  
+With the SimpleWareHouseScene open, simply press the Play button at the top of the Editor.  
 ![animation of Play button being pressed and simulation starting](images/start_unity.gif)  
 
 If the ROS2 nodes were already launched, you should see flashing, non-red arrows in the top-left HUD to indicate Unity is communicating with ROS.
 
+---
 ---
 
 ## Interacting with this Example
@@ -49,6 +50,22 @@ The TurtleBot is now localizing AND mapping, simultaneously!  Now, to do navigat
 ![animation of clicking 2D goal pose in RViz](images/goal_pose.gif)
 
 Congratulations! The TurtleBot is now navigating the map as it generates it from laserscan data published from Unity. 
+
+> While the Nav2 stack is pretty robust to most goal inputs, it may occasionally crash or otherwise reach a state where it no longer responds as expected. These issues can most of the time be fixed by simply killing and restarting the nav2 nodes, and pressing `Play` twice in Unity to stop and restart the simulation.
+
+---
+---
+
+## Now What?
+Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
+
+If you'd like to see how the interaction between Unity and the ROS2 nodes could be used in an automated integration test, stop PlayMode in Unity, restart the ROS2 environment, and open the Test Runner panel under the Window -> General dropdown. 
+![Test Runner option inside the Window dropdown](images/test_runner_menu.png)  
+
+From there, run the integration tests and watch the TurtleBot3 go through a series of navigation tasks, automated by the Unity Test Runner.
+### >>> TODO <<<
+
+For more information about how the different components in this simulation function, and how the ROS2 environment is set up, we have a separate [Explanation page](explanation.md) that goes into more granular detail.
 
 ---
 ---

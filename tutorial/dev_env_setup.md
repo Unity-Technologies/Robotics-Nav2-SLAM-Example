@@ -1,7 +1,7 @@
 # Configure your Development Environment
 ---  
 ## Install the Unity Editor  
-You will need to download the version of Unity which matches the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1), which should be `2020.3.11f1`. You may download the editor either through the Unity Hub or directly from Unity's download site, both of which are located [here](https://unity3d.com/get-unity/download).
+This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases).
 
 ---
 
@@ -22,7 +22,7 @@ This project should work with any appropriately configured ROS 2 environment, bu
 ```
 # From the repository root...
 cd ros2_docker && \
-docker build -t unity-robotics:slam-example ./
+docker build -t unity-robotics:nav2-slam-example ./
 ```
 >This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
 
