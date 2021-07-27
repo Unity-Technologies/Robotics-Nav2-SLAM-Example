@@ -5,8 +5,4 @@ set -e
 . /opt/ros/foxy/setup.bash
 # NOTE: This must match WS_NAME from the Dockerfile
 . ~/colcon_ws/install/local_setup.bash
-#ros2 launch unity_slam_example endpoint_launcher.py &
-#ENDPOINT_PID=$! &&
 ros2 launch unity_slam_example unity_slam_example.py
-# Assuming the nav2 bringup can be shut down with a ctrl-c, this will hopefully catch the endpoint
-#kill -9 $ENDPOINT_PID
