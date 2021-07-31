@@ -9,7 +9,6 @@ from launch_ros.actions import Node
 def generate_launch_description():
     package_name = 'unity_slam_example'
     package_dir = get_package_share_directory(package_name)
-    param_file = os.path.join(package_dir, 'unity_params.yaml')
 
     return LaunchDescription({
         IncludeLaunchDescription(
@@ -23,7 +22,8 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             output='screen',
-            arguments=['-d', os.path.join(package_dir, 'nav2_unity.rviz')]
+            arguments=['-d', os.path.join(package_dir, 'nav2_unity.rviz')],
+            parameters=[{'use_sim_time':True}]
         ),
 
         IncludeLaunchDescription(
@@ -31,7 +31,6 @@ def generate_launch_description():
                 os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
             ),
             launch_arguments={
-                'params_file': param_file,
                 'use_sim_time': 'true'
             }.items()
         ),
@@ -41,7 +40,6 @@ def generate_launch_description():
                 os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
             ),
             launch_arguments={
-                'params_file': param_file,
                 'use_sim_time': 'true'
             }.items()
         )

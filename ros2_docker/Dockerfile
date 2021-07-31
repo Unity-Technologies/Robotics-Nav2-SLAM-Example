@@ -4,7 +4,7 @@ LABEL maintainer="Unity Robotics <unity-robotics@unity3d.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEV_NAME=rosdev
-ENV ROS_DISTRO=foxy
+ENV ROS_DISTRO=galactic
 ENV GROUP_NAME=ros
 ENV WS_NAME=colcon_ws
 
@@ -73,7 +73,7 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 #    rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list && \
 #    chmod +x /usr/local/bin/launch_example
 
-RUN echo ". /opt/ros/foxy/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
+RUN echo ". /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
     echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc
 
 ENV TURTLEBOT3_MODEL=waffle_pi
