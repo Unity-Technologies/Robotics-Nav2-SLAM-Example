@@ -70,6 +70,7 @@ public class LaserScanSensor : MonoBehaviour
     {
         m_Ros = ROSConnection.instance;
         m_Ros.RegisterPublisher(topic, "sensor_msgs/LaserScan");
+        // m_Ros.RegisterPublisher<LaserScanMsg>(topic);
 
         m_CurrentScanAngleStart = ScanAngleStartDegrees;
         m_CurrentScanAngleEnd = ScanAngleEndDegrees;

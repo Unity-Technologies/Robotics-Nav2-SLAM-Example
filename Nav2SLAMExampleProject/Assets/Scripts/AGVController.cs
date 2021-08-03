@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Geometry;
 
-namespace RosSharp.Control
+namespace Unity.Robotics.UrdfImporter.Control
 {
     public enum ControlMode { Keyboard, ROS};
 
@@ -46,7 +46,7 @@ namespace RosSharp.Control
         {
             rosLinear = (float)cmdVel.linear.x;
             rosAngular = (float)cmdVel.angular.z;
-            Debug.Log("Linear : " + rosLinear + " Angular : " + rosAngular);
+            // Debug.Log("Linear : " + rosLinear + " Angular : " + rosAngular);
             lastCmdReceived = Time.time;
         }
 

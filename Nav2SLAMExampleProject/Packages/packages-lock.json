@@ -125,21 +125,28 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.robotics.ros-tcp-connector": {
-      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector",
+    "com.unity.robotics.message-visualizations": {
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.message-visualizations#amanda/viz/map",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f7f669f212423ff03817a2094f489547158a3852"
+      "hash": "334397e8a922e44ad86c81819619bb31f17ad0e3"
+    },
+    "com.unity.robotics.ros-tcp-connector": {
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#amanda/viz/map",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "334397e8a922e44ad86c81819619bb31f17ad0e3"
     },
     "com.unity.robotics.urdf-importer": {
-      "version": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer",
+      "version": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer#dev",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0"
       },
-      "hash": "c41208565419b04907496baa93ad1b675d41dc20"
+      "hash": "a71ec37e2d1d546da9596f6908d8816a00b8eaf8"
     },
     "com.unity.robotics.warehouse": {
       "version": "https://github.com/Unity-Technologies/Robotics-Warehouse.git?path=/com.unity.robotics.warehouse",

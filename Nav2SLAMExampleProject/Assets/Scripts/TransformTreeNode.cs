@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;
-using RosSharp.Urdf;
+using Unity.Robotics.UrdfImporter;
 using Unity.Robotics.Core;
 using UnityEngine;
 

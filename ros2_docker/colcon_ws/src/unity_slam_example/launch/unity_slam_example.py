@@ -18,14 +18,6 @@ def generate_launch_description():
             ),
         ),
 
-
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            output='screen',
-            arguments=['-d', os.path.join(package_dir, 'nav2_unity.rviz')]
-        ),
-
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
