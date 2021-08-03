@@ -37,6 +37,12 @@ public class RaycastPublisher : MonoBehaviour
 
         return (isHit, hit);
     }
+    
+    public void BeginInteractionButton()
+    {
+        m_Button.interactable = false;
+        m_State = ClickState.BEGIN;
+    }
 
     protected enum ClickState
     {

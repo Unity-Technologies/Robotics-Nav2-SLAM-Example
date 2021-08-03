@@ -30,12 +30,6 @@ public class PointPublisher : RaycastPublisher
         }
     }
 
-    public void BeginClickedPointButton()
-    {
-        m_Button.interactable = false;
-        m_State = ClickState.BEGIN;
-    }
-
     void ClickPoint()
     {
         var (didHit, hit) = RaycastCheck(ClickState.BEGIN);
