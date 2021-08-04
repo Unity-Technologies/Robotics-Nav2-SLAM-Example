@@ -60,19 +60,6 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     rm /bin/ros2-setup.bash && \
     rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
 
-
-#RUN . /opt/ros/foxy/setup.sh && \
-#    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
-#    echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
-#       /etc/apt/sources.list.d/ros2-latest.list && \
-#    apt-get update && \
-#    cd /home/${DEV_NAME}/${WS_NAME} && \
-#    rm -rf /etc/ros/rosdep/sources.list.d/20-default.list && \
-#    rosdep init && rosdep update && \
-#    rosdep install -yrq --from-paths src --ignore-src --rosdistro foxy && \
-#    rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list && \
-#    chmod +x /usr/local/bin/launch_example
-
 RUN echo ". /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
     echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc
 
@@ -83,7 +70,4 @@ ENV TURTLEBOT3_MODEL=waffle_pi
 
 # Informs the environment that the default user is not root, but instead DEV_NAME
 ENV USER ${DEV_NAME}
-#USER ${DEV_NAME}
-#WORKDIR /home/${DEV_NAME}/${WS_NAME}
 
-#ENTRYPOINT ["/usr/local/bin/launch-example"]
