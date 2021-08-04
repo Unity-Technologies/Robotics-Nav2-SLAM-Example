@@ -2,9 +2,9 @@ using System;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Std;
 using Unity.Robotics.Core;
+using Unity.Robotics.MessageVisualizers;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PointPublisher : RaycastPublisher
 {
@@ -13,7 +13,8 @@ public class PointPublisher : RaycastPublisher
     {
         base.Start();
         m_Ros.RegisterPublisher<PointStampedMsg>(m_Topic);
-        m_Button = GameObject.Find("Canvas/Panel/PointButton").GetComponent<Button>();
+        m_DeselectedLabel = "Publish Point";
+        m_SelectedLabel = "Selecting Point...";
     }
 
     // Update is called once per frame
@@ -24,15 +25,23 @@ public class PointPublisher : RaycastPublisher
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) // begin click
+        if (Input.GetMouseButtonDown(0))
         {
             ClickPoint();
         }
     }
 
+    // Override to ensure raycast is only valid for warehouse floor
+    protected override (bool, RaycastHit) RaycastCheck(ClickState state)
+    {
+        var (didHit, hit) = base.RaycastCheck(state);
+        didHit = didHit && hit.collider.gameObject.name.Contains("Floor");
+        return (didHit, hit);
+    }
+
     void ClickPoint()
     {
-        var (didHit, hit) = RaycastCheck(ClickState.BEGIN);
+        var (didHit, hit) = RaycastCheck(ClickState.Started);
         if (didHit)
         {
             m_Ros.Send(m_Topic, new PointStampedMsg
@@ -40,8 +49,7 @@ public class PointPublisher : RaycastPublisher
                 header = new HeaderMsg(new TimeStamp(Clock.time), "odom"),
                 point = hit.point.To<FLU>()
             });
-            m_Button.interactable = true;
-            m_State = ClickState.NONE;
+            m_State = ClickState.None;
         }
     }
 }

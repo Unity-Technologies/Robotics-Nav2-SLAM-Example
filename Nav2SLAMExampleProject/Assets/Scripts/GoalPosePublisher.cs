@@ -2,19 +2,28 @@ using System;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Std;
 using Unity.Robotics.Core;
+using Unity.Robotics.MessageVisualizers;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GoalPosePublisher : PosePublisher
+public class GoalPosePublisher : PoseRaycastPublisher
 {
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         m_Ros.RegisterPublisher<PoseStampedMsg>(m_Topic);
-        m_Button = GameObject.Find("Canvas/Panel/GoalButton").GetComponent<Button>();
+        m_DeselectedLabel = "Set Goal";
+        m_SelectedLabel = "Selecting Goal...";
     }
-
+    
+    // Override to ensure raycast is only valid for warehouse floor
+    protected override (bool, RaycastHit) RaycastCheck(ClickState state)
+    {
+        var (didHit, hit) = base.RaycastCheck(state);
+        didHit = didHit && hit.collider.gameObject.name.Contains("Floor");
+        return (didHit, hit);
+    }
+    
     protected override bool ReleaseClick()
     {
         if (base.ReleaseClick())
@@ -22,11 +31,11 @@ public class GoalPosePublisher : PosePublisher
             m_Ros.Send(m_Topic, new PoseStampedMsg()
             {
                 header = new HeaderMsg(new TimeStamp(Clock.time), "odom"),
-                pose = CalculatePose()
+                pose = CalculatePoseMsg()
             });
             return true;
         }
-
+    
         return false;
     }
 }
