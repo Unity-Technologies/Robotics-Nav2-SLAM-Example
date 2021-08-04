@@ -142,15 +142,16 @@
       "hash": "c41208565419b04907496baa93ad1b675d41dc20"
     },
     "com.unity.robotics.warehouse": {
-      "version": "file:C:\\Users\\Devin\\unity_ws\\amr-demo\\Robotics-Warehouse\\com.unity.robotics.warehouse",
+      "version": "https://github.com/Unity-Technologies/Robotics-Warehouse.git?path=com.unity.robotics.warehouse#nav2-example",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.perception": "0.8.0-preview.3",
         "com.unity.postprocessing": "3.0.3",
         "com.unity.render-pipelines.universal": "10.3.2",
         "com.unity.robotics.urdf-importer": "0.3.0"
-      }
+      },
+      "hash": "9fa61061d31b30686573bd2e0213f049738a8949"
     },
     "com.unity.searcher": {
       "version": "4.3.2",
