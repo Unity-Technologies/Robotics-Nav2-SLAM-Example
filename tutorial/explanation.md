@@ -4,9 +4,9 @@ This page contains brief explanations and justifications for the various compone
 ## The Unity Project
 
 Everything we've created to enable this particular Project lives inside the Assets folder, which you can locate in the Project Browser panel.
-<img style="padding: 15px" align="right" src="images/scripts_in_browser.png" />
 
 ### Scripts
+<img style="padding: 15px" align="right" src="images/scripts_in_browser.png" />
 We often use our example projects as a way to exercise prototype code and validate the design of functionality we are looking to release a fully realized features sometime in the future. Inside the scripts folder you will find a few of these prototypes. We've lightly documented them here, but feel free to browse the current state of the code for additional insight into how they work. 
 #### AGVController
 The Automated Guided Vehicle Controller. This Monobehaviour serves as a bridge between externally issued control signals and the `ArticulationBody` physics classes that we rely on to move our robots in physically accurate ways. 
@@ -25,8 +25,9 @@ This class, along with `TimeStamp`, `TransformExtensions`, and `TransformTreeNod
 
 ### Prefabs
 A few objects in our scene needed to be modified manually from what is produced by default by our tools. [Prefabs](https://docs.unity3d.com/Manual/Prefabs.html) are a useful way to modify and store specially configured objects for a particular scene.
-<img style="padding: 15px" align="right" src="images/turtlebot_hierarchy.png" />
+
 #### Marker
+<img style="padding: 15px" align="right" src="images/turtlebot_hierarchy.png" />
 A simple sphere used to visualize LaserScan hits in the scene.
 
 #### TurtleBot3ManualConfig
