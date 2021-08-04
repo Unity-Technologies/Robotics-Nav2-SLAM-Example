@@ -12,10 +12,10 @@ To skip the tutorial and run the demo already setup, use our Quick Demo.
 
 **Table of Contents**
 
- 1. System setup and requirements
- 2. Setting up the Unity scene
- 3. ROS 2 setup
- 4. Performing autonomous navigation
+ 1. [System setup and requirements](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/system_setup.md)
+ 2. [Setting up the Unity scene](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/scene_setup.md)
+ 3. [ROS 2 setup](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/ros2_setup.md)
+ 4. [Performing autonomous navigation](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/autonomous_navigation.md)
 
 ## System setup and requirements
 
