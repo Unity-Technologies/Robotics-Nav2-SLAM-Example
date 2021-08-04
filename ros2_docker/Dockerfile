@@ -45,9 +45,7 @@ RUN useradd --create-home --home-dir /home/${DEV_NAME} --shell /bin/bash --user-
     echo "$DEV_NAME:$DEV_NAME" | chpasswd && \
     echo "$DEV_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY --chown=${DEV_NAME} colcon_ws /home/${DEV_NAME}/colcon_ws
-COPY --chown=${DEV_NAME} launch-example /usr/local/bin/
 COPY ros2-setup.bash /bin/ros2-setup.bash
-RUN chmod +x /bin/ros2-setup.bash
 # Doing a second fetch of sources & apt-get update here, because these ones depend on the state of the build context
 # in our repo
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
@@ -56,6 +54,7 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
         /etc/apt/sources.list.d/ros2-latest.list && \
     apt-get update -q && \
     rosdep init && \
+    chmod +x /bin/ros2-setup.bash && \
     gosu ${DEV_NAME} /bin/ros2-setup.bash && \
     runuser -u ${DEV_NAME} ros2-setup.bash && \
     rm /bin/ros2-setup.bash && \

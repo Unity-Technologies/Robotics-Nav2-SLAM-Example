@@ -14,8 +14,8 @@ git clone --recurse-submodule git@github.com:Unity-Technologies/Robotics-Nav2-SL
 
 ---
 
-## Set Up the ROS2 Environment
-This project should work with any appropriately configured ROS 2 environment, but we strongly encourage users new to ROS to build the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), which exposes a pre-configured ROS2 environment to you via a built-in web VNC client. We may be unable to provide adequate troubleshooting support for other environments. 
+## Set Up the ROS 2 Environment
+This project should work with any appropriately configured ROS 2 environment, but we strongly encourage users new to ROS to build the environment from the [Dockerfile provided with the project](../ROS 2_docker/Dockerfile), which exposes a pre-configured ROS 2 environment to you via a built-in web VNC client. We may be unable to provide adequate troubleshooting support for other environments. 
 
 ### Build the Docker container
 - From the root of the repository, run the following:
@@ -26,8 +26,8 @@ This project should work with any appropriately configured ROS 2 environment, bu
 This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
 
 
-### (Optional) Using an alternative ROS2 environment
-If you prefer to use your own VM, or have ROS2 installed natively and would like to use that instead, the colcon workspace for the ROS2 side is located in the `ros2_docker/colcon_ws` directory.  You can relocate this folder to your VM, or `colcon build` it directly from the workspace root. Note that you may need to use `rosdep` to ensure you have the appropriate dependencies in place before your build and execution will both succeed.
+### (Optional) Using an alternative ROS 2 environment
+If you prefer to use your own VM, or have ROS 2 installed natively and would like to use that instead, the colcon workspace for the ROS 2 side is located in the `ros2_docker/colcon_ws` directory.  You can relocate this folder to your VM, or `colcon build` it directly from the workspace root. Note that you may need to use `rosdep` to ensure you have the appropriate dependencies in place before your build and execution will both succeed.
 
 ---
 

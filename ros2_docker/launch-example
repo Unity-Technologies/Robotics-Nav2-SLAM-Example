@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-. /opt/ros/foxy/setup.bash
-# NOTE: This must match WS_NAME from the Dockerfile
-. ~/colcon_ws/install/local_setup.bash
-ros2 launch unity_slam_example unity_slam_example.py

@@ -15,7 +15,7 @@
 
     - In the Terminal run:
       ```
-      launch-example
+      ros2 launch unity_slam_example unity_slam_example.py
       ```
 - If everything is configured correctly, you should see an RViz window open that looks like this:
   
@@ -72,7 +72,7 @@ Congratulations! The TurtleBot is now navigating the map as it generates it from
 ### Exercise the Example 
 Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
 
-You may also want to modify the parameters of the LaserScan sensor to find the conditions under which the slam_toolbox's algorithm breaks down, or if there is any benefit from changing the sensor in some way:
+You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:
 ![base_scan's LaserScan properties in the Inspector](images/laser_parameters.png)
 
 ### Learn more about the Unity Scene
@@ -88,7 +88,7 @@ From there, run the integration tests and watch the TurtleBot3 go through a seri
 
 ### Experiment with your own Scenes
 
-The `turtlebot3_manual_config` object can be found in the`Project` browser under the `Assets/Prefabs` folder. This prefab should contain everything necessary to enable SLAM and Navigation in any Unity scene with a floor and objects for the robot's laser scan to detect. Import a Unity scene into the project, or create a new one in the Editor, and simply drag this prefab from the `Project` browser into the `Hierarchy`. 
+The `turtlebot3_manual_config` object can be found in the `Project` browser under the `Assets/Prefabs` folder. This prefab should contain everything necessary to enable SLAM and Navigation in any (mostly flat) Unity scene with a floor and objects for the robot's laser scan to detect. Import a Unity scene into the project, or create a new one in the Editor, and simply drag this prefab from the `Project` browser into the `Hierarchy`. 
 
 
 ---
@@ -101,4 +101,3 @@ The `turtlebot3_manual_config` object can be found in the`Project` browser under
 launch.invalid_launch_file_error.InvalidLaunchFileError: Caught exception when trying to load file of format [py]: "package 'ros_tcp_endpoint' not found, searching: ['/home/rosdev/colcon_ws/install/unity_slam_example', '/opt/ros/foxy']"
 ```
 You likely forgot to check out the submodules when following the [setup instructions](dev_env_setup.md). You will need to check them out with `git submodule update --init --recursive` and re-build the container as per the instructions in the linked page.
-

@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 1872241788542568030}
   - component: {fileID: 5948607648823134037}
   m_Layer: 11
-  m_Name: turtlebot3_manual_config
+  m_Name: TurtleBot3ManualConfig
   m_TagString: robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2373,6 +2373,70 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 5d9538af883af4e64add30cf18ad2fa2, type: 2}
+--- !u!1 &5906167912740643583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5906167912740643577}
+  - component: {fileID: 5906167912740643582}
+  - component: {fileID: 5906167912740643576}
+  m_Layer: 0
+  m_Name: ROSPublishers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5906167912740643577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906167912740643583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.6641, y: -4.702461, z: 10.059958}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1872241788542568031}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5906167912740643582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906167912740643583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967f7747bd690dd41bfed4e6090ab213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClockMode: 0
+  m_LastSetClockMode: 0
+  m_PublishRateHz: 50
+--- !u!114 &5906167912740643576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906167912740643583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f65278fa404640beeb137ab878606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PublishRateHz: 20
+  m_GlobalFrameIds:
+  - map
+  - odom
+  m_RootGameObject: {fileID: 1872241788697882711}
 --- !u!1 &6791392714016611625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,78 +2870,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7388015333232248165, guid: cd1328dabdc4147a2b3d5c9e1e15315d, type: 3}
   m_PrefabInstance: {fileID: 1872241789447549466}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5599889495004549141
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1872241788542568031}
-    m_Modifications:
-    - target: {fileID: 2035664136423568106, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_Name
-      value: ROSPublishers
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568107, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_PublishRateHz
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.6641
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.702461
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.059958
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568109, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_PublishRateHz
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035664136423568109, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-      propertyPath: m_RootGameObject
-      value: 
-      objectReference: {fileID: 1872241788697882711}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
---- !u!4 &5906167912740643577 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2035664136423568108, guid: 6f341aa899307854ca79ff905139c57f, type: 3}
-  m_PrefabInstance: {fileID: 5599889495004549141}
   m_PrefabAsset: {fileID: 0}
