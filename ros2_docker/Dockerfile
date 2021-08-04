@@ -47,6 +47,7 @@ RUN useradd --create-home --home-dir /home/${DEV_NAME} --shell /bin/bash --user-
 COPY --chown=${DEV_NAME} colcon_ws /home/${DEV_NAME}/colcon_ws
 COPY --chown=${DEV_NAME} launch-example /usr/local/bin/
 COPY ros2-setup.bash /bin/ros2-setup.bash
+RUN chmod +x /bin/ros2-setup.bash
 # Doing a second fetch of sources & apt-get update here, because these ones depend on the state of the build context
 # in our repo
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
