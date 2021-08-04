@@ -24,7 +24,7 @@ In this section, you will get the correct version of Unity installed, supporting
 ## Setting up the Unity scene
 
 In this section, you will set the Unity warehouse scene setup. This includes importing the TurtleBot 3 using the URDF Importer package and setting up prefabs in the scene.
-https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example
+
 ## ROS 2 setup
 
 In this section, you will use a provided Docker container with ROS 2 software to simulate the robot functionality. This section also includes instructions to for running the ROS 2 software locally.
