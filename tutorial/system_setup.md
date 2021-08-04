@@ -13,7 +13,9 @@ To get started, we want to download Unity, Docker, and the robotics packages we 
 
 ## Create a new Unity project
 When you first run Unity, you will be asked to open an existing project or create a new one. Open Unity and create a new project using the ***Universal Render Pipeline***. Name your new project ***AMR Tutorial***, and specify a desired location as shown below.
- TODO Image
+ ![Create a new Unity project](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/1_create_new_project.png)
+
+> Note: There is a know issue with the Unity Editor on Linux. If you are trying to open a project and have no projects listed in the Unity Hub, nothing will happen. To resolve this, you just need to create a project (it doesn't matter if it has anything) and save it. Then the hub will function normally
 
 ## Download Unity Robotics packages
 Once your new project is created and loaded, you will be presented with the Unity Editor interface. From this point on, whenever we refer to the "editor", we mean the Unity Editor.
@@ -26,23 +28,24 @@ We will need to download and install several packages. In general, packages can 
  -   Click on the  _**+**_  sign at the top-left corner of the  _**Package Manager**_  window and then choose the option  _**Add package from git URL...**_.
     
  -   Enter the package address and click  _**Add**_.
-    
+![Install Unity packages](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/1_package_imports_short.gif) 
+
 It can take a few minutes for the manager to download and import packages.
 >Note: If you encounter a Package Manager issue, check the [Troubleshooting Guide](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation/blob/main/Documentation/troubleshooting.md) for potential solutions.
 
 ### Packages to install
 Install the following packages with the provided git URLs:
 
- - [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer)  -  `https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer`
-    
-    -   This package will help us import a robot into our scene from a file in the  [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
-
- - [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector)  -  `https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector`
-    
-    -   This package will enable a connection between ROS 2 and Unity.
+- [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - This package will help us import a robot into our scene from a file in the  [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
  
-- [Robotics Warehouse package](https://github.com/Unity-Technologies/Robotics-Warehouse)  -  `https://github.com/Unity-Technologies/Robotics-Warehouse.git?path=/com.unity.robotics.warehouse`
+   `https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer`
     
-    -   This repository contains a configurable warehouse environment that is ready for use in robotics simulation.
+- [ROS-TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - This package will enable a connection between ROS 2 and Unity.
+ 
+   `https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector`
+     
+- [Robotics Warehouse package](https://github.com/Unity-Technologies/Robotics-Warehouse) - This repository contains a configurable warehouse environment that is ready for use in robotics simulation.
+  
+  ```https://github.com/Unity-Technologies/Robotics-Warehouse.git?path=/com.unity.robotics.warehouse```
 
-Next we will set up the Unity Scene.
+**Next we will set up the [Unity Scene](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/scene_setup.md).**
