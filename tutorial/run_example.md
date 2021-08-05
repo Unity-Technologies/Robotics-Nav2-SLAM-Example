@@ -72,7 +72,8 @@ Congratulations! The TurtleBot is now navigating the map as it generates it from
 ### Exercise the Example 
 Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
 
-You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:
+You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:  
+
 ![base_scan's LaserScan properties in the Inspector](images/laser_parameters.png)
 
 ### Learn more about the Unity Scene
@@ -81,6 +82,7 @@ For more information about how the different components in this simulation funct
 
 ### Automate it!
 If you'd like to see how the interaction between Unity and the ROS2 nodes could be used in an automated integration test, stop PlayMode in Unity, restart the ROS2 environment, and open the Test Runner panel under the Window -> General dropdown. 
+  
 ![Test Runner option inside the Window dropdown](images/test_runner_menu.png)  
 
 From there, run the integration tests and watch the TurtleBot3 go through a series of navigation tasks, automated by the Unity Test Runner.
