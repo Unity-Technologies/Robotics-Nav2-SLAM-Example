@@ -38,4 +38,6 @@ Simply put in Unity, a Scene contains any object that exists in the world. This 
 	 - **Protocol:** _ROS 2_
 	 - **ROS IP Address:** _127.0.0.1_
 
+![Robotics Window](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/2-ros_settings_menu.png) ![Robotics Settings](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/2-ros_settings_window.png)
+
  **Next we will [setup the ROS 2 software](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/ros2_setup.md).**
