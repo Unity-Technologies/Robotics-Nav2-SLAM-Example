@@ -5,6 +5,15 @@ In the [Scene Setup section](https://github.com/Unity-Technologies/Robotics-Nav2
 There are two options for running the ROS 2 software. Users who want to run ROS 2 on their local machine can install ROS 2 and follow the steps below. We have also provided a Docker container that is setup for running ROS 2 fully contained in Docker.
 
 ## Using ROS 2 with Docker
+This project should work with any appropriately configured ROS 2 environment, but we strongly encourage building the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), as we may be unable to provide adequate troubleshooting support for other environments. This section will assume you are setting up your environment using our Dockerfile.
+### Build the Docker container
+```
+# From the repository root...
+cd ros2_docker && \
+docker build -t unity-robotics:slam-example ./
+```
+>This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
+
 This projects uses [RViz](https://github.com/ros-visualization/rviz), which is a robotics visualization tool that allows the user to not only see what the robot is seeing but, in this example, also allows the user to assign navigation goals to the robot. In order to launch Rviz through Docker, X11 forwarding is needed.
 
 ### Install an X11 host
