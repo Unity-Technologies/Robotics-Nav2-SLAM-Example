@@ -1,5 +1,8 @@
 # AMR Demo: ROS2 Integration
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Unity](https://img.shields.io/badge/unity-2020.3+-brightgreen)
+
 ![Nav2-SLAM](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/nav2-slam.png)
 
 This tutorial goes through the setup of a Unity warehouse environment with an autonomous mobile robot (AMR) based on a [TurtleBot 3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) and integration with ROS 2. You'll setup the basic scene to perform simultaneous localization and mapping (SLAM) and visualize the map using Rviz. By completing this tutorial, you will gain experience in the following tasks:
