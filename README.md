@@ -1,14 +1,18 @@
 # AMR Demo: ROS2 Integration
 
+![Nav2-SLAM](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/nav2-slam.png)
+
 This tutorial goes through the setup of a Unity warehouse environment with an autonomous mobile robot (AMR) based on a [TurtleBot 3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) and integration with ROS 2. You'll setup the basic scene to perform simultaneous localization and mapping (SLAM) and visualize the map using Rviz. By completing this tutorial, you will gain experience in the following tasks:
 
- - Unity Scene setup and asset usage
- - Importing a robot into Unity
- - Importing Unity robotics packages
- - Connecting Unity to a ROS 2
+ - Unity Scene setup
+ - Generating a Prefab using the Warehouse Generator
+ - Importing a robot into Unity using the URDF Importer
+ - Adding a laserscan sensor to the robot
+ - Importing Unity Robotics packages
+ - Connecting Unity to ROS 2
  - Performing SLAM with the robot
 
-To skip the tutorial and run the demo already setup, use our Quick Demo.
+To skip the tutorial and run the demo already setup, use our **Quick Demo**.
 
 **Table of Contents**
 
@@ -19,19 +23,27 @@ To skip the tutorial and run the demo already setup, use our Quick Demo.
 
 ## System setup and requirements
 
-In this section, you will get the correct version of Unity installed, supporting software like Docker, required Unity Packages, and be ready to start your Unity project.
+![Unity Hub](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/1_create_new_project.png)
+
+[In this section](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/system_setup.md), you will get the correct version of Unity installed, supporting software like Docker, required Unity Packages, and be ready to start your Unity project.
 
 ## Setting up the Unity scene
 
-In this section, you will set the Unity warehouse scene setup. This includes importing the TurtleBot 3 using the URDF Importer package and setting up prefabs in the scene.
+![Unity scene](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/2-warehouse-scene.png)
+
+[In this section](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/scene_setup.md), you will set the Unity warehouse scene setup. This includes importing the TurtleBot 3 using the URDF Importer package and setting up prefabs in the scene.
 
 ## ROS 2 setup
 
-In this section, you will use a provided Docker container with ROS 2 software to simulate the robot functionality. This section also includes instructions to for running the ROS 2 software locally.
+![ROS 2](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/ros2-running.png)
+
+[In this section](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/ros2_setup.md), you will use a provided Docker container with ROS 2 software to simulate the robot functionality. This section also includes instructions to for running the ROS 2 software locally.
 
 ## Performing autonomous navigation
 
-In this section, you will use Unity with the ROS 2 software running in order to perform autonomous navigation using the TurtleBot 3
+![Autonomous navigation](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/images/autonomous-navigation.png)
+
+[In this section](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/anthony/demo/tutorial/autonomous_navigation.md), you will use Unity with the ROS 2 software running in order to perform autonomous navigation using the TurtleBot 3
 
 ## Support
 
