@@ -1,7 +1,7 @@
 # Configure your Development Environment
 ---  
 ## Install the Unity Editor  
-This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases).
+This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases). Note that if using a more recent version, you will receive some warnings to this effect when you first open the project, but you are fine to proceed through them.
 
 ---
 
@@ -15,7 +15,7 @@ git clone --recurse-submodule git@github.com:Unity-Technologies/Robotics-Nav2-SL
 ---
 
 ## Set Up the ROS 2 Environment
-This project should work with any appropriately configured ROS 2 environment, but we strongly encourage users new to ROS to build the environment from the [Dockerfile provided with the project](../ROS 2_docker/Dockerfile), which exposes a pre-configured ROS 2 environment to you via a built-in web VNC client. We may be unable to provide adequate troubleshooting support for other environments. 
+This project should work with any appropriately configured ROS 2 environment, but we strongly encourage users new to ROS to build the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), which exposes a pre-configured ROS 2 environment to you via a built-in web VNC client. We may be unable to provide adequate troubleshooting support for other environments. 
 
 ### Build the Docker container
 - From the root of the repository, run the following:
@@ -23,7 +23,7 @@ This project should work with any appropriately configured ROS 2 environment, bu
     cd ros2_docker
     docker build -t unity-robotics:nav2-slam-example ./
     ```
-This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
+This build process will take at least 10 minutes, depending on your download speeds and hardware specificiations, but you are free to proceed to next steps in the tutorial while it is building.
 
 
 ### (Optional) Using an alternative ROS 2 environment
