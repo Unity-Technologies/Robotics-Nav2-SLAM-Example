@@ -1,7 +1,7 @@
 # Configure your Development Environment
 ---  
 ## Install the Unity Editor  
-You will need to download the version of Unity which matches the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1), which should be `2020.3.11f1`. You may download the editor either through the Unity Hub or directly from Unity's download site, both of which are located [here](https://unity3d.com/get-unity/download).
+This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases). Note that if using a more recent version, you will receive some warnings to this effect when you first open the project, but you are fine to proceed through them.
 
 ---
 
@@ -14,31 +14,20 @@ git clone --recurse-submodule git@github.com:Unity-Technologies/Robotics-Nav2-SL
 
 ---
 
-## Set Up the ROS2 Environment
-This project should work with any appropriately configured ROS 2 environment, but we strongly encourage building the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), as we may be unable to provide adequate troubleshooting support for other environments. This section will assume you are setting up your environment using our Dockerfile.
+## Set Up the ROS 2 Environment
+This project should work with any appropriately configured ROS 2 environment, but we strongly encourage users new to ROS to build the environment from the [Dockerfile provided with the project](../ros2_docker/Dockerfile), which exposes a pre-configured ROS 2 environment to you via a built-in web VNC client. We may be unable to provide adequate troubleshooting support for other environments. 
+
 ### Build the Docker container
-```
-# From the repository root...
-cd ros2_docker && \
-docker build -t unity-robotics:slam-example ./
-```
->This build process will take a while, but you are free to proceed to next steps in the tutorial while it is building.
+- From the root of the repository, run the following:
+    ```
+    cd ros2_docker
+    docker build -t unity-robotics:nav2-slam-example ./
+    ```
+This build process will take at least 10 minutes, depending on your download speeds and hardware specificiations, but you are free to proceed to next steps in the tutorial while it is building.
 
-### Install an X11 host
-How exactly you set up your X11 host will depend on your operating system and is to some extent a matter of personal preference.  In order to render the RViz display from inside the Docker container, you will need an X11 host appropriately configured to receive networked connection requests from the loopback interface (`127.0.0.1`) at a minimum.  There are several guides available online for setting up X11 hosts with Docker for different environments. You may also need to **configure firewall settings or other network security software to allow communication between Docker and your host machine**. We've installed mesa-utils in the image for convenience. To confirm your x11 forwarding is working, try the following command once your docker build completes:
 
-```
-docker run -it --rm -p 10000:10000 -p 5005:5005 -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 --entrypoint=/usr/bin/timeout unity-robotics:nav2-slam-example 10 glxgears
-```
-
-If configured correctly, you should see a window with three moving gears for 10 seconds, or however long you specify at the end of the previous `docker run` command.
-
-![glxgears running in x11 window](images/glxgears.gif)
-
-There are many potential pitfalls when doing this step; most will have solutions available via StackOverflow or other troubleshooting forums. However, if you can't find an adequate solution to a problem you encounter, feel free to file an Issue ticket here and we may be able to help you troubleshoot further.
-
-### (Optional) Using an alternative ROS2 environment
-If you prefer to use your own VM, or have ROS2 installed natively and would like to use that instead, the colcon workspace for the ROS2 side is located in the `ros2_docker/colcon_ws` directory.  You can relocate this folder to your VM, or `colcon build` it directly from the workspace root. Note that you may need to use `rosdep` to ensure you have the appropriate dependencies in place before your build and execution will both succeed.
+### (Optional) Using an alternative ROS 2 environment
+If you prefer to use your own VM, or have ROS 2 installed natively and would like to use that instead, the colcon workspace for the ROS 2 side is located in the `ros2_docker/colcon_ws` directory.  You can relocate this folder to your VM, or `colcon build` it directly from the workspace root. Note that you may need to use `rosdep` to ensure you have the appropriate dependencies in place before your build and execution will both succeed.
 
 ---
 
