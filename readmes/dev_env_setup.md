@@ -23,7 +23,7 @@ This project should work with any appropriately configured ROS 2 environment, bu
     cd ros2_docker
     docker build -t unity-robotics:nav2-slam-example ./
     ```
-This build process will take at least 10 minutes, depending on your download speeds and hardware specificiations, but you are free to proceed to next steps in the tutorial while it is building.
+This build process will take at least 10 minutes, depending on your download speeds and hardware specificiations, but you are free to proceed to next step while it is building.
 
 
 ### (Optional) Using an alternative ROS 2 environment

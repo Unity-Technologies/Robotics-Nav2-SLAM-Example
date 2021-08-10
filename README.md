@@ -2,12 +2,12 @@
 This example provides a Unity Project and a colcon workspace that, when used together, allows a user to substitute Unity as the simulation environment for the purposes of following the [Navigation 2 SLAM tutorials](https://navigation.ros.org/tutorials/docs/navigation2_with_slam.html). In following the setup instructions below, you will exercise Unity's ROS 2 integration, explore an example environment generated with our [Robotics Warehouse](https://github.com/Unity-Technologies/Robotics-Warehouse/tree/main) randomizable environment, and learn about ways in which this project could be extended to support a more specific use case or automated to provide continuous integration testing of a robotics navigation stack.
 
 ## Setup Instructions
-1. ### [Configuring Your Development Environment](tutorial/dev_env_setup.md)
-1. ### [Setting Up the Unity Project](tutorial/unity_project.md)
-1. ### [Running the Example](tutorial/run_example.md)
+1. ### [Configuring Your Development Environment](readmes/dev_env_setup.md)
+1. ### [Setting Up the Unity Project](readmes/unity_project.md)
+1. ### [Running the Example](readmes/run_example.md)
 
 ## Understanding the Project Components
-* ### [Breakdown of this Example](tutorial/explanation.md)
+* ### [Breakdown of this Example](readmes/explanation.md)
 * ### [Robotics Warehouse](https://github.com/Unity-Technologies/Robotics-Warehouse)
 * ### [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 * ### [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer)
