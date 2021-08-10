@@ -8,15 +8,14 @@ package_name = 'unity_slam_example'
 setup(
     name=package_name,
     version='0.0.1',
-    packages=[package_name],
+    packages=[],
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name), [
                                                 'rviz/nav2_unity.rviz',
                                                 'launch/unity_slam_example.py'
-                                                ]),
-        (os.path.join('share', package_name), ['params/unity_params.yaml'])
+                                                ])
     ],
     install_requires=['setuptools'],
     zip_safe=True,

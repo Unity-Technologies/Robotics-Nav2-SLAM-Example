@@ -1,15 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using RosMessageTypes.Sensor;
 using RosMessageTypes.Std;
 using RosMessageTypes.BuiltinInterfaces;
-using RosSharp.Urdf;
-using TMPro.SpriteAssetUtilities;
 using Unity.Robotics.Core;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using UnityEditor.SearchService;
 using UnityEngine.Serialization;
 
 public class LaserScanSensor : MonoBehaviour
@@ -46,11 +42,15 @@ public class LaserScanSensor : MonoBehaviour
     public GameObject markerPrefab;
     public string LayerMaskName = "TurtleBot3Manual";
     public string FrameId = "base_scan";
-    [FormerlySerializedAs("MarkerGradient")] public Gradient ActiveMarkerGradient;
-    public Gradient InActiveMarkerGradient;
-
+    
+    [Header("Debug")]
     [SerializeField]
     bool m_RenderDebugVisuals;
+    [SerializeField, FormerlySerializedAs("ActiveMarkerGradient")]
+    Gradient m_ActiveMarkerGradient;
+    [SerializeField, FormerlySerializedAs("InActiveMarkerGradient")]
+    Gradient m_InActiveMarkerGradient;
+
     Queue<ScanMarker> m_MarkersActive = new Queue<ScanMarker>();
     Queue<ScanMarker> m_MarkersInactive = new Queue<ScanMarker>();
 
@@ -89,7 +89,7 @@ public class LaserScanSensor : MonoBehaviour
 
     void ResetMarkers()
     {
-        var inactiveColor = InActiveMarkerGradient.Evaluate(0f);
+        var inactiveColor = m_InActiveMarkerGradient.Evaluate(0f);
 
         while (m_MarkersActive.Count > 0)
         {
@@ -172,7 +172,7 @@ public class LaserScanSensor : MonoBehaviour
 
     void ActivateMarker(ScanMarker marker)
     {
-        marker.SetColor(ActiveMarkerGradient.Evaluate(0f));
+        marker.SetColor(m_ActiveMarkerGradient.Evaluate(0f));
         marker.TimeCurrentStateSeconds = 0f;
         //marker.SetActive(true);
         m_MarkersActive.Enqueue(marker);
@@ -190,14 +190,14 @@ public class LaserScanSensor : MonoBehaviour
         {
             marker.TimeCurrentStateSeconds += timeDelta;
             var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / (float)PublishPeriodSeconds);
-            marker.SetColor(ActiveMarkerGradient.Evaluate(fadeAmount));
+            marker.SetColor(m_ActiveMarkerGradient.Evaluate(fadeAmount));
         }
 
         foreach (var marker in m_MarkersInactive)
         {
             marker.TimeCurrentStateSeconds += timeDelta;
             var fadeAmount = Mathf.Clamp01(marker.TimeCurrentStateSeconds / (float)PublishPeriodSeconds);
-            marker.SetColor(InActiveMarkerGradient.Evaluate(fadeAmount));
+            marker.SetColor(m_InActiveMarkerGradient.Evaluate(fadeAmount));
         }
     }
 

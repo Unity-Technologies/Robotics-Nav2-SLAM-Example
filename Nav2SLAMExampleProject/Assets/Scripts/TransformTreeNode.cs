@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;
-using RosSharp.Urdf;
 using Unity.Robotics.Core;
+using Unity.Robotics.UrdfImporter;
 using UnityEngine;
 
 namespace Unity.Robotics.SlamExample
