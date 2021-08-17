@@ -1,0 +1,18 @@
+{
+    "name": "Unity.Robotics.Nav2Example",
+    "rootNamespace": "",
+    "references": [
+        "GUID:625bfc588fb96c74696858f2c467e978",
+        "GUID:b1ef917f7a8a86a4eb639ec2352edbf8",
+        "GUID:18b61dc105331d14c9d7a5ba828092b6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
