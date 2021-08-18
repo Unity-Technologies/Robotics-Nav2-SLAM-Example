@@ -10,7 +10,7 @@ using UnityEngine.TestTools;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
-namespace Unity.Robotics.Nav2Example.Tests
+namespace IntegrationTests 
 {
     class WaypointTracker
     {

@@ -15,7 +15,7 @@ commands:
   #TODO: Determine how best to capture ROS logging as test artifacts
   - /bin/bash .yamato/start-ros.bash
   - utr/utr --testproject=./Nav2SLAMExampleProject --editor-location=.Editor --reruncount=0
-    --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.NavigationIntegrationTests
+    --artifacts_path=test-results --suite=playmode --platform=Editor --testfilter IntegrationTests.NavigationIntegrationTests
 
 triggers:
   cancel_old_ci: true
