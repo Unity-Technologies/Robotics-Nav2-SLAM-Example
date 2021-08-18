@@ -21,7 +21,6 @@ namespace IntegrationTests
         List<Transform> m_Waypoints;
         int m_CurrentWaypointIdx;
 
-        // Start is called before the first frame update
         internal WaypointTracker()
         {
             var waypoints = GameObject.FindGameObjectsWithTag(k_WaypointTag).ToList();
@@ -162,6 +161,7 @@ namespace IntegrationTests
                 yield return new WaitForSeconds(k_SleepBetweenWaypointsTime);
             }
             
+            Debug.Log($"Test completed successfully for {scenePath}");
             yield return null;
         }
 

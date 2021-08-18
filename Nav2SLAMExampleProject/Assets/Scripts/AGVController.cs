@@ -45,7 +45,6 @@ namespace RosSharp.Control
         {
             rosLinear = (float)cmdVel.linear.x;
             rosAngular = (float)cmdVel.angular.z;
-            //Debug.Log("Linear : " + rosLinear + " Angular : " + rosAngular);
             lastCmdReceived = Time.time;
         }
 
