@@ -8,12 +8,12 @@ variables:
 commands:
   - git submodule update --init --recursive
   # Ensure audio is disabled. Unity built-in audio fails to initialize in our Bokken image.
-  - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./tutorials/pick_and_place/PickAndPlaceProject/ProjectSettings/AudioManager.asset"
+  - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./Nav2SLAMExampleProject/ProjectSettings/AudioManager.asset"
   - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
   - unity-downloader-cli -u 2020.3.11f1 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
   - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
   #TODO: Determine how best to capture ROS logging as test artifacts
-  - /bin/bash .yamato/PickAndPlaceTests/start-ros.bash
+  - /bin/bash .yamato/start-ros.bash
   - utr/utr --testproject=./Nav2SLAMExampleProject --editor-location=.Editor --reruncount=0
     --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.NavigationIntegrationTests
 
