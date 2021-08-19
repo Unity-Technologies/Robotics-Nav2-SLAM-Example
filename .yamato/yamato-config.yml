@@ -1,0 +1,28 @@
+name: Nav2 SLAM Example Tests
+agent:
+  type: Unity::VM
+  image: robotics/ci-ros2-galactic-ubuntu20:v0.0.2-nav2slam-848832
+  flavor: i1.large
+variables:
+  PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
+commands:
+  - git submodule update --init --recursive
+  # Ensure audio is disabled. Unity built-in audio fails to initialize in our Bokken image.
+  - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./Nav2SLAMExampleProject/ProjectSettings/AudioManager.asset"
+  - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
+  - unity-downloader-cli -u 2020.3.11f1 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
+  - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
+  #TODO: Determine how best to capture ROS logging as test artifacts
+  - /bin/bash .yamato/start-ros.bash
+  - utr/utr --testproject=./Nav2SLAMExampleProject --editor-location=.Editor --reruncount=0
+    --artifacts_path=test-results --suite=playmode --platform=Editor --testfilter IntegrationTests.NavigationIntegrationTests
+
+triggers:
+  cancel_old_ci: true
+  expression: |
+    (pull_request.target in ["main", "dev"] AND
+    NOT pull_request.changes.all match ["**/*.md","**/*.jpg","**/*.jpeg","**/*.gif","**/*.pdf"])
+artifacts:
+  logs:
+    paths:
+      - "test-results/**/*"
