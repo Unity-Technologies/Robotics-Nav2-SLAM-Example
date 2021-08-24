@@ -80,6 +80,16 @@ You may also modify the parameters of the LaserScan sensor and observe how diffe
 
  ---
 
+ ### Automate It
+
+Selecting `Window->General->Test Runner` from the drop-down menu at the top will open a panel which displays any Tests defined for the Project. 
+
+![](images/test.png)
+
+This is an example integration test which, when executed, will open a simple scene with a few waypoints defined in the hierarchy.  The test script will publish each waypoint in order, as goal poses, and evaluate "Success" based on the Turtlebot's ability to navigate to each waypoint within the time limit. To see this test execute, ensure you have freshly launched ros2 environment (`ros2 launch unity_slam_example unity_slam_example.py`) and then simply double-click the test in the Test Runner panel.  The source code for this test is located in `Assets/Scripts/Tests/PlayMode/WaypointIntegrationTest.cs`.
+
+ ---
+
 ### Learn more about this Unity Scene
 
 For more information about how the different components in this simulation function, and how the ROS2 environment is set up, we have a separate [page](explanation.md) that goes into more granular detail.

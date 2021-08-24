@@ -54,7 +54,7 @@ MonoBehaviour:
   m_KeepaliveTime: 5
   m_NetworkTimeoutSeconds: 2
   m_SleepTimeSeconds: 0.01
-  m_ShowHUD: 1
+  m_ShowHUD: 0
 --- !u!114 &-8745016548381094262
 MonoBehaviour:
   m_ObjectHideFlags: 0
