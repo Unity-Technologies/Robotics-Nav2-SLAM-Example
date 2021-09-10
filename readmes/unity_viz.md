@@ -67,7 +67,7 @@ Next, we'll visualize the map being made.
 
 The map should now be appearing in the scene as the `/map` topic receives updates from ROS! However, you'll notice the map seems to collide with the floor rendering. 
 
-    ![](images/viz_clip.png)
+![](images/viz_clip.png)
 
 Let's customize this nav_msgs/OccupancyGrid visualization.
 
@@ -89,9 +89,11 @@ You may also want to view the costmap at the same time--this, as we know, is ano
 
     ![](images/viz_occupancygrids.png)
 
-- Once again, enter Play mode. You should now see the two maps updating in realtime! As you send goal poses to Turtlebot, the maps should now update as expected.
+- Once again, enter Play mode. In the HUD's Topics window, toggle on the `Viz` for `/global_costmap/costmap` now.
 
-    ![](images/viz_maps.png)
+You should now see the two maps updating in realtime! As you send goal poses to Turtlebot, the occupancy grid drawings should now update as expected.
+
+![](images/viz_maps.png)
 
 ## Laser Scan Visualization
 
@@ -111,15 +113,17 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
     > Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
 
-- Enter Play mode. Open the HUD's `Topics` tab again, and click `UI` toggle for `/scan`. The laser scan message should now be drawing and updating!
+- Enter Play mode. Open the HUD's `Topics` tab again, and click `Viz` toggle for `/scan`. The laser scan message should now be drawing and updating!
 
     > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `odom` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object.
 
 We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/Sensor` and scroll back down to the `Laser Scan Default Visualizer`.
 
+> Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TEMP LINK [here]().
+
 <!-- - TODO: In the Inspector, turn on `Use Intensity Size`. This will swap out the `Point Radius` field for the `Max Intensity` field. You should see the point sizes change. -->
   
-- In the Inspector, select the dropdown for `Color Mode.` These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value to `Angle` and see how the point colors change.
+- In the Inspector, select the dropdown for `Color Mode.` These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
 
     ![](images/viz_laserinspector.png)
 
