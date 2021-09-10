@@ -73,7 +73,7 @@ namespace IntegrationTests
         [UnityTearDown]
         public IEnumerator TearDown()
         {
-            ROSConnection.instance.Disconnect();
+            ROSConnection.GetOrCreateInstance().Disconnect();
             yield return null;
         }
 
@@ -117,7 +117,7 @@ namespace IntegrationTests
             //SceneManager.LoadScene(scenePath);
             yield return SceneManager.LoadSceneAsync(scenePath);
             
-            var ros = ROSConnection.instance;
+            var ros = ROSConnection.GetOrCreateInstance();
             ros.ConnectOnStart = true;
             
             var robots = GameObject.FindGameObjectsWithTag(k_RobotTag);

@@ -1,5 +1,13 @@
 # Setting up the Unity Project
 
+**Table of Contents**
+- [Open the Unity Project](#open-the-unity-project)
+- [Open the SimpleWarehouseScene](#open-the-simplewarehousescene)
+- [Configure your ROS Settings](#configure-your-ros-settings)
+- [Continue to running the example](#continue-to-running-the-example)
+
+---
+
 ## Open the Unity Project
 Assuming you have already [configured your dev environment](dev_env_setup.md), you can open the `Nav2SLAMExampleProject` either by adding the directory to your Unity Hub via the `Add` button, or opening it directly from an open Editor. 
 

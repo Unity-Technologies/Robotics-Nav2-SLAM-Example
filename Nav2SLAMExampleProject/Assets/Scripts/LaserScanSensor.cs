@@ -68,7 +68,7 @@ public class LaserScanSensor : MonoBehaviour
 
     protected virtual void Start()
     {
-        m_Ros = ROSConnection.instance;
+        m_Ros = ROSConnection.GetOrCreateInstance();
         m_Ros.RegisterPublisher(topic, "sensor_msgs/LaserScan");
 
         m_CurrentScanAngleStart = ScanAngleStartDegrees;

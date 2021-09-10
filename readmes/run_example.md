@@ -1,6 +1,23 @@
 # Running the Nav2 + slam_toolbox Example
+
+**Table of Contents**
+- [Start RViz in the Docker container](#start-rviz-in-the-docker-container)
+    - [(Optional) Launching ROS2 components manually](#optional-launching-ros2-components-manually)
+- [Start the Unity simulation](#start-the-unity-simulation)
+- [Interacting with this Example](#interacting-with-this-example)
+- [Continue to adding visualizations](#continue-to-adding-visualizations)
+- [Now What?](#now-what)
+    - [Exercise the Example](#exercise-the-example)
+    - [Automate It](#automate-it)
+    - [Learn more about this Unity Scene](#learn-more-about-this-unity-scene)
+    - [Import your own robot](#import-your-own-robot)
+    - [Experiment with your own Scenes](#experiment-with-your-own-scenes)
+- [Troubleshooting](#troubleshooting)
+
+---
+
 ## Start RViz in the Docker container
->This section assumes you have already  set up your environment according to the guide [here](dev_env_setup.md)
+>This section assumes you have already set up your environment according to the guide [here](dev_env_setup.md)
 
 - In a terminal on your host OS, run the following:
 
@@ -69,6 +86,11 @@ Congratulations! The TurtleBot is now navigating the map as it generates it from
 ---
 
 ## Now What?
+
+### Continue to adding visualizations
+
+The next step is to add visualizations in Unity using the Message Visualizations package. Proceed to [Visualizing with Unity](unity_viz.md).
+
 ### Exercise the Example 
 Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
 
@@ -80,7 +102,7 @@ You may also modify the parameters of the LaserScan sensor and observe how diffe
 
  ---
 
- ### Automate It
+### Automate It
 
 Selecting `Window->General->Test Runner` from the drop-down menu at the top will open a panel which displays any Tests defined for the Project. 
 

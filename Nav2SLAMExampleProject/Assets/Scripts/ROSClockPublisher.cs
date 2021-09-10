@@ -50,7 +50,7 @@ public class ROSClockPublisher : MonoBehaviour
     void Start()
     {
         SetClockMode(m_ClockMode);
-        m_ROS = ROSConnection.instance;
+        m_ROS = ROSConnection.GetOrCreateInstance();
         m_ROS.RegisterPublisher("clock", "rosgraph_msgs/Clock");
     }
 
