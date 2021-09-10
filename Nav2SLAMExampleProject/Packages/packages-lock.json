@@ -126,16 +126,18 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.robotics.message-visualizations": {
-      "version": "file:/Users/amanda.trang/Documents/Robotics/Projects/ROS-TCP-Connector/com.unity.robotics.message-visualizations",
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.message-visualizations#amanda/viz/bugs",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "513429c2cea8833111523d4ae6d0536d7a65a4e6"
     },
     "com.unity.robotics.ros-tcp-connector": {
-      "version": "file:/Users/amanda.trang/Documents/Robotics/Projects/ROS-TCP-Connector/com.unity.robotics.ros-tcp-connector",
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#amanda/viz/bugs",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "513429c2cea8833111523d4ae6d0536d7a65a4e6"
     },
     "com.unity.robotics.urdf-importer": {
       "version": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer#v0.5.0",
