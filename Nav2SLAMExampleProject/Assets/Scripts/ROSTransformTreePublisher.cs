@@ -92,7 +92,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
         PopulateTFList(tfMessageList, m_TransformRoot);
 
         var tfMessage = new TFMessageMsg(tfMessageList.ToArray());
-        m_ROS.Send(k_TfTopic, tfMessage);
+        m_ROS.Publish(k_TfTopic, tfMessage);
         m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
     }
 

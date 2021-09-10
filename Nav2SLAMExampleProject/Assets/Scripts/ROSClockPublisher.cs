@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.BuiltinInterfaces;
+using RosMessageTypes.Rosgraph;
 using Unity.Robotics.Core;
 
 public class ROSClockPublisher : MonoBehaviour
@@ -51,7 +52,7 @@ public class ROSClockPublisher : MonoBehaviour
     {
         SetClockMode(m_ClockMode);
         m_ROS = ROSConnection.GetOrCreateInstance();
-        m_ROS.RegisterPublisher("clock", "rosgraph_msgs/Clock");
+        m_ROS.RegisterPublisher<ClockMsg>("clock");
     }
 
     void PublishMessage()
@@ -63,7 +64,7 @@ public class ROSClockPublisher : MonoBehaviour
             nanosec = (uint)((publishTime - Math.Floor(publishTime)) * Clock.k_NanoSecondsInSeconds)
         };
         m_LastPublishTimeSeconds = publishTime;
-        m_ROS.Send("clock", clockMsg);
+        m_ROS.Publish("clock", clockMsg);
     }
 
     void Update()

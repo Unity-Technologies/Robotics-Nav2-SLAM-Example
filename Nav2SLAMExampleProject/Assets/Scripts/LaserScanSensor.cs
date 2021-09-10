@@ -69,7 +69,7 @@ public class LaserScanSensor : MonoBehaviour
     protected virtual void Start()
     {
         m_Ros = ROSConnection.GetOrCreateInstance();
-        m_Ros.RegisterPublisher(topic, "sensor_msgs/LaserScan");
+        m_Ros.RegisterPublisher<LaserScanMsg>(topic);
 
         m_CurrentScanAngleStart = ScanAngleStartDegrees;
         m_CurrentScanAngleEnd = ScanAngleEndDegrees;
@@ -148,7 +148,7 @@ public class LaserScanSensor : MonoBehaviour
             ranges = ranges.ToArray(),
         };
         
-        m_Ros.Send(topic, msg);
+        m_Ros.Publish(topic, msg);
 
         m_NumMeasurementsTaken = 0;
         ranges.Clear();
