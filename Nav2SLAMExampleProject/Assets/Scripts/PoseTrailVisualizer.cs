@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using RosMessageTypes.Geometry;
-using Unity.Robotics.MessageVisualizers;
-using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using RosMessageTypes.Geometry;                     // Generated message classes
+using Unity.Robotics.MessageVisualizers;            // Message visualizations
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
 using UnityEngine;
 
 public class PoseTrailVisualizer : MultiDrawingVisualizer<PoseStampedMsg>
 {
     [SerializeField]
-    Color m_Color;
+    Color m_Color = Color.white;
     [SerializeField]
     float m_Thickness = 0.1f;
     [SerializeField]
-    string m_Label;
+    string m_Label = "";
 
     public override Action CreateGUI(IEnumerable<Tuple<PoseStampedMsg, MessageMetadata>> messages)
     {
