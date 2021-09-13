@@ -43,7 +43,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
     > If the HUD is not visible, ensure your connection throws no errors, your nav2 ROS nodes are still running, and that `Show HUD` in the ROS Settings is on.
 
-- You should now see a new `UI` window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for messages..."
+- You should now see a new `UI` window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for message..."
 
     ![](images/viz_hud_goalpose.png)
 
@@ -75,7 +75,7 @@ Let's customize this nav_msgs/OccupancyGrid visualization.
 
 - The `Offset` will modify where the occupancy grid is drawn in the scene, which can be useful in situations where it may be obscured by the simulated world. Change the `Y` offset minimally, e.g. from 0 to `0.015`.
 
-You may also want to view the costmap at the same time--this, as we know, is another occupancy grid message. Without specifying a topic, the visualizations are created based on their ROS message type. You can also explicitly set the topic of each visualization to apply customizations to messages on that specific topic, allowing you to customize the visualization for each topic of the same type.
+You may also want to view the costmap at the same time. We know this is another occupancy grid message. Without specifying a topic, the visualizations are created based on their ROS message type. You can also explicitly set the topic of each visualization to apply customizations to messages on that specific topic, allowing you to customize the visualization for each topic of the same type.
 
 - In the `Occupancy Grid Default Visualizer` component, specify the `Occupancy Grid Topic` to be `/map`. 
 
@@ -83,7 +83,7 @@ You may also want to view the costmap at the same time--this, as we know, is ano
 
     > The `+` icon on the newly added component indicates that it is added to a prefab, but the changes on it exist in this particular scene, and not the prefab file itself.
 
-- On the newly added component, specify this `Occupancy Grid Topic` to `/global_costmap/costmap`, and similarly, update the `Offset` to something that will be under the `/map`, e.g. `0.01`.
+- On the newly added component, specify this `Occupancy Grid Topic` as `/global_costmap/costmap`, and similarly, update the `Offset` to something that will be below the `/map` offset, e.g. `0.01`.
 
 - You may now want to differentiate between the two occupancy grid visualizers--in the `Color` field of these two visualizers, feel free to start changing colors! We kept the `/map` as white, and changed the `/global_costmap/costmap` to be a light blue.
 
@@ -109,7 +109,7 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
     In the `Topic` field, enter `/scan`.
 
-- For messages with stamped headers, there is an option to customize the coordinate frame tracking per visualization. This is set via the `TF Tracking Settings`: click it to expand the options. To create each drawing as children of respective *frame_id* GameObjects, change the `Type` to `Track Latest`. The `TF Topic` should be left as the default `/tf`.
+- For messages with stamped headers, there is an option to customize the coordinate frame tracking per visualization. This is set via the `TF Tracking Settings`; click it to expand the options. To create each drawing as children of respective *frame_id* GameObjects, change the `Type` to `Track Latest`. The `TF Topic` should be left as the default `/tf`.
 
     > Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
 
@@ -133,6 +133,6 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 ## More with Message Visualizations
 
-You can proceed to the next tutorial, [TEMP link] [Visualizing Custom Messages]().
+You can proceed to the next tutorial, TODO [Visualizing Custom Messages]().
 
 To learn more about using the Message Visualizations package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
