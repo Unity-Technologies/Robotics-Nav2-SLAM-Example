@@ -133,6 +133,6 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 ## More with Message Visualizations
 
-You can proceed to the next tutorial, TODO [Visualizing Custom Messages]().
+You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md).
 
 To learn more about using the Message Visualizations package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).

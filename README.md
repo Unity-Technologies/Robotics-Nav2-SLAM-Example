@@ -11,6 +11,7 @@ This example provides a Unity Project and a colcon workspace that, when used tog
 1. ### [Setting Up the Unity Project](readmes/unity_project.md)
 1. ### [Running the Example](readmes/run_example.md)
 1. ### [Visualizing with Unity](readmes/unity_viz.md)
+1. ### [Making a Custom Visualizer](readmes/custom_viz.md)
 
 ## Understanding the Project Components
 * ### [Breakdown of this Example](readmes/explanation.md)
