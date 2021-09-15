@@ -39,7 +39,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
     ![](images/viz_hudtopics.png)
 
-    Click the `/goal_pose` topic name to toggle both the `UI` and `Viz` options. Alternatively, you can select each individual toggle. `UI` toggles a GUI window that displays a text-formatted version of the message. `Viz` toggles the 3D drawing.
+    Click into the search bar, and begin typing `/goal_pose`. When it appears, select the `/goal_pose` topic name to toggle both the `UI` and `Viz` options. Alternatively, you can select each individual toggle. `UI` toggles a GUI window that displays a text-formatted version of the message. `Viz` toggles the 3D drawing.
 
     > If the HUD is not visible, ensure your connection throws no errors, your nav2 ROS nodes are still running, and that `Show HUD` in the ROS Settings is on.
 
@@ -63,7 +63,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 Next, we'll visualize the map being made. 
 
-- In Unity, select the `Topics` tab in the HUD. Click the `Viz` toggle next to the `/map` topic name to toggle on the 3D drawing.
+- In Unity, select the `Topics` tab in the HUD. Select the `Viz` toggle next to the `/map` topic name to toggle on the 3D drawing.
 
 The map should now be appearing in the scene as the `/map` topic receives updates from ROS! However, you'll notice the map seems to collide with the floor rendering. 
 
