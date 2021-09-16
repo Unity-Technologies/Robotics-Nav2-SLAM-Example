@@ -2,8 +2,6 @@
 
 While the Message Visualizations package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the nav2 project that tracks a history of `/goal_pose` messages over time, drawing a path between each point. 
 
-TODO: screenshot
-
 **Table of Contents**
 - [Creating a New Visualizer](#creating-a-new-visualizer)
     - [Drawing the UI Window](#drawing-the-ui-window)
@@ -20,15 +18,13 @@ TODO: screenshot
 
     > To create a new script, right click in Unity's Project window, and select `Create > C# Script`.
 
-    > TODO: To use the completed script, you can add the file from [DIRECTORY PoseTrailVisualizer]() and skip to []() step.
+    > To skip to the end using the completed script, you can add the file from [unity_scripts/PoseTrailVisualizer](../unity_scripts/PoseTrailVisualizer.cs) to a GameObject in your scene and run the example.
 
 - Make a new GameObject in your scene named `Visualizer`. Add the newly created PoseTrailVisualizer component to the Visualizer GameObject. 
 
-    - If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added and you can move to editing the script.
+    - If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added and you can continue to editing the script.
     
-    - If you do not have the `DefaultVisualizationSuite` in your scene, you will also need the `VisualizationsTopicsTab` component in order to add the `Topics` tab to your HUD. 
-    
-    On your `Visualizer` GameObject, add the `VisualizationsTopicsTab` component now. This component extends the ROS Connection HUD to show options for visualizations on registered topics. 
+    - If you do not have the `DefaultVisualizationSuite` in your scene, you will also need the `VisualizationsTopicsTab` component in order to add the `Topics` tab to your HUD. On your `Visualizer` GameObject, add the `VisualizationsTopicsTab` component now. This component extends the ROS Connection HUD to show options for visualizations on registered topics. 
 
     > Learn more about the HUD TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#the-hud).
 
@@ -113,15 +109,15 @@ In the Message Visualizations package, UI windows are registered based on its to
 
     Change the `History Length` to however many goals you would like to track over time--for example, `5`. 
 
-    TODO: screenshot
+    ![](images/viz_history.png)
 
-- TODO: Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on the `UI`. 
+- Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on the `UI`. 
 
     On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`. 
 
     The UI window should appear, waiting for messages on the topic. Begin publishing goal poses, and you will see the UI window update appropriately!
 
-    TODO: screenshot
+    ![](images/viz_goals_ui.png)
 
 Move onto the next step to begin customizing and adding the 3D drawing to your visualization.
 
@@ -226,7 +222,7 @@ public override void Draw(Drawing3d drawing, IEnumerable<Tuple<PoseStampedMsg, M
 
 You have now completed the tutorial for creating a custom visualizer for your nav2 simulation!
 
-TODO: gif
+![](images/viz_trail.gif)
 
 ## Now What?
 
