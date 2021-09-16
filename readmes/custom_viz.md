@@ -33,6 +33,7 @@ While the Message Visualizations package provides a preconfigured default visual
     Open your newly created script for editing. At the top of the script, import these namespaces:
 
     ```csharp
+    using System;
     using RosMessageTypes.Geometry;                     // Generated message classes
     using Unity.Robotics.MessageVisualizers;            // Message visualizations
     using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
@@ -41,6 +42,8 @@ While the Message Visualizations package provides a preconfigured default visual
     You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `MultiDrawingVisualizer<T>` class. Do this now by replacing the `MonoBehaviour` class with `MultiDrawingVisualizer<PoseStampedMsg>`.
 
     > Learn more about the visualizer base classes TODO link [here]().
+
+- Next, delete the template `Start()` and `Update()` functions--the base `MultiDrawingVisualizer` class will manage what needs to happen in those MonoBehaviour functions for you.
 
 ```csharp
 using System;
@@ -52,9 +55,7 @@ using UnityEngine;
 
 public class PoseTrailVisualizer : MultiDrawingVisualizer<PoseStampedMsg>
 {
-    // Start is called before the first frame update
-    void Start()
-    ...
+    
 }
 ```
 
@@ -107,13 +108,15 @@ In the Message Visualizations package, UI windows are registered based on its to
 
 - Return to Unity. Select the `Visualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component. 
 
-    Change the `History Length` to however many goals you would like to track over time--for example, `5`. 
+    Change the `History Length` field to however many goals you would like to track over time--for example, `5`. 
 
-    ![](images/viz_history.png)
+- Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on the `UI` if it's not already on.
 
-- Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on the `UI`. 
+    On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`.
 
-    On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`. 
+    ![](images/viz_menu.png)
+
+    > Note that you may have to drag the `/goal_pose` UI window out of the way in order to access the menu.
 
     The UI window should appear, waiting for messages on the topic. Begin publishing goal poses, and you will see the UI window update appropriately!
 
@@ -123,9 +126,11 @@ Move onto the next step to begin customizing and adding the 3D drawing to your v
 
 ### Creating Drawings
 
-Like the text and UI windows, 3D visualizations from this package are customizable. A set of basic customization parameters can include, for example, the thickness or color of lines drawn.
+Like the text and UI windows, 3D visualizations from this package are customizable. A set of basic customization parameters can include, for example, the color and thickness of the lines drawn, or the text label added.
 
-- Define these customizable parameters for the trail drawing as serialized private fields at the top of your class.
+- Exit Play mode and return to the `PoseTrailVisualizer` script for editing. 
+
+    Define these customizable parameters (line color, thickness, and label) for the trail drawing as serialized private fields at the top of your class.
 
     ```csharp
     [SerializeField]
@@ -216,7 +221,7 @@ public override void Draw(Drawing3d drawing, IEnumerable<Tuple<PoseStampedMsg, M
 }
 ```
 
-- Your visualizer is ready to fully test! You are free to modify the thickness, color, and label of the visual in the `PoseTrailVisualizer`'s Inspector window.
+- Your visualizer is ready to fully test! You are free to modify the thickness, color, and label of the visual in the `PoseTrailVisualizer`'s Inspector window. We left the thickness at the default `0.1`, chose a light green color, and set the label to say `Goal!`.
 
     Enter Play mode, and begin publishing goal poses. You should now see line segments connecting each of the published goal poses in order.
 
