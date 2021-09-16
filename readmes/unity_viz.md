@@ -99,7 +99,9 @@ You should now see the two maps updating in realtime! As you send goal poses to 
 
 Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Message Visualizations package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your nav2 project.
 
-- Start by removing the debug visuals on the current Laser Scan Sensor. Do this by navigating to and selecting `turtlebot3_manual_config/base_footprint/base_link/base_scan` in your scene Hierarchy (you can also just search for `base_scan`). 
+- If you are still in Play mode, exit it. Start by removing the debug visuals on the current Laser Scan Sensor. 
+
+    Do this by navigating to and selecting `turtlebot3_manual_config/base_footprint/base_link/base_scan` in your scene Hierarchy (you can also just search for `base_scan`). 
 
     In its Inspector window, scroll down to the `Laser Scan Sensor (Script)` and *uncheck* `Render Debug Visuals`.
 
