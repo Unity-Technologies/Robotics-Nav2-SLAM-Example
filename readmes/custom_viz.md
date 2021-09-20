@@ -14,17 +14,19 @@ While the Message Visualizations package provides a preconfigured default visual
 
 ## Creating a New Visualizer
 
-- To start writing a custom visualizer, start by making a new script named `PoseTrailVisualizer`.
+- If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added for visualization.
 
-    > To create a new script, right click in Unity's Project window, and select `Create > C# Script`.
+    - If you do not have the `DefaultVisualizationSuite`, you can instead use the `EmptyVisualizationSuite`, which contains the necessary extensions for visualizations. To add the empty visualization suite, in the Project window, expand and select `Packages/Message Visualizations`. Select the `EmptyVisualizationSuite` and drag it into your scene Hierarchy.
 
-    > To skip to the end using the completed script, you can add the file from [unity_scripts/PoseTrailVisualizer](../unity_scripts/PoseTrailVisualizer.cs) to a GameObject in your scene and run the example.
+- To start writing a custom visualizer, start by making a new script in the `Assets/Scripts` directory named `PoseTrailVisualizer`.
 
-- Make a new GameObject in your scene named `Visualizer`. Add the newly created PoseTrailVisualizer component to the Visualizer GameObject. 
+    > To create a new script, right click on `Assets/Scripts` in Unity's Project window, and select `Create > C# Script`.
 
-    - If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added and you can continue to editing the script.
-    
-    - If you do not have the `DefaultVisualizationSuite` in your scene, you will also need the `VisualizationsTopicsTab` component in order to add the `Topics` tab to your HUD. On your `Visualizer` GameObject, add the `VisualizationsTopicsTab` component now. This component extends the ROS Connection HUD to show options for visualizations on registered topics. 
+    > To skip to the end using the completed script, you can add the file from [unity_scripts/PoseTrailVisualizer](../unity_scripts/PoseTrailVisualizer.cs) to `Assets/Scripts`, attach it to a GameObject in your scene, configure the component in the inspector, and run the example.
+
+- In your visualization suite, make a new GameObject named `TrailVisualizer` (e.g. `DefaultVisualizationSuite/TrailVisualizer`). 
+
+    Add the newly created PoseTrailVisualizer component to the TrailVisualizer GameObject. 
 
     > Learn more about the HUD TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#the-hud).
 
@@ -39,11 +41,11 @@ While the Message Visualizations package provides a preconfigured default visual
     using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
     ```
 
-    You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `MultiDrawingVisualizer<T>` class. Do this now by replacing the `MonoBehaviour` class with `MultiDrawingVisualizer<PoseStampedMsg>`.
+    You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `HistoryDrawingVisualizer<T>` class. Do this now by replacing the `MonoBehaviour` class with `HistoryDrawingVisualizer<PoseStampedMsg>`.
 
     > Learn more about the visualizer base classes TODO link [here]().
 
-- Next, delete the template `Start()` and `Update()` functions--the base `MultiDrawingVisualizer` class will manage what needs to happen in those MonoBehaviour functions for you.
+- Next, delete the template `Start()` and `Update()` functions--the base `HistoryDrawingVisualizer` class will manage what needs to happen in those MonoBehaviour functions for you.
 
 ```csharp
 using System;
@@ -53,7 +55,7 @@ using Unity.Robotics.MessageVisualizers;            // Message visualizations
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
 using UnityEngine;
 
-public class PoseTrailVisualizer : MultiDrawingVisualizer<PoseStampedMsg>
+public class PoseTrailVisualizer : HistoryDrawingVisualizer<PoseStampedMsg>
 {
     
 }
@@ -63,11 +65,11 @@ Your template class should now look something like the above code block. However
 
 ### Drawing the UI Window
 
-In the Message Visualizations package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `MultiDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
+In the Message Visualizations package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `HistoryDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
 
-- Implementations of the visualizer classes override the function `CreateGUI()` in order to populate the UI window. By default, this function will simply display the raw message converted to a string. The MultiDrawingVisualizer acts a bit differently, managing multiple messages over time.
+- Implementations of the visualizer classes override the function `CreateGUI()` in order to populate the UI window. By default, this function will simply display the raw message converted to a string. The HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time.
 
-    Begin by adding an empty override for MultiDrawingVisualizer's `CreateGUI` function to your visualizer script.
+    Begin by adding an empty override for HistoryDrawingVisualizer's `CreateGUI` function to your visualizer script.
 
     ```csharp
     public override Action CreateGUI(IEnumerable<Tuple<PoseStampedMsg, MessageMetadata>> messages)
@@ -106,7 +108,7 @@ In the Message Visualizations package, UI windows are registered based on its to
     ros2 launch unity_slam_example unity_slam_example.py
     ```
 
-- Return to Unity. Select the `Visualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component. 
+- Return to Unity. Select the `TrailVisualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component. 
 
     Change the `History Length` field to however many goals you would like to track over time--for example, `5`. 
 
@@ -143,9 +145,9 @@ Like the text and UI windows, 3D visualizations from this package are customizab
 
     > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#visualization-settings).
 
-- Like the GUI function, implementations of the visualizer classes also override the function `Draw()` for updating a 3D drawing in the Unity scene. Once again, the MultiDrawingVisualizer acts a bit differently, managing multiple messages over time--the updating and cleanup of message drawings past the saved history is managed by the MultiDrawingVisualizer class--all we'll have to do is feed the pose messages in.
+- Like the GUI function, implementations of the visualizer classes also override the function `Draw()` for updating a 3D drawing in the Unity scene. Once again, the HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time--the updating and cleanup of message drawings is managed by the HistoryDrawingVisualizer class--all we'll have to do is feed the pose messages in.
 
-    Start by adding an empty override for MultiDrawingVisualizer's `Draw` function in your visualizer script.
+    Start by adding an empty override for HistoryDrawingVisualizer's `Draw` function in your visualizer script.
 
     ```csharp
     public override void Draw(Drawing3d drawing, IEnumerable<Tuple<PoseStampedMsg, MessageMetadata>> messages)

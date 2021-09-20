@@ -5,7 +5,7 @@ using Unity.Robotics.MessageVisualizers;            // Message visualizations
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
 using UnityEngine;
 
-public class PoseTrailVisualizer : MultiDrawingVisualizer<PoseStampedMsg>
+public class PoseTrailVisualizer : HistoryDrawingVisualizer<PoseStampedMsg>
 {
     [SerializeField]
     Color m_Color = Color.white;
