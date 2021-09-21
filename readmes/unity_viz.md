@@ -39,11 +39,13 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
     ![](images/viz_hudtopics.png)
 
-    Click into the search bar, and begin typing `/goal_pose`. When it appears, select the `/goal_pose` topic name to toggle both the `UI` and `Viz` options. Alternatively, you can select each individual toggle. `UI` toggles a GUI window that displays a text-formatted version of the message. `Viz` toggles the 3D drawing.
+    Click into the search bar, and begin typing `/goal_pose`. When it appears, select the `/goal_pose` topic name to toggle both the `2D` and `3D` options. Alternatively, you can select each individual toggle. `2D` toggles a GUI window that displays a text-formatted version of the message. `3D` toggles the 3D drawing.
 
     > If the HUD is not visible, ensure your connection throws no errors, your nav2 ROS nodes are still running, and that `Show HUD` in the ROS Settings is on.
 
-- You should now see a new `UI` window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for message..."
+- You should now see a new window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for message..."
+
+    You can now click the `Topics` tab again to close the list.
 
     ![](images/viz_hud_goalpose.png)
 
@@ -53,9 +55,11 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
     ros2 topic pub -1 /goal_pose geometry_msgs/PoseStamped "{header: {stamp: {sec: 0}, frame_id: 'map'}, pose: {position: {x: 2.0, y: 7.0, z: 0.0}, orientation: {w: 1.0}}}"
     ```
 
-    Go ahead and publish different goal poses. In Unity, you should be able to see the goal pose drawing and the UI window update as messages are received on the topic! You can also click and drag the edges of the UI to adjust the size and placement of the topic's window. 
+    Go ahead and publish different goal poses. In Unity, you should be able to see the goal pose drawing and the window update as messages are received on the topic! You can also click and drag the edges of the UI to adjust the size and placement of the topic's window. 
 
-    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
+    
+    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
 
     ![](images/viz_goalpose.png)
 
@@ -63,7 +67,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 Next, we'll visualize the map being made. 
 
-- In Unity, select the `Topics` tab in the HUD. Select the `Viz` toggle next to the `/map` topic name to toggle on the 3D drawing.
+- In Unity, select the `Topics` tab in the HUD to open the list again. Select the `3D` toggle next to the `/map` topic name to toggle on the 3D drawing.
 
 The map should now be appearing in the scene as the `/map` topic receives updates from ROS! However, you'll notice the map seems to collide with the floor rendering. 
 
@@ -71,15 +75,15 @@ The map should now be appearing in the scene as the `/map` topic receives update
 
 Let's customize this nav_msgs/OccupancyGrid visualization.
 
-- Exit Play mode. In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Select the `Nav` child object (for nav_msgs). In its Inspector window, scroll down until you find the `Occupancy Grid Default Visualizer`.
+- Exit Play mode. In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Expand the `nav_msgs` child object and select the `OccupancyGrid` object to open its Inspector.
 
 - The `Offset` will modify where the occupancy grid is drawn in the scene, which can be useful in situations where it may be obscured by the simulated world. Change the `Y` offset minimally, e.g. from 0 to `0.015`.
 
 You may also want to view the costmap at the same time. We know this is another occupancy grid message. Without specifying a topic, the visualizations are created based on their ROS message type. You can also explicitly set the topic of each visualization to apply customizations to messages on that specific topic, allowing you to customize the visualization for each topic of the same type.
 
-- In the `Occupancy Grid Default Visualizer` component, specify the `Occupancy Grid Topic` to be `/map`. 
+- In the `OccupancyGrid` object, specify the `Topic` to be `/map`. 
 
-- Although the default visualization suite is provided as a prefab, you are free to make changes to the suite for your own use. Still on the Nav object's Inspector window, click `Add Component`. Begin searching for `Occupancy Grid Default Visualizer` and add it to the object. You should now have two occupancy grid visualizers on this object!
+- Although the default visualization suite is provided as a prefab, you are free to make changes to the suite for your own use. Still on the `OccupancyGrid` object's Inspector window, click `Add Component`. Begin searching for `Occupancy Grid Default Visualizer` and add it to the object. You should now have two occupancy grid visualizers on this object!
 
     > The `+` icon on the newly added component indicates that it is added to a prefab, but the changes on it exist in this particular scene, and not the prefab file itself.
 
@@ -89,7 +93,9 @@ You may also want to view the costmap at the same time. We know this is another 
 
     ![](images/viz_occupancygrids.png)
 
-- Once again, enter Play mode. In the HUD's Topics window, toggle on the `Viz` for `/global_costmap/costmap` now.
+- Once again, enter Play mode. 
+
+    In the HUD's Topics window, toggle on the `3D` for `/global_costmap/costmap` now.
 
 You should now see the two maps updating in realtime! As you send goal poses to Turtlebot, the occupancy grid drawings should now update as expected.
 
@@ -107,7 +113,7 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
     ![](images/viz_debugoff.png)
 
-- In the scene Hierarchy, once again expand the `DefaultVisualizationSuite`. This time, select the `Sensor` child object (for sensor_msgs). In its Inspector window, scroll down until you find the `Laser Scan Default Visualizer`.
+- In the scene Hierarchy, once again expand the `DefaultVisualizationSuite`. This time, expand the `sensor_msgs` object and select `LaserScan` to open its Inspector.
 
     In the `Topic` field, enter `/scan`.
 
@@ -115,17 +121,17 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
     > Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
 
-- Enter Play mode. Open the HUD's `Topics` tab again, and click `Viz` toggle for `/scan`. The laser scan message should now be drawing and updating!
+- Enter Play mode. Open the HUD's `Topics` tab again, and click `3D` toggle for `/scan`. The laser scan message should now be drawing and updating!
 
-    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `odom` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object.
+    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object.
 
-We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/Sensor` and scroll back down to the `Laser Scan Default Visualizer`.
+We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/sensor_msgs/LaserScan`.
 
 > Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TEMP LINK [here]().
 
-<!-- - TODO: In the Inspector, turn on `Use Intensity Size`. This will swap out the `Point Radius` field for the `Max Intensity` field. You should see the point sizes change. -->
-  
 - In the Inspector, select the dropdown for `Color Mode.` These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
+
+    You can also modify the `Point Radius` to change the size of each drawn point.
 
     ![](images/viz_laserinspector.png)
 
