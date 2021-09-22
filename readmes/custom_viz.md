@@ -1,12 +1,17 @@
 # Making a Custom Visualizer
 
-While the Message Visualizations package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the nav2 project that tracks a history of `/goal_pose` messages over time, drawing a path between each point. 
+While the Message Visualizations package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
 
 **Table of Contents**
 - [Creating a New Visualizer](#creating-a-new-visualizer)
     - [Drawing the UI Window](#drawing-the-ui-window)
     - [Creating Drawings](#creating-drawings)
-- [What's Next?](#whats-next)
+- [Now What?](#now-what)
+    - [Exercise the Example](#exercise-the-example)
+    - [Automate It](#automate-it)
+    - [Learn more about this Unity Scene](#learn-more-about-this-unity-scene)
+    - [Import your own robot](#import-your-own-robot)
+    - [Experiment with your own Scenes](#experiment-with-your-own-scenes)
 
 > This section assumes you have already set up your environment according to the [configuration guide](dev_env_setup.md) and have run the example successfully as described [here](run_example.md).
 
@@ -83,7 +88,7 @@ In the Message Visualizations package, UI windows are registered based on its to
 
 - The Message Visualizations package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
 
-    As `/goal_pose` is a PoseMsg, we will use the utility function for its GUI, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.message-visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
+    As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.message-visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
 
     Add this functionality between the `return` curly brackets. Your overridden function should look as follows:
 
@@ -112,7 +117,7 @@ In the Message Visualizations package, UI windows are registered based on its to
 
     Change the `History Length` field to however many goals you would like to track over time--for example, `5`. 
 
-- Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on the `UI` if it's not already on.
+- Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on `2D` if it's not already on.
 
     On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`.
 
@@ -132,7 +137,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
 
 - Exit Play mode and return to the `PoseTrailVisualizer` script for editing. 
 
-    Define these customizable parameters (line color, thickness, and label) for the trail drawing as serialized private fields at the top of your class.
+    Define these customizable parameters (line color, thickness, and label) for the trail drawing as serialized private fields at the top of your PoseTrailVisualizer class.
 
     ```csharp
     [SerializeField]
@@ -223,18 +228,21 @@ public override void Draw(Drawing3d drawing, IEnumerable<Tuple<PoseStampedMsg, M
 }
 ```
 
-- Your visualizer is ready to fully test! You are free to modify the thickness, color, and label of the visual in the `PoseTrailVisualizer`'s Inspector window. We left the thickness at the default `0.1`, chose a light green color, and set the label to say `Goal!`.
+- Your visualizer is ready to fully test! You are free to modify the thickness, color, and label of the visual in the `PoseTrailVisualizer`'s Inspector window. We left the thickness at the default `0.1`, chose a lime green color, and set the label to say `Goal!`.
 
-    Enter Play mode, and begin publishing goal poses. You should now see line segments connecting each of the published goal poses in order.
+    Enter Play mode. Once again, open the `Topics` tab and turn on the `3D` toggle if it is not already on, and begin publishing goal poses. You should now see line segments connecting each of the published goal poses in order.
 
-You have now completed the tutorial for creating a custom visualizer for your nav2 simulation!
+You have now completed the tutorial for creating a custom visualizer for your Nav2 simulation!
 
 ![](images/viz_trail.gif)
+
+---
+---
 
 ## Now What?
 
 ### Exercise the Example 
-Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
+Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the Nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
 
 You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:  
 

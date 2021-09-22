@@ -9,7 +9,7 @@ This page introduces message visualizations to the Nav2 example running in Unity
 - [Goal Pose Visualization](#goal-pose-visualization)
 - [Map Visualization](#map-visualization)
 - [Laser Scan Visualization](#laser-scan-visualization)
-- [Point Clouds](#point-clouds)
+- [More with Message Visualizations](#more-with-message-visualizations)
 
 > This section assumes you have already set up your environment according to the [configuration guide](dev_env_setup.md) and have run the example successfully as described [here](run_example.md).
 
