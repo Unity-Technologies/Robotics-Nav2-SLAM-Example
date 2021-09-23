@@ -2,7 +2,7 @@
 
 There are a variety of reasons that visualizations can be useful in a simulation, both in realtime and in playback. Seeing the data being sent and received within the context of the simulated world offers more information and a better understanding of the state of the simulation, offering insights into data like realtime sensor readings and control signals.
 
-This page introduces message visualizations to the Nav2 example running in Unity.
+This page introduces the Visualizations Package to the Nav2 example running in Unity.
 
 **Table of Contents**
 - [Adding Visualizations](#adding-visualizations)
@@ -17,9 +17,9 @@ This page introduces message visualizations to the Nav2 example running in Unity
 
 ## Adding Visualizations
 
-> The Message Visualizations package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Message Visualizations to your own project, learn more in the package TEMP LINK [documentation]().
+> The Visualizations Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Message Visualizations to your own project, learn more in the package TEMP LINK [documentation]().
 
-The Message Visualizations package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
+The Visualizations Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
 - To add the default visualization suite, in the Project window, expand and select `Packages/Message Visualizations`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
 
@@ -89,7 +89,13 @@ You may also want to view the costmap at the same time. We know this is another 
 
 - On the newly added component, specify this `Topic` as `/global_costmap/costmap`, and similarly, update the `Offset` to something that will be below the `/map` offset, e.g. `0.01`.
 
-- You may now want to differentiate between the two occupancy grid visualizers--in the `Color` field of these two visualizers, feel free to start changing colors! We kept the `/map` as white, and changed the `/global_costmap/costmap` to be a light blue.
+- To set the default material to the new Occupancy Grid visualizer, assign the `Material` field to the OccupancyGrid material, found in `Packages/Message Visualizations/Runtime/Materials/OccupancyGrid`.
+
+    > You can find this file by searching in the Project window. Note that you will have to change the Search type from "In Assets" to "All". 
+
+    ![](images/viz_search.png)
+
+- You may now want to differentiate between the two occupancy grid visualizers--in the `Unoccupied` Cell Color field of these two visualizers, feel free to start changing colors! We kept the `/map` as white, and changed the `/global_costmap/costmap` to be a light blue.
 
     ![](images/viz_occupancygrids.png)
 
@@ -103,7 +109,7 @@ You should now see the two maps updating in realtime! As you send goal poses to 
 
 ## Laser Scan Visualization
 
-Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Message Visualizations package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
+Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Visualizations Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
 
 - If you are still in Play mode, exit it. Let's start by removing the debug visuals on the current Laser Scan Sensor. 
 
@@ -143,4 +149,14 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md).
 
-To learn more about using the Message Visualizations package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+To learn more about using the Visualizations Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+
+---
+---
+
+## Troubleshooting
+
+```
+rclpy._rclpy_pybind11.InvalidHandle: cannot use Destroyable because destruction was requested
+```
+If you encounter the above error, you will need to shut down your ROS nodes between each disconnect. For example, after running the ROS nodes connected to Unity, if you exit Play mode in Unity, you will also need to shut down the ROS nodes and restart them before entering Play mode in Unity again.

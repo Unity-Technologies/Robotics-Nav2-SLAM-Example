@@ -1,6 +1,6 @@
 # Making a Custom Visualizer
 
-While the Message Visualizations package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
+While the Visualizations Package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
 
 **Table of Contents**
 - [Creating a New Visualizer](#creating-a-new-visualizer)
@@ -70,7 +70,7 @@ Your template class should now look something like the above code block. However
 
 ### Drawing the UI Window
 
-In the Message Visualizations package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `HistoryDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
+In the Visualizations Package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `HistoryDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
 
 - Implementations of the visualizer classes override the function `CreateGUI()` in order to populate the UI window. By default, this function will simply display the raw message converted to a string. The HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time.
 
@@ -86,7 +86,7 @@ In the Message Visualizations package, UI windows are registered based on its to
     }
     ```
 
-- The Message Visualizations package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
+- The Visualizations Package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
 
     As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.message-visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
 
@@ -281,4 +281,4 @@ The `turtlebot3_manual_config` object can be found in the `Project Browser` unde
 ---
 ---
 
-To learn more about using the Message Visualizations package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+To learn more about using the Visualizations Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
