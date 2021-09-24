@@ -21,7 +21,7 @@ While the Visualization Package provides a preconfigured default visualization s
 
 - If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added for visualization.
 
-    - If you do not have the `DefaultVisualizationSuite`, you can instead use the `EmptyVisualizationSuite`, which contains the necessary extensions for visualizations. To add the empty visualization suite, in the Project window, expand and select `Packages/Robotics Visualizations Package`. Select the `EmptyVisualizationSuite` and drag it into your scene Hierarchy.
+    - If you do not have the `DefaultVisualizationSuite`, you can instead use the `EmptyVisualizationSuite`, which contains the necessary extensions for visualizations. To add the empty visualization suite, in the Project window, expand and select `Packages/Robotics Visualization`. Select the `EmptyVisualizationSuite` and drag it into your scene Hierarchy.
 
 - To start writing a custom visualizer, start by making a new script in the `Assets/Scripts` directory named `PoseTrailVisualizer`.
 
@@ -123,9 +123,9 @@ In the Visualization Package, UI windows are registered based on its topic, and 
 
 - Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on `2D` if it's not already on.
 
-    On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`.
+    <!-- On the right side of the `/goal_pose` row, click to expand the hamburger menu and select your new visualizer, `PoseTrailVisualizer`. -->
 
-    ![](images/viz_menu.png)
+    <!-- ![](images/viz_menu.png) -->
 
     > Note that you may have to drag the `/goal_pose` UI window out of the way in order to access the menu.
 

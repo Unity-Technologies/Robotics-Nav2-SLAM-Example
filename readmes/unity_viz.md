@@ -18,11 +18,11 @@ This page introduces the Visualization Package to the Nav2 example running in Un
 
 ## Adding Visualizations
 
-> The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package TEMP LINK [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#installation).
+> The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package TEMP LINK [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#installation).
 
 The Visualization Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
-- To add the default visualization suite, in the Project window, expand and select `Packages/Robotics Visualizations Package`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
+- To add the default visualization suite, in the Project window, expand and select `Packages/Robotics Visualization`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
 
     ![](images/viz_prefab.png)
 
@@ -92,7 +92,7 @@ You may also want to view the costmap at the same time. We know this is another 
 
 - On the newly added component, specify this `Topic` as `/global_costmap/costmap`, and similarly, update the `Offset` to something that will be below the `/map` offset, e.g. `0.01`.
 
-- To set the default material to the new Occupancy Grid visualizer, assign the `Material` field to the OccupancyGrid material, found in `Packages/Robotics Visualizations Package/Runtime/Materials/OccupancyGrid`.
+- To set the default material to the new Occupancy Grid visualizer, assign the `Material` field to the OccupancyGrid material, found in `Packages/Robotics Visualization/Runtime/Materials/OccupancyGrid`.
 
     > You can find this file by searching in the Project window. Note that you will have to change the Search type from "In Assets" to "All". 
 
