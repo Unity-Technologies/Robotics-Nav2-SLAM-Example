@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;                     // Generated message classes
-using Unity.Robotics.MessageVisualizers;            // Message visualizations
+using Unity.Robotics.Visualizations;                // Visualizations
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
 using UnityEngine;
 

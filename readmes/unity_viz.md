@@ -2,14 +2,15 @@
 
 There are a variety of reasons that visualizations can be useful in a simulation, both in realtime and in playback. Seeing the data being sent and received within the context of the simulated world offers more information and a better understanding of the state of the simulation, offering insights into data like realtime sensor readings and control signals.
 
-This page introduces the Visualizations Package to the Nav2 example running in Unity.
+This page introduces the Visualization Package to the Nav2 example running in Unity.
 
 **Table of Contents**
 - [Adding Visualizations](#adding-visualizations)
 - [Goal Pose Visualization](#goal-pose-visualization)
 - [Map Visualization](#map-visualization)
 - [Laser Scan Visualization](#laser-scan-visualization)
-- [More with Message Visualizations](#more-with-message-visualizations)
+- [More with Visualizations](#more-with-visualizations)
+- [Troubleshooting](#troubleshooting)
 
 > This section assumes you have already set up your environment according to the [configuration guide](dev_env_setup.md) and have run the example successfully as described [here](run_example.md).
 
@@ -17,11 +18,11 @@ This page introduces the Visualizations Package to the Nav2 example running in U
 
 ## Adding Visualizations
 
-> The Visualizations Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Message Visualizations to your own project, learn more in the package TEMP LINK [documentation]().
+> The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package TEMP LINK [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#installation).
 
-The Visualizations Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
+The Visualization Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
-- To add the default visualization suite, in the Project window, expand and select `Packages/Message Visualizations`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
+- To add the default visualization suite, in the Project window, expand and select `Packages/Robotics Visualizations Package`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
 
     ![](images/viz_prefab.png)
 
@@ -45,6 +46,12 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 - You should now see a new window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for message..."
 
+    You can click and drag the edges of the UI to adjust the size and placement of the topic's window. 
+
+    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
+    
+    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+
     You can now click the `Topics` tab again to close the list.
 
     ![](images/viz_hud_goalpose.png)
@@ -55,11 +62,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
     ros2 topic pub -1 /goal_pose geometry_msgs/PoseStamped "{header: {stamp: {sec: 0}, frame_id: 'map'}, pose: {position: {x: 2.0, y: 7.0, z: 0.0}, orientation: {w: 1.0}}}"
     ```
 
-    Go ahead and publish different goal poses. In Unity, you should be able to see the goal pose drawing and the window update as messages are received on the topic! You can also click and drag the edges of the UI to adjust the size and placement of the topic's window. 
-
-    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
-    
-    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+    Go ahead and publish different goal poses. In Unity, you should be able to see the goal pose drawing and the window update as messages are received on the topic!
 
     ![](images/viz_goalpose.png)
 
@@ -89,7 +92,7 @@ You may also want to view the costmap at the same time. We know this is another 
 
 - On the newly added component, specify this `Topic` as `/global_costmap/costmap`, and similarly, update the `Offset` to something that will be below the `/map` offset, e.g. `0.01`.
 
-- To set the default material to the new Occupancy Grid visualizer, assign the `Material` field to the OccupancyGrid material, found in `Packages/Message Visualizations/Runtime/Materials/OccupancyGrid`.
+- To set the default material to the new Occupancy Grid visualizer, assign the `Material` field to the OccupancyGrid material, found in `Packages/Robotics Visualizations Package/Runtime/Materials/OccupancyGrid`.
 
     > You can find this file by searching in the Project window. Note that you will have to change the Search type from "In Assets" to "All". 
 
@@ -101,6 +104,8 @@ You may also want to view the costmap at the same time. We know this is another 
 
 - Once again, enter Play mode. 
 
+    > You may have to restart your ROS nodes before re-entering Play mode if you encounter unexpected issues. Check the [Troubleshooting](#troubleshooting) section below.
+
     In the HUD's Topics window, toggle on the `3D` for `/global_costmap/costmap` now.
 
 You should now see the two maps updating in realtime! As you send goal poses to Turtlebot, the occupancy grid drawings should now update as expected.
@@ -109,7 +114,7 @@ You should now see the two maps updating in realtime! As you send goal poses to 
 
 ## Laser Scan Visualization
 
-Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Visualizations Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
+Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Visualization Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
 
 - If you are still in Play mode, exit it. Let's start by removing the debug visuals on the current Laser Scan Sensor. 
 
@@ -129,7 +134,7 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
 - Enter Play mode. Open the HUD's `Topics` tab again, and click `3D` toggle for `/scan`. The laser scan message should now be drawing and updating!
 
-    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
 We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/sensor_msgs/LaserScan`.
 
@@ -141,15 +146,15 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
     ![](images/viz_laserinspector.png)
 
-- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
     ![](images/viz_1.gif)
 
-## More with Message Visualizations
+## More with Visualizations
 
 You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md).
 
-To learn more about using the Visualizations Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+To learn more about using the Visualization Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
 ---
 ---

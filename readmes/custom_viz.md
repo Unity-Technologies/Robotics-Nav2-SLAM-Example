@@ -1,6 +1,6 @@
 # Making a Custom Visualizer
 
-While the Visualizations Package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
+While the Visualization Package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
 
 **Table of Contents**
 - [Creating a New Visualizer](#creating-a-new-visualizer)
@@ -21,7 +21,7 @@ While the Visualizations Package provides a preconfigured default visualization 
 
 - If you have the `DefaultVisualizationSuite` in your scene from the previous tutorial, the necessary components are already added for visualization.
 
-    - If you do not have the `DefaultVisualizationSuite`, you can instead use the `EmptyVisualizationSuite`, which contains the necessary extensions for visualizations. To add the empty visualization suite, in the Project window, expand and select `Packages/Message Visualizations`. Select the `EmptyVisualizationSuite` and drag it into your scene Hierarchy.
+    - If you do not have the `DefaultVisualizationSuite`, you can instead use the `EmptyVisualizationSuite`, which contains the necessary extensions for visualizations. To add the empty visualization suite, in the Project window, expand and select `Packages/Robotics Visualizations Package`. Select the `EmptyVisualizationSuite` and drag it into your scene Hierarchy.
 
 - To start writing a custom visualizer, start by making a new script in the `Assets/Scripts` directory named `PoseTrailVisualizer`.
 
@@ -33,7 +33,7 @@ While the Visualizations Package provides a preconfigured default visualization 
 
     Add the newly created PoseTrailVisualizer component to the TrailVisualizer GameObject. 
 
-    > Learn more about the HUD TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#the-hud).
+    > Learn more about the HUD TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#the-hud).
 
 - Creating a new script will create a template that automatically inherits from [MonoBehaviour](https://docs.unity3d.com/Manual/class-MonoBehaviour.html) with the basic using directives. To turn this script into a visualizer, we'll need to reference the additional required packages. This includes the generated messages, ROS Geometry for coordinate conversions, and, of course, message visualizations.
 
@@ -42,7 +42,7 @@ While the Visualizations Package provides a preconfigured default visualization 
     ```csharp
     using System;
     using RosMessageTypes.Geometry;                     // Generated message classes
-    using Unity.Robotics.MessageVisualizers;            // Message visualizations
+    using Unity.Robotics.Visualizations;                // Visualizations
     using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
     ```
 
@@ -56,7 +56,7 @@ While the Visualizations Package provides a preconfigured default visualization 
 using System;
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;                     // Generated message classes
-using Unity.Robotics.MessageVisualizers;            // Message visualizations
+using Unity.Robotics.Visualizations;                // Visualizations
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
 using UnityEngine;
 
@@ -70,7 +70,7 @@ Your template class should now look something like the above code block. However
 
 ### Drawing the UI Window
 
-In the Visualizations Package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `HistoryDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
+In the Visualization Package, UI windows are registered based on its topic, and will update whenever a message is sent or received on it. That being said, the visualizer base class (in this case, `HistoryDrawingVisualizer`) manages all of this already. All we'll have to do is format the message contents in the window.
 
 - Implementations of the visualizer classes override the function `CreateGUI()` in order to populate the UI window. By default, this function will simply display the raw message converted to a string. The HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time.
 
@@ -86,9 +86,9 @@ In the Visualizations Package, UI windows are registered based on its topic, and
     }
     ```
 
-- The Visualizations Package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
+- The Visualization Package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
 
-    As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.message-visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
+    As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
 
     Add this functionality between the `return` curly brackets. Your overridden function should look as follows:
 
@@ -115,7 +115,11 @@ In the Visualizations Package, UI windows are registered based on its topic, and
 
 - Return to Unity. Select the `TrailVisualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component. 
 
-    Change the `History Length` field to however many goals you would like to track over time--for example, `5`. 
+    Change the `History Length` field to however many goals you would like to track over time--for example, `5`.
+
+- Before we test it, we'll want to set this as the new default visualizer for `/goal_pose` messages. In your `TrailVisualizer` object, add the `Priority Setter` component. 
+
+    > This value will default to `0`, giving it a higher priority than the default visualizers.
 
 - Enter Play mode. Click the `Topics` button in the top-left HUD to open the list of subscribed topics. Find the `/goal_pose` topic and toggle on `2D` if it's not already on.
 
@@ -148,7 +152,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
     string m_Label = "";
     ```
 
-    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md#visualization-settings).
+    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#visualization-settings).
 
 - Like the GUI function, implementations of the visualizer classes also override the function `Draw()` for updating a 3D drawing in the Unity scene. Once again, the HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time--the updating and cleanup of message drawings is managed by the HistoryDrawingVisualizer class--all we'll have to do is feed the pose messages in.
 
@@ -281,4 +285,4 @@ The `turtlebot3_manual_config` object can be found in the `Project Browser` unde
 ---
 ---
 
-To learn more about using the Visualizations Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.message-visualizations/Documentation~/README.md).
+To learn more about using the Visualization Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).

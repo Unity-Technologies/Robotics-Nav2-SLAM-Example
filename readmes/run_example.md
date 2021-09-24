@@ -78,7 +78,7 @@ Congratulations! The TurtleBot is now navigating the map as it generates it from
 
 ## Continue to Adding Visualizations
 
-The next step is to add visualizations in Unity using the Message Visualizations package. Proceed to [Visualizing with Unity](unity_viz.md).
+The next step is to add visualizations in Unity using the Visualization Package. Proceed to [Visualizing with Unity](unity_viz.md).
 
 ---
 ---
