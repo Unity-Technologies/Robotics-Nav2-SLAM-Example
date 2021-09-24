@@ -46,7 +46,9 @@ While the Visualization Package provides a preconfigured default visualization s
     using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
     ```
 
-    You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `HistoryDrawingVisualizer<T>` class. Do this now by replacing the `MonoBehaviour` class with `HistoryDrawingVisualizer<PoseStampedMsg>`.
+- You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `HistoryDrawingVisualizer<T>` class. 
+
+    Do this now by replacing the `MonoBehaviour` class with `HistoryDrawingVisualizer<PoseStampedMsg>`.
 
     > Learn more about the visualizer base classes TODO link [here]().
 

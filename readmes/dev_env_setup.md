@@ -17,7 +17,7 @@ This project was most recently validated with the Editor version listed in the [
 ## Clone the Project
 Check out the project using your method of choice, or simply copy the following line into a terminal with the `git` CLI installed:  
 ```
-git clone --recurse-submodule git@github.com:Unity-Technologies/Robotics-Nav2-SLAM-Example.git
+git clone --recurse-submodule -b amanda/custom-viz git@github.com:Unity-Technologies/Robotics-Nav2-SLAM-Example.git
 ```  
 >Observe our usage of `--recurse-submodules` to ensure any dependencies are checked out. If you miss this part, you will need to use `git submodule update --init --recursive` later to download and update the submodules.
 

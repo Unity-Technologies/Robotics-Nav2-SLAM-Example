@@ -140,7 +140,7 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 > Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TEMP LINK [here]().
 
-- In the Inspector, select the dropdown for `Color Mode.` These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
+- In the Inspector, select the dropdown for `Color Mode`. These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
 
     You can also modify the `Point Radius` to change the size of each drawn point.
 
