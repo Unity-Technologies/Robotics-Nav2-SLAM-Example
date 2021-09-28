@@ -40,8 +40,8 @@ public class PoseTrailVisualizer : HistoryDrawingVisualizer<PoseStampedMsg>
             var point = msg.pose.position.From<FLU>();
             if (firstPass)
             {
-                color = MessageVisualizationUtils.SelectColor(m_Color, meta);
-                label = MessageVisualizationUtils.SelectLabel(m_Label, meta);
+                color = VisualizationUtils.SelectColor(m_Color, meta);
+                label = VisualizationUtils.SelectLabel(m_Label, meta);
                 firstPass = false;
             }
             else

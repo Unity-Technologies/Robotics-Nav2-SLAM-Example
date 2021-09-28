@@ -12,6 +12,7 @@ While the Visualization Package provides a preconfigured default visualization s
     - [Learn more about this Unity Scene](#learn-more-about-this-unity-scene)
     - [Import your own robot](#import-your-own-robot)
     - [Experiment with your own Scenes](#experiment-with-your-own-scenes)
+    - [Learn more about Visualizations](#learn-more-about-visualizations)
 
 > This section assumes you have already set up your environment according to the [configuration guide](dev_env_setup.md) and have run the example successfully as described [here](run_example.md).
 
@@ -33,7 +34,7 @@ While the Visualization Package provides a preconfigured default visualization s
 
     Add the newly created PoseTrailVisualizer component to the TrailVisualizer GameObject. 
 
-    > Learn more about the HUD TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#the-hud).
+    > Learn more about the HUD [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#the-hud).
 
 - Creating a new script will create a template that automatically inherits from [MonoBehaviour](https://docs.unity3d.com/Manual/class-MonoBehaviour.html) with the basic using directives. To turn this script into a visualizer, we'll need to reference the additional required packages. This includes the generated messages, ROS Geometry for coordinate conversions, and, of course, message visualizations.
 
@@ -50,7 +51,7 @@ While the Visualization Package provides a preconfigured default visualization s
 
     Do this now by replacing the `MonoBehaviour` class with `HistoryDrawingVisualizer<PoseStampedMsg>`.
 
-    > Learn more about the visualizer base classes TODO link [here]().
+    <!-- > Learn more about the visualizer base classes TODO link [here](). -->
 
 - Next, delete the template `Start()` and `Update()` functions--the base `HistoryDrawingVisualizer` class will manage what needs to happen in those MonoBehaviour functions for you.
 
@@ -90,7 +91,7 @@ In the Visualization Package, UI windows are registered based on its topic, and 
 
 - The Visualization Package contains a convenient set of utility functions to format common message types to strings as well as draw common geometries. As the messages are passed in as an IEnumerable, we can simply iterate through them and call the desired functions.
 
-    As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [TEMP LINK] [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/4c74d53961e581ab68021dc082aa0c6c5a83ea8f/com.unity.robotics.visualizations/Runtime/Scripts/MessageVisualizationUtils.cs#L309-L317). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
+    As `/goal_pose` is a PoseStampedMsg, we will use the utility function for pose GUIs, as defined [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/bc6c4220d39ced0e17c64553917357d6c90fb3f2/com.unity.robotics.visualizations/Runtime/Scripts/VisualizationUtils.cs#L338). The function takes an optional string parameter that serves as a label for the formatting. In this case, label the string as with a goal number, counting up from a newly initialized counter variable.
 
     Add this functionality between the `return` curly brackets. Your overridden function should look as follows:
 
@@ -154,7 +155,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
     string m_Label = "";
     ```
 
-    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings TEMP LINK [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#visualization-settings).
+    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#visualization-settings).
 
 - Like the GUI function, implementations of the visualizer classes also override the function `Draw()` for updating a 3D drawing in the Unity scene. Once again, the HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time--the updating and cleanup of message drawings is managed by the HistoryDrawingVisualizer class--all we'll have to do is feed the pose messages in.
 
@@ -176,7 +177,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
     var label = "";
     ```
 
-- Similar to the GUI window, we can simply iterate through the set of saved messages in order to update the line drawing, drawing each segment along the way using the utilities provided for `DrawLine` (as defined TODO link [here]()). Add the following loop to the `Draw()` function.
+- Similar to the GUI window, we can simply iterate through the set of saved messages in order to update the line drawing, drawing each segment along the way using the utilities provided for Drawing3d's `DrawLine` (as defined [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/bfbf9774d1b9979e28cdb2c2a460fe391f5ed6fe/com.unity.robotics.visualizations/Runtime/Drawing3d/Scripts/Drawing3d.cs#L128). Add the following loop to the `Draw()` function.
 
     ```csharp
     foreach (var (msg, meta) in messages)
@@ -184,8 +185,8 @@ Like the text and UI windows, 3D visualizations from this package are customizab
         var point = msg.pose.position.From<FLU>();
         if (firstPass)
         {
-            color = MessageVisualizationUtils.SelectColor(m_Color, meta);
-            label = MessageVisualizationUtils.SelectLabel(m_Label, meta);
+            color = VisualizationUtils.SelectColor(m_Color, meta);
+            label = VisualizationUtils.SelectLabel(m_Label, meta);
             firstPass = false;
         }
         else
@@ -218,8 +219,8 @@ public override void Draw(Drawing3d drawing, IEnumerable<Tuple<PoseStampedMsg, M
         var point = msg.pose.position.From<FLU>();
         if (firstPass)
         {
-            color = MessageVisualizationUtils.SelectColor(m_Color, meta);
-            label = MessageVisualizationUtils.SelectLabel(m_Label, meta);
+            color = VisualizationUtils.SelectColor(m_Color, meta);
+            label = VisualizationUtils.SelectLabel(m_Label, meta);
             firstPass = false;
         }
         else
@@ -283,8 +284,6 @@ The Turtlebot3 prefab in this project was derived from the prefab generated by o
 
 The `turtlebot3_manual_config` object can be found in the `Project Browser` under the `Assets/Prefabs` folder. This prefab should contain everything necessary to enable SLAM and Navigation in any (mostly flat) Unity scene with a floor and objects for the robot's laser scan to detect. Import a Unity Scene into the project, or create a new one in the Editor, and simply drag this prefab from the `Project Browser` into the `Hierarchy`. If you'd like to learn in greater detail about how to use the Unity Editor to set up such a scene, refer back to [the repository README section entitled "Learning More About Unity"](../README.md)
 
+### Learn more about Visualizations
 
----
----
-
-To learn more about using the Visualization Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+To learn more about using the Visualization Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).

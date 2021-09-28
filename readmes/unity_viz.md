@@ -4,7 +4,7 @@ There are a variety of reasons that visualizations can be useful in a simulation
 
 This page introduces the Visualization Package to the Nav2 example running in Unity.
 
-**Table of Contents**
+**Table of Contents**z
 - [Adding Visualizations](#adding-visualizations)
 - [Goal Pose Visualization](#goal-pose-visualization)
 - [Map Visualization](#map-visualization)
@@ -18,7 +18,7 @@ This page introduces the Visualization Package to the Nav2 example running in Un
 
 ## Adding Visualizations
 
-> The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package TEMP LINK [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#installation).
+> The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#installation).
 
 The Visualization Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
@@ -50,7 +50,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
     > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
     
-    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
     You can now click the `Topics` tab again to close the list.
 
@@ -134,11 +134,11 @@ Finally, let's revisit how the laser scan sensor is being visualized in the scen
 
 - Enter Play mode. Open the HUD's `Topics` tab again, and click `3D` toggle for `/scan`. The laser scan message should now be drawing and updating!
 
-    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
 We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/sensor_msgs/LaserScan`.
 
-> Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TEMP LINK [here]().
+> Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TODO LINK here.
 
 - In the Inspector, select the dropdown for `Color Mode`. These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
 
@@ -146,7 +146,7 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
     ![](images/viz_laserinspector.png)
 
-- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [TEMP link] [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
     ![](images/viz_1.gif)
 
@@ -154,7 +154,7 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md).
 
-To learn more about using the Visualization Package, visit the package [TEMP link] [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+To learn more about using the Visualization Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
 ---
 ---
