@@ -31,11 +31,13 @@ You should see something like this open in your Editor window:
 Use the `Robotics` drop-down menu to open the `ROS Settings` menu.  
 
 ![Robotics drop-down with ROS Settings selected](images/ros_settings_menu.png)  
+
 In the ROS Settings panel:
-* Check the `Connect on Startup` checkbox
+* Ensure the `Connect on Startup` checkbox is checked
 * Ensure `Protocol` is set to `ROS2`
-* Set your `ROS IP Address` to the address of the adapter your ROS2 environment is using. For those using a Docker container on the same machine as per our guidance from the [setup instructions](dev_env_setup.md), this will be the default: `127.0.0.1`  
-* Check the `Show HUD` checkbox to ensure you get visual feedback on the state of your ROS connection later
+* For those using a Docker container on the same machine as per our guidance from the [setup instructions](dev_env_setup.md), leave your `ROS IP Address` as the default: `127.0.0.1`. 
+  * Otherwise, set your `ROS IP Address` to the address of the adapter your ROS2 environment is using.
+* Ensure the `Show HUD` is checked. This is to ensure you get visual feedback on the state of your ROS connection during runtime.
 
 ![ROS Settings Panel with appropriate settings](images/ros_settings_window.png)  
 

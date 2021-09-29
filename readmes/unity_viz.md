@@ -4,10 +4,11 @@ There are a variety of reasons that visualizations can be useful in a simulation
 
 This page introduces the Visualization Package to the Nav2 example running in Unity.
 
-**Table of Contents**z
+**Table of Contents**
 - [Adding Visualizations](#adding-visualizations)
 - [Goal Pose Visualization](#goal-pose-visualization)
 - [Map Visualization](#map-visualization)
+    - [Add Global Costmap Visualization](#add-global-costmap-visualization)
 - [Laser Scan Visualization](#laser-scan-visualization)
 - [More with Visualizations](#more-with-visualizations)
 - [Troubleshooting](#troubleshooting)
@@ -21,6 +22,8 @@ This page introduces the Visualization Package to the Nav2 example running in Un
 > The Visualization Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#installation).
 
 The Visualization Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
+
+- If Unity is still in Play mode, exit Play mode.
 
 - To add the default visualization suite, in the Project window, expand and select `Packages/Robotics Visualization`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
 
@@ -59,8 +62,12 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 - Open a new terminal in your ROS workspace and begin publishing goal poses, e.g.:
 
     ```bash
-    ros2 topic pub -1 /goal_pose geometry_msgs/PoseStamped "{header: {stamp: {sec: 0}, frame_id: 'map'}, pose: {position: {x: 2.0, y: 7.0, z: 0.0}, orientation: {w: 1.0}}}"
+    ros2 topic pub -1 /goal_pose geometry_msgs/PoseStamped "{header: {stamp: {sec: 0}, frame_id: 'map'}, pose: {position: {x: 0.0, y: -4.0, z: 0.0}, orientation: {w: 1.0}}}"
     ```
+
+    > If you are using the suggested Docker + noVNC environment, you can copy and paste text into the environment by expanding (`◀`) the menu on the noVNC dock and selecting the clipboard icon. You can then add text into the box to add it to the Docker container's clipboard.
+
+    > ![](images/viz_novnc.png)
 
     Go ahead and publish different goal poses. In Unity, you should be able to see the goal pose drawing and the window update as messages are received on the topic!
 
@@ -70,7 +77,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 Next, we'll visualize the map being made. 
 
-- In Unity, select the `Topics` tab in the HUD to open the list again. Find and select the `3D` toggle next to the `/map` topic name to toggle on the 3D drawing.
+- In Unity, select the `Topics` tab in the HUD to open the list again. Type `/map` in the search bar, then select the `3D` toggle next to the `/map` topic name to toggle on the 3D drawing.
 
 The map should now be appearing in the scene as the `/map` topic receives updates from ROS! However, you'll notice the map seems to collide with the floor rendering. 
 
@@ -78,13 +85,17 @@ The map should now be appearing in the scene as the `/map` topic receives update
 
 Let's customize this nav_msgs/OccupancyGrid visualization.
 
-- Exit Play mode. In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Expand the `nav_msgs` child object and select the `OccupancyGrid` object to open its Inspector.
+- Exit Play mode. 
+
+- In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Expand the `nav_msgs` child object and select the `OccupancyGrid` object to open its Inspector.
 
 - The `Offset` will modify where the occupancy grid is drawn in the scene, which can be useful in situations where it may be obscured by the simulated world. Change the `Y` offset minimally, e.g. from 0 to `0.015`.
 
 You may also want to view the costmap at the same time. We know this is another occupancy grid message. Without specifying a topic, the visualizations are created based on their ROS message type. You can also explicitly set the topic of each visualization to apply customizations to messages on that specific topic, allowing you to customize the visualization for each topic of the same type.
 
 - Still in the `OccupancyGrid` object's `Occupancy Grid Default Visualizer` component, specify the `Topic` to be `/map`. 
+
+### Add Global Costmap Visualization
 
 - Although the default visualization suite is provided as a prefab, you are free to make changes to the suite for your own use. Still on the `OccupancyGrid` object's Inspector window, click `Add Component`. Begin searching for `Occupancy Grid Default Visualizer` and add it to the object. You should now have two occupancy grid visualizers on this object!
 
@@ -114,15 +125,9 @@ You should now see the two maps updating in realtime! As you send goal poses to 
 
 ## Laser Scan Visualization
 
-Finally, let's revisit how the laser scan sensor is being visualized in the scene. Using the Visualization Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
+Finally, let's visit how the laser scan sensor is being visualized in the scene. Using the Visualization Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
 
-- If you are still in Play mode, exit it. Let's start by removing the debug visuals on the current Laser Scan Sensor. 
-
-    Do this by navigating to and selecting `turtlebot3_manual_config/base_footprint/base_link/base_scan` in your scene Hierarchy (you can also just search for `base_scan`). 
-
-    In its Inspector window, scroll down to the `Laser Scan Sensor (Script)` and *uncheck* `Render Debug Visuals`.
-
-    ![](images/viz_debugoff.png)
+- If you are still in Play mode, exit it. 
 
 - In the scene Hierarchy, once again expand the `DefaultVisualizationSuite`. This time, expand the `sensor_msgs` object and select `LaserScan` to open its Inspector.
 
@@ -156,7 +161,6 @@ You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md
 
 To learn more about using the Visualization Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
 
----
 ---
 
 ## Troubleshooting

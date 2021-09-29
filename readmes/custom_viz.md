@@ -255,9 +255,9 @@ You may also modify the parameters of the LaserScan sensor and observe how diffe
 
 ![base_scan's LaserScan properties in the Inspector](images/laser_parameters.png)
 
- Note that any changes made while in PlayMode (while the play button is lit and you are communicating with ROS) will be undone automatically when PlayMode is stopped. This is by design to allow for low-risk experimentation without accidentally breaking your Scene.  To make permanent changes, exit PlayMode first by pressing the play button, and be sure to save your Scene when you are done!
+Note that any changes made while in PlayMode (while the play button is lit and you are communicating with ROS) will be undone automatically when PlayMode is stopped. This is by design to allow for low-risk experimentation without accidentally breaking your Scene.  To make permanent changes, exit PlayMode first by pressing the play button, and be sure to save your Scene when you are done!
 
- ---
+---
 
 ### Automate It
 
@@ -267,7 +267,7 @@ Selecting `Window->General->Test Runner` from the drop-down menu at the top will
 
 This is an example integration test which, when executed, will open a simple scene with a few waypoints defined in the hierarchy.  The test script will publish each waypoint in order, as goal poses, and evaluate "Success" based on the Turtlebot's ability to navigate to each waypoint within the time limit. To see this test execute, ensure you have freshly launched ros2 environment (`ros2 launch unity_slam_example unity_slam_example.py`) and then simply double-click the test in the Test Runner panel.  The source code for this test is located in `Assets/Scripts/Tests/PlayMode/WaypointIntegrationTest.cs`.
 
- ---
+---
 
 ### Learn more about this Unity Scene
 
