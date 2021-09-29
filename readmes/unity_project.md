@@ -5,6 +5,7 @@
 - [Open the SimpleWarehouseScene](#open-the-simplewarehousescene)
 - [Configure your ROS Settings](#configure-your-ros-settings)
 - [Continue to running the example](#continue-to-running-the-example)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -45,3 +46,21 @@ In the ROS Settings panel:
 
 ## Continue to running the example
 Everything is now configured to [run the example](run_example.md). If you'd like to understand more about how this project is set up and what the different components are doing, you may skip to [Understanding the Project Components](explanation.md)
+
+---
+
+## Troubleshooting
+
+If you encounter the following error when opening the Unity project:
+
+```
+An error occurred while resolving packages:
+  Project has invalid dependencies:
+    com.unity.robotics.warehouse: Error when executing git command. error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+    error: 5749 bytes of body are still expected
+    fetch-pack: unexpected disconnect while reading sideband packet
+    fatal: early EOF
+    fatal: index-pack failed
+```
+
+You may need to modify the compression, e.g. `git config --global core.compression 9`.
