@@ -5,7 +5,7 @@
     - [(Optional) Launching ROS2 components manually](#optional-launching-ros2-components-manually)
 - [Start the Unity simulation](#start-the-unity-simulation)
 - [Interacting with this Example](#interacting-with-this-example)
-- [Continue to Adding Visualizations](#continue-to-adding-visualizations)
+- [Getting Started with Visualizations](#getting-started-with-visualizations)
 - [Troubleshooting](#troubleshooting)
 
 ---
@@ -48,7 +48,6 @@ If this doesn't work, you may need to first `colcon build` the workspace or `sou
 
 
 ---
----
 
 ## Start the Unity simulation
 >This section assumes you have already set up your Unity environment according to the guide [here](unity_project.md).  
@@ -59,7 +58,6 @@ If this doesn't work, you may need to first `colcon build` the workspace or `sou
 
 If the ROS2 nodes were already launched, you should see flashing, non-red arrows in the top-left HUD to indicate Unity is communicating with ROS.
 
----
 ---
 
 ## Interacting with this Example
@@ -76,11 +74,10 @@ Congratulations! The TurtleBot is now navigating the map as it generates it from
 
 > While the Nav2 stack is pretty robust to most goal inputs, it may occasionally crash or otherwise reach a state where it no longer responds as expected. These issues can most of the time be fixed by simply killing and restarting the nav2 nodes, and pressing `Play` twice in Unity to stop and restart the simulation.
 
-## Continue to Adding Visualizations
+## Getting Started with Visualizations
 
 The next step is to add visualizations in Unity using the Visualization Package. Proceed to [Visualizing with Unity](unity_viz.md).
 
----
 ---
 
 ## Troubleshooting
