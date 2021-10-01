@@ -1,4 +1,13 @@
 # Configure your Development Environment
+
+**Table of Contents**
+- [Install the Unity Editor](#install-the-unity-editor)
+- [Clone the Project](#clone-the-project)
+- [Set Up the ROS 2 Environment](#set-up-the-ros-2-environment)
+    - [Build the Docker container](#build-the-docker-container)
+    - [(Optional) Using an alternative ROS 2 environment](#optional-using-an-alternative-ros-2-environment)
+- [Continue on to Setting up the Unity Project](#continue-on-to-setting-up-the-unity-project)
+
 ---  
 ## Install the Unity Editor  
 This project was most recently validated with the Editor version listed in the [ProjectVersion.txt file](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example/blob/dev/Nav2SLAMExampleProject/ProjectSettings/ProjectVersion.txt#L1). If you have a more recent version, it will most likely work fine, or you may download the exact version we used from the release page [here](https://unity3d.com/unity/qa/lts-releases). Note that if using a more recent version, you will receive some warnings to this effect when you first open the project, but you are fine to proceed through them.

@@ -58,8 +58,6 @@ namespace IntegrationTests
         const string k_RobotBaseName = "base_footprint/base_link";
         const string k_GoalPoseFrameId = "map";
         const string k_GoalPoseTopic = "/goal_pose";
-        static readonly string k_GoalPoseMessageName = 
-            MessageRegistry.GetRosMessageName<RosMessageTypes.Geometry.PoseStampedMsg>();
         
         const float k_Nav2InitializeTime = 5.0f;
         const float k_SleepBetweenWaypointsTime = 2.0f;
@@ -73,7 +71,7 @@ namespace IntegrationTests
         [UnityTearDown]
         public IEnumerator TearDown()
         {
-            ROSConnection.instance.Disconnect();
+            ROSConnection.GetOrCreateInstance().Disconnect();
             yield return null;
         }
 
@@ -117,7 +115,7 @@ namespace IntegrationTests
             //SceneManager.LoadScene(scenePath);
             yield return SceneManager.LoadSceneAsync(scenePath);
             
-            var ros = ROSConnection.instance;
+            var ros = ROSConnection.GetOrCreateInstance();
             ros.ConnectOnStart = true;
             
             var robots = GameObject.FindGameObjectsWithTag(k_RobotTag);
@@ -135,7 +133,7 @@ namespace IntegrationTests
             // TODO: Implement some sort of confirmation mechanism on ROS side rather than use arbitrary sleep
             yield return new WaitForSeconds(k_Nav2InitializeTime);
             
-            ros.RegisterPublisher(k_GoalPoseTopic, k_GoalPoseMessageName);
+            ros.RegisterPublisher<RosMessageTypes.Geometry.PoseStampedMsg>(k_GoalPoseTopic);
 
             while (waypoints.NextWaypoint())
             {

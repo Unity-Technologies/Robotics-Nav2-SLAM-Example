@@ -1,6 +1,26 @@
 # Breaking down this example...
 This page contains brief explanations and justifications for the various components in the Unity and ROS 2 workspaces that we wrote for this example.
 
+**Table of Contents**
+- [The Unity Project](#the-unity-project)
+    - [Scripts](#scripts)
+        - [AGVController](#agvcontroller)
+        - [Clock](#clock)
+        - [LaserScanSensor](#laserscansensor)
+        - [ROSClockPublisher](#rosclockpublisher)
+        - [ROSTransformTreePublisher](#rostransformtreepublisher)
+    - [Prefabs](#prefabs)
+        - [Marker](#marker)
+        - [TurtleBot3ManualConfig](#turtlebot3manualconfig)
+    - [Scenes](#scenes)
+        - [SimpleWarehouseScene](#simplewarehousescene)
+        - [BasicScene](#basicscene)
+- [The ROS 2 Workspace](#the-ros-2-workspace)
+    - [Launch file (unity_slam_example.py)](#launch-file-unity_slam_examplepy)
+    - [RViz config (nav2_unity.rviz)](#rviz-config-nav2_unityrviz)
+    - [Other project files](#other-project-files)
+
+---
 ## The Unity Project
 
 Everything we've created to enable this particular Project lives inside the Assets folder, which you can locate in the Project Browser panel.

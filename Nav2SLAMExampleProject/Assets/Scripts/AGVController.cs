@@ -37,7 +37,7 @@ namespace RosSharp.Control
             wA2 = wheel2.GetComponent<ArticulationBody>();
             SetParameters(wA1);
             SetParameters(wA2);
-            ros = ROSConnection.instance;
+            ros = ROSConnection.GetOrCreateInstance();
             ros.Subscribe<TwistMsg>("cmd_vel", ReceiveROSCmd);
         }
 

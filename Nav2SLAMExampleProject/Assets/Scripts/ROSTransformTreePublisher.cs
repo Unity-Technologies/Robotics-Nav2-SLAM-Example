@@ -39,7 +39,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
             m_RootGameObject = gameObject;
         }
 
-        m_ROS = ROSConnection.instance;
+        m_ROS = ROSConnection.GetOrCreateInstance();
         m_TransformRoot = new TransformTreeNode(m_RootGameObject);
         m_ROS.RegisterPublisher<TFMessageMsg>(k_TfTopic);
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
@@ -92,7 +92,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
         PopulateTFList(tfMessageList, m_TransformRoot);
 
         var tfMessage = new TFMessageMsg(tfMessageList.ToArray());
-        m_ROS.Send(k_TfTopic, tfMessage);
+        m_ROS.Publish(k_TfTopic, tfMessage);
         m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
     }
 
