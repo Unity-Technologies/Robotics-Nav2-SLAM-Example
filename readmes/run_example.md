@@ -16,7 +16,7 @@
 - In a terminal on your host OS, run the following:
 
     ```
-    docker run -it --rm -p 6080:80 -p 10000:10000 -p 5005:5005 --shm-size=1024m unity-robotics:nav2-slam-example
+    docker run -it --rm -p 6080:80 -p 10000:10000 --shm-size=1024m unity-robotics:nav2-slam-example
     ```
 
 - In a web browser connect to [http://127.0.0.1:6080](http://127.0.0.1:6080) and follow the steps below:
