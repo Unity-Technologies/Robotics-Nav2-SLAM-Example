@@ -145,7 +145,7 @@ Finally, let's visit how the laser scan sensor is being visualized in the scene.
 
 We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/sensor_msgs/LaserScan`.
 
-> Note that only certain visualizer classes will save changes during runtime. Read more about the visualizer base classes TODO LINK here.
+> Note that only certain visualizer classes will save changes during runtime. 
 
 - In the Inspector, select the dropdown for `Color Mode`. These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
 
