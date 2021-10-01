@@ -134,6 +134,8 @@ In the Visualizations Package, UI windows are registered based on its topic, and
 
     The UI window should appear, waiting for messages on the topic. Begin publishing goal poses, and you will see the UI window update appropriately!
 
+    > If the `/goal_pose` window still says "Waiting for message..." and shows only one message, you may have to untoggle the 2D and 3D visualizations, exit Play mode, restart Play mode, and toggle the visualizations back on.
+
     ![](images/viz_goals_ui.png)
 
 Move onto the next step to begin customizing and adding the 3D drawing to your visualization.
