@@ -126,11 +126,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.robotics.ros-tcp-connector": {
-      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#laurie/VisualizationPackage",
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#v0.6.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "6f50db2bb5589628cb31e9ccee310afb28cf69b8"
+      "hash": "7f055108f43ab11ff297175a52af5d30fbac9d57"
     },
     "com.unity.robotics.urdf-importer": {
       "version": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer#v0.5.0",
@@ -142,11 +142,11 @@
       "hash": "e9859c4becda48194e153356afc0a802516b1488"
     },
     "com.unity.robotics.visualizations": {
-      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.visualizations#laurie/VisualizationPackage",
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.visualizations#v0.6.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "6f50db2bb5589628cb31e9ccee310afb28cf69b8"
+      "hash": "7f055108f43ab11ff297175a52af5d30fbac9d57"
     },
     "com.unity.robotics.warehouse": {
       "version": "https://github.com/Unity-Technologies/Robotics-Warehouse.git?path=com.unity.robotics.warehouse#nav2-example",

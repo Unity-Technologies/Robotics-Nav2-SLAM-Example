@@ -155,7 +155,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
     string m_Label = "";
     ```
 
-    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#visualization-settings).
+    > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter. Learn more about visualization settings [here](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md#visualization-settings).
 
 - Like the GUI function, implementations of the visualizer classes also override the function `Draw()` for updating a 3D drawing in the Unity scene. Once again, the HistoryDrawingVisualizer acts a bit differently, managing multiple messages over time--the updating and cleanup of message drawings is managed by the HistoryDrawingVisualizer class--all we'll have to do is feed the pose messages in.
 
@@ -286,4 +286,4 @@ The `turtlebot3_manual_config` object can be found in the `Project Browser` unde
 
 ### Learn more about Visualizations
 
-To learn more about using the Visualizations Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+To learn more about using the Visualizations Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).

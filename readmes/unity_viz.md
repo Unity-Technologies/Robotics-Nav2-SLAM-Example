@@ -19,7 +19,7 @@ This page introduces the Visualizations Package to the Nav2 example running in U
 
 ## Adding Visualizations
 
-> The Visualizations Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md#installation).
+> The Visualizations Package has already been added to this Unity project. You can verify this in the `Window > Package Manager`. To add Visualizations to your own project, learn more in the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md#installation).
 
 The Visualizations Package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
@@ -55,7 +55,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
     > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
     
-    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+    > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).
 
     You can now click the `Topics` tab again to close the list.
 
@@ -139,7 +139,7 @@ Finally, let's visit how the laser scan sensor is being visualized in the scene.
 
     In this case, we want the laser scan to be drawn with respect to the most recent transform we have for its parent: Turtlebot's `base_scan`. To do so, change the `Type` to `Track Latest`. The `TF Topic` should be left as the default `/tf`.
 
-    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+    > Because the TF Tracking Type is set to Track Latest, in your scene Hierarchy, you can expand the `map` frame GameObject all the way down to find the `base_scan/Drawing/PointCloud` object. Learn more about TF tracking options in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).
 
 - Enter Play mode. Open the HUD's `Topics` tab again, and click `3D` toggle for `/scan`. The laser scan message should now be drawing and updating!
 
@@ -153,7 +153,7 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
     ![](images/viz_laserinspector.png)
 
-- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+- You now have a fully configured LaserScan visualization! You can learn more about other point cloud-type visualizations (such as PointCloud2) in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).
 
     ![](images/viz_1.gif)
 
@@ -161,7 +161,7 @@ We can continue to customize this visualization during runtime. Return to `Defau
 
 You can proceed to the next tutorial, [Making a Custom Visualizer](custom_viz.md).
 
-To learn more about using the Visualizations Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/amanda/default-tutorial/com.unity.robotics.visualizations/Documentation~/README.md).
+To learn more about using the Visualizations Package, visit the package [documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).
 
 ---
 
