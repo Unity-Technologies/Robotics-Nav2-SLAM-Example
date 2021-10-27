@@ -10,14 +10,14 @@ using UnityEngine.TestTools;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
-namespace IntegrationTests 
+namespace IntegrationTests
 {
     class WaypointTracker
     {
         internal Transform CurrentWaypoint => m_Waypoints[m_CurrentWaypointIdx];
         internal int Count => m_Waypoints.Count;
-        
-        const string k_WaypointTag = "Waypoint"; 
+
+        const string k_WaypointTag = "Waypoint";
         List<Transform> m_Waypoints;
         int m_CurrentWaypointIdx;
 
@@ -58,10 +58,10 @@ namespace IntegrationTests
         const string k_RobotBaseName = "base_footprint/base_link";
         const string k_GoalPoseFrameId = "map";
         const string k_GoalPoseTopic = "/goal_pose";
-        
+
         const float k_Nav2InitializeTime = 5.0f;
         const float k_SleepBetweenWaypointsTime = 2.0f;
-        
+
         // Used to define a timeout for waypoint navigation based on distances between steps
         const float k_MinimumSpeedExpected = 0.15f;
 
@@ -114,25 +114,25 @@ namespace IntegrationTests
             var scenePath = GetScenePath(sceneName);
             //SceneManager.LoadScene(scenePath);
             yield return SceneManager.LoadSceneAsync(scenePath);
-            
+
             var ros = ROSConnection.GetOrCreateInstance();
             ros.ConnectOnStart = true;
-            
+
             var robots = GameObject.FindGameObjectsWithTag(k_RobotTag);
             Assert.AreEqual(1, robots.Length,
                 $"There should be exactly one object tagged '{k_RobotTag}' in the scene, but {scenePath} had {robots.Length}");
             var robot = robots[0].transform.Find(k_RobotBaseName)?.gameObject;
-            Assert.IsNotNull(robot, 
+            Assert.IsNotNull(robot,
                 $"Expected {robots[0].name} to have a child object named {k_RobotBaseName} but it did not.");
-            
+
             var waypoints = new WaypointTracker();
-            Assert.Less(0, waypoints.Count, 
+            Assert.Less(0, waypoints.Count,
                 $"Every test scene is expected to have at least one waypoint, but {scenePath} had none.");
 
             yield return new EnterPlayMode();
             // TODO: Implement some sort of confirmation mechanism on ROS side rather than use arbitrary sleep
             yield return new WaitForSeconds(k_Nav2InitializeTime);
-            
+
             ros.RegisterPublisher<RosMessageTypes.Geometry.PoseStampedMsg>(k_GoalPoseTopic);
 
             while (waypoints.NextWaypoint())
@@ -143,22 +143,22 @@ namespace IntegrationTests
                 var robotTf = robot.transform;
                 var distance = (waypointTf.position - robotTf.position).magnitude;
                 var timeout = distance / k_MinimumSpeedExpected;
-                
-                
+
+
                 ros.Send(k_GoalPoseTopic, ToRosMsg(waypointTf));
 
-                yield return new WaitUntil(() => 
+                yield return new WaitUntil(() =>
                     IsCloseEnough(waypointTf, robotTf) ||
                     Time.realtimeSinceStartup - timeNavigationStarted > timeout);
-                
-                Assert.IsTrue(IsCloseEnough(waypointTf.transform, robot.transform), 
+
+                Assert.IsTrue(IsCloseEnough(waypointTf.transform, robot.transform),
                     $"Robot did not reach {waypoint.name} in the time allotted ({timeout} seconds).");
-                
+
                 // Because our success threshold may not match the navigation stack's success threshold, we "sleep" for
                 // a small amount of time to ensure the nav stack has time to complete its route
                 yield return new WaitForSeconds(k_SleepBetweenWaypointsTime);
             }
-            
+
             Debug.Log($"Test completed successfully for {scenePath}");
             yield return null;
         }

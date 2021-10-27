@@ -39,7 +39,7 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
     ros2 launch unity_slam_example unity_viz_example.py
     ```
 
-- In Unity, enter Play mode. Select the `Topics` tab in the HUD. 
+- In Unity, enter Play mode. Select the `Topics` tab in the HUD.
 
     ![](images/viz_hudtopics.png)
 
@@ -51,10 +51,10 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 - You should now see a new window labeled with the `/goal_pose` topic in your Game view, saying "Waiting for message..."
 
-    You can click and drag the edges of the UI to adjust the size and placement of the topic's window. 
+    You can click and drag the edges of the UI to adjust the size and placement of the topic's window.
 
-    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode. 
-    
+    > Your UI layout and visualized topics are automatically saved to your local machine, which will be loaded next time you enter Play mode.
+
     > You can also specifically export and load layouts from your filesystem using the HUD's `Layout` tab. Learn more about this feature in the [Usage Documentation](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md).
 
     You can now click the `Topics` tab again to close the list.
@@ -77,25 +77,25 @@ Topics will, by default, populate in the top-left HUD's `Topics` list. Let's beg
 
 ## Map Visualization
 
-Next, we'll visualize the map being made. 
+Next, we'll visualize the map being made.
 
 - In Unity, select the `Topics` tab in the HUD to open the list again. Type `/map` in the search bar, then select the `3D` toggle next to the `/map` topic name to toggle on the 3D drawing.
 
-The map should now be appearing in the scene as the `/map` topic receives updates from ROS! 
+The map should now be appearing in the scene as the `/map` topic receives updates from ROS!
 
 ### Add Global Costmap Visualization
 
 You may also want to view the costmap at the same time. We know this is another occupancy grid message. Without specifying a topic, the visualizations for a ROS message type will follow the configuration for its Default Visualizer. In this scenario, that means that if you were to turn on the visualizations for `/map` and `/global_costmap/costmap`, it would be hard to distinguish between the two of them, as they'd both have the same exact customization from the `Occupancy Grid Default Visualizer`!
 
 To solve this, you can add multiple visualizers--one for each topic. By specifying the topic for each visualizer, this allows you to customize the visualization for each topic, even for messages of the same ROS message type.
- 
-- Exit Play mode. 
+
+- Exit Play mode.
 
 - In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Expand the `nav_msgs` child object and select the `OccupancyGrid` object to open its Inspector.
 
-- Specify the `Topic` to be `/map`. 
+- Specify the `Topic` to be `/map`.
 
-- Although the default visualization suite is provided as a prefab, you are free to make changes to the suite for your own use. 
+- Although the default visualization suite is provided as a prefab, you are free to make changes to the suite for your own use.
 
     Still on the `OccupancyGrid` object's Inspector window, click `Add Component`. Begin searching for `Occupancy Grid Default Visualizer` and add it to the object. You should now have two occupancy grid visualizers on this object!
 
@@ -115,7 +115,7 @@ To solve this, you can add multiple visualizers--one for each topic. By specifyi
 
     ![](images/viz_occupancygrids.png)
 
-- Once again, enter Play mode. 
+- Once again, enter Play mode.
 
     > You may have to restart your ROS nodes before re-entering Play mode if you encounter unexpected issues. Check the [Troubleshooting](#troubleshooting) section below.
 
@@ -129,13 +129,13 @@ You should now see the two maps updating in realtime! As you send goal poses to 
 
 Finally, let's visit how the laser scan sensor is being visualized in the scene. Using the Visualizations Package, point cloud-type visualizations are highly customizable. This section will walk through customization options for a sensor_msgs/LaserScan visualization for your Nav2 project.
 
-- If you are still in Play mode, exit it. 
+- If you are still in Play mode, exit it.
 
 - In the scene Hierarchy, once again expand the `DefaultVisualizationSuite`. This time, expand the `sensor_msgs` object and select `LaserScan` to open its Inspector.
 
     In the `Topic` field, enter `/scan`.
 
-- For messages with stamped headers, we need to specify how we want the visualizations to be drawn with respect to the TF tree. This is done via the `TF Tracking Settings`; click it to expand the options. 
+- For messages with stamped headers, we need to specify how we want the visualizations to be drawn with respect to the TF tree. This is done via the `TF Tracking Settings`; click it to expand the options.
 
     In this case, we want the laser scan to be drawn with respect to the most recent transform we have for its parent: Turtlebot's `base_scan`. To do so, change the `Type` to `Track Latest`. The `TF Topic` should be left as the default `/tf`.
 
@@ -145,7 +145,7 @@ Finally, let's visit how the laser scan sensor is being visualized in the scene.
 
 We can continue to customize this visualization during runtime. Return to `DefaultVisualizationSuite/sensor_msgs/LaserScan`.
 
-> Note that only certain visualizer classes will save changes during runtime. 
+> Note that only certain visualizer classes will save changes during runtime.
 
 - In the Inspector, select the dropdown for `Color Mode`. These settings select what value corresponds to the point's colors--distance from the sensor, intensity of the reading, or angle of the reading. Change the value between `Distance` and `Angle` and see how the point colors change.
 

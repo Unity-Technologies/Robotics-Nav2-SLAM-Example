@@ -27,9 +27,9 @@ namespace Unity.Robotics.Core
         static readonly DateTime k_UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
         // Time the application started, relative to Unix Epoch
         static readonly double k_StartTimeEpochSeconds = SecondsSinceUnixEpoch - Time.realtimeSinceStartupAsDouble;
-        
+
         static double SecondsSinceUnixEpoch => (DateTime.Now - k_UnixEpoch).TotalSeconds;
-        static double UnityUnscaledTimeSinceFrameStart => 
+        static double UnityUnscaledTimeSinceFrameStart =>
             Time.realtimeSinceStartupAsDouble - Time.unscaledTimeAsDouble;
 
         public static double TimeSinceFrameStart => Now - FrameStartTimeInSeconds;
@@ -62,7 +62,7 @@ namespace Unity.Robotics.Core
                 };
             }
         }
-        
+
         // NOTE: Precision loss vs. other time measurements due to no deltaTimeAsDouble interface
         public static float DeltaTimeInSeconds
         {

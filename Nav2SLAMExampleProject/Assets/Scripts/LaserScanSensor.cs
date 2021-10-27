@@ -99,7 +99,7 @@ public class LaserScanSensor : MonoBehaviour
             intensities = new float[ranges.Count],
             ranges = ranges.ToArray(),
         };
-        
+
         m_Ros.Publish(topic, msg);
 
         m_NumMeasurementsTaken = 0;
@@ -163,7 +163,7 @@ public class LaserScanSensor : MonoBehaviour
             // Even if Raycast didn't find a valid hit, we still count it as a measurement
             ++m_NumMeasurementsTaken;
         }
-        
+
         if (m_NumMeasurementsTaken >= NumMeasurementsPerScan)
         {
             if (m_NumMeasurementsTaken > NumMeasurementsPerScan)
