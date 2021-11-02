@@ -13,14 +13,14 @@ using UnityEngine;
 public class ROSTransformTreePublisher : MonoBehaviour
 {
     const string k_TfTopic = "/tf";
-    
+
     [SerializeField]
     double m_PublishRateHz = 20f;
     [SerializeField]
     List<string> m_GlobalFrameIds = new List<string> { "map", "odom" };
     [SerializeField]
     GameObject m_RootGameObject;
-    
+
     double m_LastPublishTimeSeconds;
 
     TransformTreeNode m_TransformRoot;
@@ -76,7 +76,7 @@ public class ROSTransformTreePublisher : MonoBehaviour
         {
             Debug.LogWarning($"No {m_GlobalFrameIds} specified, transform tree will be entirely local coordinates.");
         }
-        
+
         // In case there are multiple "global" transforms that are effectively the same coordinate frame, 
         // treat this as an ordered list, first entry is the "true" global
         for (var i = 1; i < m_GlobalFrameIds.Count; ++i)

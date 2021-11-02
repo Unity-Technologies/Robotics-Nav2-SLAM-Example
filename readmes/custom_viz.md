@@ -1,6 +1,6 @@
 # Making a Custom Visualizer
 
-While the Visualizations Package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point. 
+While the Visualizations Package provides a preconfigured default visualization suite, there are many compelling cases for custom visualizations. This page steps through how to create a custom visualizer for the Nav2 project that tracks a history of `/goal_pose` messages over time, drawing a line between each point.
 
 **Table of Contents**
 - [Creating a New Visualizer](#creating-a-new-visualizer)
@@ -30,9 +30,9 @@ While the Visualizations Package provides a preconfigured default visualization 
 
     > To skip to the end using the completed script, you can add the file from [unity_scripts/PoseTrailVisualizer](../unity_scripts/PoseTrailVisualizer.cs) to `Assets/Scripts`, attach it to a GameObject in your scene, configure the component in the inspector, and run the example.
 
-- In your visualization suite, make a new GameObject named `TrailVisualizer` (e.g. `DefaultVisualizationSuite/TrailVisualizer`). 
+- In your visualization suite, make a new GameObject named `TrailVisualizer` (e.g. `DefaultVisualizationSuite/TrailVisualizer`).
 
-    Add the newly created PoseTrailVisualizer component to the TrailVisualizer GameObject. 
+    Add the newly created PoseTrailVisualizer component to the TrailVisualizer GameObject.
 
     > Note that you will have to wait until Unity has finished compiling in order to add the component to a GameObject.
 
@@ -47,7 +47,7 @@ While the Visualizations Package provides a preconfigured default visualization 
     using Unity.Robotics.ROSTCPConnector.ROSGeometry;   // Coordinate space utilities
     ```
 
-- You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `HistoryDrawingVisualizer<T>` class. 
+- You now have access to the necessary classes and functions for this visualization. A visualizer that manages multiple drawings over time for a specific message type should inherit from the `HistoryDrawingVisualizer<T>` class.
 
     Do this now by replacing the `MonoBehaviour` class with `HistoryDrawingVisualizer<PoseStampedMsg>`.
 
@@ -65,7 +65,7 @@ using UnityEngine;
 
 public class PoseTrailVisualizer : HistoryDrawingVisualizer<PoseStampedMsg>
 {
-    
+
 }
 ```
 
@@ -116,11 +116,11 @@ In the Visualizations Package, UI windows are registered based on its topic, and
     ros2 launch unity_slam_example unity_viz_example.py
     ```
 
-- Return to Unity. Select the `TrailVisualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component. 
+- Return to Unity. Select the `TrailVisualizer` object, and in the Inspector, find this `PoseTrailVisualizer` component.
 
     Specify the topic to be `/goal_pose`, and change the `History Length` field to however many goals you would like to track over time--for example, `5`.
 
-- Before we test it, we'll want to set this as the new default visualizer for `/goal_pose` messages. In your `TrailVisualizer` object, add the `Priority Setter` component. 
+- Before we test it, we'll want to set this as the new default visualizer for `/goal_pose` messages. In your `TrailVisualizer` object, add the `Priority Setter` component.
 
     > This value will default to `0`, giving it a higher priority than the default visualizers.
 
@@ -144,7 +144,7 @@ Move onto the next step to begin customizing and adding the 3D drawing to your v
 
 Like the text and UI windows, 3D visualizations from this package are customizable. A set of basic customization parameters can include, for example, the color and thickness of the lines drawn, or the text label added.
 
-- Exit Play mode and return to the `PoseTrailVisualizer` script for editing. 
+- Exit Play mode and return to the `PoseTrailVisualizer` script for editing.
 
     Define these customizable parameters (line color, thickness, and label) for the trail drawing as serialized private fields at the top of your PoseTrailVisualizer class.
 
@@ -201,7 +201,7 @@ Like the text and UI windows, 3D visualizations from this package are customizab
     ```
 
 - Finally, we want to update the position of the text label to be at the most updated position, so add a call to the utility `DrawLabel()` after the `foreach` loop.
-    
+
     ```csharp
     drawing.DrawLabel(label, prevPoint, color);
     ```
@@ -250,10 +250,10 @@ You have now completed the tutorial for creating a custom visualizer for your Na
 
 ## Now What?
 
-### Exercise the Example 
+### Exercise the Example
 Feel free to try different 2D Goal Poses and watch the TurtleBot3 navigate the environment and build its map. In the Unity Scene view, you can click on different objects and, using the Transform handles, drag them to different positions in the warehouse to quickly re-configure the test environment. If doing this while RViz is active, you can observe how the Nav2 stack and slam_toolbox respond to dynamic obstacles in the scene.
 
-You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:  
+You may also modify the parameters of the LaserScan sensor and observe how different ranges, fields of view, and scan density affect the quality of the SLAM map:
 
 ![base_scan's LaserScan properties in the Inspector](images/laser_parameters.png)
 
@@ -263,7 +263,7 @@ Note that any changes made while in PlayMode (while the play button is lit and y
 
 ### Automate It
 
-Selecting `Window->General->Test Runner` from the drop-down menu at the top will open a panel which displays any Tests defined for the Project. 
+Selecting `Window->General->Test Runner` from the drop-down menu at the top will open a panel which displays any Tests defined for the Project.
 
 ![](images/test.png)
 

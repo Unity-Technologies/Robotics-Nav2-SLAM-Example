@@ -5,7 +5,7 @@ using Unity.Robotics.UrdfImporter.Control;
 
 namespace RosSharp.Control
 {
-    public enum ControlMode { Keyboard, ROS};
+    public enum ControlMode { Keyboard, ROS };
 
     public class AGVController : MonoBehaviour
     {
@@ -57,7 +57,7 @@ namespace RosSharp.Control
             else if (mode == ControlMode.ROS)
             {
                 ROSUpdate();
-            }     
+            }
         }
 
         private void SetParameters(ArticulationBody joint)
