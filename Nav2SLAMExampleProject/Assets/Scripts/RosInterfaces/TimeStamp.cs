@@ -2,11 +2,11 @@
 using UnityEngine;
 using RosMessageTypes.BuiltinInterfaces;
 
-namespace Unity.Robotics.Core
+namespace Unity.Robotics.Nav2SlamExample
 {
     public readonly struct TimeStamp
     {
-        public const double k_NanosecondsInSecond = 1e9f;
+        const double k_NanosecondsInSecond = 1e9f;
 
         // TODO: specify base time this stamp is measured against (Sim 0, time since application start, etc.)
         public readonly int Seconds;

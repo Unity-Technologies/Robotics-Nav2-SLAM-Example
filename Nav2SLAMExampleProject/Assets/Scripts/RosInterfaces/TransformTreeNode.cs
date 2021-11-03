@@ -1,29 +1,28 @@
 using System.Collections.Generic;
 using RosMessageTypes.Geometry;
-using Unity.Robotics.Core;
 using Unity.Robotics.UrdfImporter;
 using UnityEngine;
 
-namespace Unity.Robotics.SlamExample
+namespace Unity.Robotics.Nav2SlamExample
 {
     class TransformTreeNode
     {
-        public readonly GameObject SceneObject;
-        public readonly List<TransformTreeNode> Children;
-        public Transform Transform => SceneObject.transform;
-        public string name => SceneObject.name;
+        readonly GameObject m_SceneObject;
+        internal readonly List<TransformTreeNode> Children;
+        public Transform Transform => m_SceneObject.transform;
+        public string name => m_SceneObject.name;
         public bool IsALeafNode => Children.Count == 0;
 
         public TransformTreeNode(GameObject sceneObject)
         {
-            SceneObject = sceneObject;
+            m_SceneObject = sceneObject;
             Children = new List<TransformTreeNode>();
             PopulateChildNodes(this);
         }
 
         public static TransformStampedMsg ToTransformStamped(TransformTreeNode node)
         {
-            return node.Transform.ToROSTransformStamped(Clock.time);
+            return node.Transform.ToRosTransformStamped(Clock.time);
         }
 
         static void PopulateChildNodes(TransformTreeNode tfNode)

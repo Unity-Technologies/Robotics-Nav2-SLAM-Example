@@ -3,7 +3,7 @@ using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Geometry;
 using Unity.Robotics.UrdfImporter.Control;
 
-namespace RosSharp.Control
+namespace Unity.Robotics.Nav2SlamExample
 {
     public enum ControlMode { Keyboard, ROS };
 

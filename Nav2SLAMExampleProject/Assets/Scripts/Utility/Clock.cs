@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Unity.Robotics.Core
+namespace Unity.Robotics.Nav2SlamExample
 {
     public static class Clock
     {
