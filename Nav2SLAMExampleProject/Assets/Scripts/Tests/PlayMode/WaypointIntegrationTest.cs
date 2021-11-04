@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Unity.Robotics.Core;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using Unity.Robotics.ROSTCPConnector.MessageGeneration;
+using Unity.Robotics.Nav2SlamExample;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 namespace IntegrationTests
@@ -145,7 +144,7 @@ namespace IntegrationTests
                 var timeout = distance / k_MinimumSpeedExpected;
 
 
-                ros.Send(k_GoalPoseTopic, ToRosMsg(waypointTf));
+                ros.Publish(k_GoalPoseTopic, ToRosMsg(waypointTf));
 
                 yield return new WaitUntil(() =>
                     IsCloseEnough(waypointTf, robotTf) ||
