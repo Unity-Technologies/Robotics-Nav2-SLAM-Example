@@ -60,11 +60,12 @@ namespace Unity.Robotics.Nav2SlamExample
 
         void ProcessRosCommand(TwistMsg cmdVel)
         {
-            // Convert coordinates to Unity coordinates (Right, Up, Forward) before reading
-            var linear = cmdVel.linear.As<RUF>();
+            // Convert from ROS body coordinates (Front, Left, Up) to Unity coordinates (Right, Up, Forward)
+            var linear = cmdVel.linear.From<FLU>();
             // z is forward in Unity coordinates
             m_VelocityLinear = linear.z;
-            var angular = cmdVel.angular.As<RUF>();
+            // This is a roll, pitch, yaw vector in right-handed coordinates, i.e. NED (North, East, Down)
+            var angular = cmdVel.angular.From<NED>();
             // y is up in Unity coordinates -- we're reading the yaw command
             m_VelocityAngular = angular.y;
             m_TimeLastCommandReceived = Time.time;
@@ -104,12 +105,7 @@ namespace Unity.Robotics.Nav2SlamExample
         void FixedUpdate()
         {
             m_VelocityLinear = Mathf.Clamp(m_VelocityLinear, -m_MaxLinearSpeed, m_MaxLinearSpeed);
-
             m_VelocityAngular = Mathf.Clamp(m_VelocityAngular, -m_MaxRotationalSpeed, m_MaxRotationalSpeed);
-            if (m_VelocityAngular != 0)
-            {
-                var x = 5;
-            }
 
             SetWheelRotationalVelocity(m_LeftJoint, RotationDirection.Positive);
             SetWheelRotationalVelocity(m_RightJoint, RotationDirection.Negative);
