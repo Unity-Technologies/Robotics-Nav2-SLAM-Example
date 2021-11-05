@@ -9,30 +9,37 @@ using UnityEngine.Serialization;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// An idealized LIDAR, <c>LaserScanSensor</c> uses Unity's physics engine to measure distances to the objects
+    /// closest to the center of this MonoBehaviour's GameObject and publish those as <c>LaserScanMsg</c> to ROS
+    /// </summary>
     public class LaserScanSensor : MonoBehaviour
     {
         [SerializeField]
         string m_Topic = "/scan";
         [SerializeField]
+        [Tooltip("Approximate real time, in seconds, between scans. i.e. the multiplicative inverse of frequency")]
         double m_PublishPeriodSeconds = 0.1;
         [SerializeField, FormerlySerializedAs("RangeMetersMin")]
+        [Tooltip("Minimum distance from center of this object that measurements will be taken")]
         float m_RangeMetersMin;
         [SerializeField, FormerlySerializedAs("RangeMetersMax")]
+        [Tooltip("Maximum distance from the center of this object that measurements will be taken")]
         float m_RangeMetersMax = 1000;
         [SerializeField, FormerlySerializedAs("ScanAngleStartDegrees")]
+        [Tooltip("Start point for the scanning sweep. " +
+            "Note that the scan sweep will use a linear interpolation between start and end.")]
         float m_ScanAngleStartDegrees = -45;
         [SerializeField, FormerlySerializedAs("ScanAngleEndDegrees")]
+        [Tooltip("End point for the scanning sweep. " +
+            "Note that the scan sweep will use a linear interpolation between start and end.")]
         float m_ScanAngleEndDegrees = 45;
-        // Change the scan start and end by this amount after every publish
-        [SerializeField]
-        float m_ScanOffsetAfterPublish;
         [SerializeField, FormerlySerializedAs("NumMeasurementsPerScan")]
+        [Tooltip("Number of measurements to take per scan, evenly distributed between start and end, inclusive")]
         int m_NumMeasurementsPerScan = 10;
         [SerializeField]
         string m_FrameId = "base_scan";
 
-        float m_CurrentScanAngleStart;
-        float m_CurrentScanAngleEnd;
         ROSConnection m_Ros;
         double m_TimeNextScanSeconds = -1;
         int m_NumMeasurementsTaken;
@@ -45,9 +52,6 @@ namespace Unity.Robotics.Nav2SlamExample
         {
             m_Ros = ROSConnection.GetOrCreateInstance();
             m_Ros.RegisterPublisher<LaserScanMsg>(m_Topic);
-
-            m_CurrentScanAngleStart = m_ScanAngleStartDegrees;
-            m_CurrentScanAngleEnd = m_ScanAngleEndDegrees;
 
             m_TimeNextScanSeconds = Clock.Now + m_PublishPeriodSeconds;
         }
@@ -74,11 +78,13 @@ namespace Unity.Robotics.Nav2SlamExample
 
             var timestamp = new TimeStamp(Clock.time);
             // Invert the angle ranges when going from Unity to ROS
-            var angleStartRos = -m_CurrentScanAngleStart * Mathf.Deg2Rad;
-            var angleEndRos = -m_CurrentScanAngleEnd * Mathf.Deg2Rad;
+            var angleStartRos = -m_ScanAngleStartDegrees * Mathf.Deg2Rad;
+            var angleEndRos = -m_ScanAngleEndDegrees * Mathf.Deg2Rad;
             if (angleStartRos > angleEndRos)
             {
-                Debug.LogWarning("LaserScan was performed in a clockwise direction but ROS expects a counter-clockwise scan, flipping the ranges...");
+                Debug.LogWarning(
+                    "LaserScan was performed in a clockwise direction but ROS expects a counter-clockwise scan, " +
+                    "reversing the measurement ordering");
                 var temp = angleEndRos;
                 angleEndRos = angleStartRos;
                 angleStartRos = temp;
@@ -120,14 +126,6 @@ namespace Unity.Robotics.Nav2SlamExample
                     $"scheduled to start: {m_TimeNextScanSeconds:F}, rescheduling to now ({now:F})");
                 m_TimeNextScanSeconds = now;
             }
-
-            m_CurrentScanAngleStart += m_ScanOffsetAfterPublish;
-            m_CurrentScanAngleEnd += m_ScanOffsetAfterPublish;
-            if (m_CurrentScanAngleStart > 360f || m_CurrentScanAngleEnd > 360f)
-            {
-                m_CurrentScanAngleStart -= 360f;
-                m_CurrentScanAngleEnd -= 360f;
-            }
         }
 
         void Update()
@@ -142,13 +140,12 @@ namespace Unity.Robotics.Nav2SlamExample
                 BeginScan();
             }
 
-
             // TODO: This could be optimized by using RaycastCommand
             var yawBaseDegrees = transform.rotation.eulerAngles.y;
             while (m_NumMeasurementsTaken < m_NumMeasurementsPerScan)
             {
                 var t = m_NumMeasurementsTaken / (float)m_NumMeasurementsPerScan;
-                var yawSensorDegrees = Mathf.Lerp(m_CurrentScanAngleStart, m_CurrentScanAngleEnd, t);
+                var yawSensorDegrees = Mathf.Lerp(m_ScanAngleStartDegrees, m_ScanAngleEndDegrees, t);
                 var yawDegrees = yawBaseDegrees + yawSensorDegrees;
                 var directionVector = Quaternion.Euler(0f, yawDegrees, 0f) * Vector3.forward;
                 var measurementStart = m_RangeMetersMin * directionVector + transform.position;

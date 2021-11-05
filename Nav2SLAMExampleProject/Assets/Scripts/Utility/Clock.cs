@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// This is a prototype implementation of a Clock management system we are still experimenting with, meant to handle
+    /// the many different ways a time measurement can be defined inside and outside of the simulation
+    /// </summary>
     public static class Clock
     {
         // Since UnityScaled is the default Unity Time mode, we'll use that for this project

@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// <c>TransformExtensions</c> provides some convenience functions for converting between different Transform types
+    /// which automatically uses the correct coordinate spaces
+    /// </summary>
     public static class TransformExtensions
     {
 
@@ -25,3 +29,4 @@ namespace Unity.Robotics.Nav2SlamExample
         }
     }
 }
+

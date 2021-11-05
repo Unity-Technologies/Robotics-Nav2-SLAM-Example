@@ -6,13 +6,13 @@ using RosMessageTypes.Rosgraph;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// Publishes the current time to the ROS /clock topic at the specified rate, using our <c>Clock</c> class as
+    /// the time authority
+    /// </summary>
     public class RosClockPublisher : MonoBehaviour
     {
-        [SerializeField]
-        Clock.ClockMode m_ClockMode;
-
-        [SerializeField, HideInInspector]
-        Clock.ClockMode m_LastSetClockMode;
+        static readonly Clock.ClockMode s_ClockMode = Clock.ClockMode.UnityScaled;
 
         [SerializeField]
         double m_PublishRateHz = 100f;
@@ -32,26 +32,11 @@ namespace Unity.Robotics.Nav2SlamExample
             {
                 Debug.LogWarning("Found too many clock publishers in the scene, there should only be one!");
             }
-
-            if (Application.isPlaying && m_LastSetClockMode != m_ClockMode)
-            {
-                Debug.LogWarning("Can't change ClockMode during simulation! Setting it back...");
-                m_ClockMode = m_LastSetClockMode;
-            }
-
-            SetClockMode(m_ClockMode);
         }
 
-        void SetClockMode(Clock.ClockMode mode)
-        {
-            Clock.Mode = mode;
-            m_LastSetClockMode = mode;
-        }
-
-        // Start is called before the first frame update
         void Start()
         {
-            SetClockMode(m_ClockMode);
+            Clock.Mode = s_ClockMode;
             m_ROS = ROSConnection.GetOrCreateInstance();
             m_ROS.RegisterPublisher<ClockMsg>("clock");
         }
