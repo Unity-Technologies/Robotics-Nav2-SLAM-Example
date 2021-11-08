@@ -11,59 +11,65 @@ namespace Unity.Robotics.Nav2SlamExample
 {
     public class LaserScanSensor : MonoBehaviour
     {
-        public string topic;
-        [FormerlySerializedAs("TimeBetweenScansSeconds")]
-        public double PublishPeriodSeconds = 0.1;
-        public float RangeMetersMin = 0;
-        public float RangeMetersMax = 1000;
-        public float ScanAngleStartDegrees = -45;
-        public float ScanAngleEndDegrees = 45;
+        [SerializeField]
+        string m_Topic = "/scan";
+        [SerializeField]
+        double m_PublishPeriodSeconds = 0.1;
+        [SerializeField, FormerlySerializedAs("RangeMetersMin")]
+        float m_RangeMetersMin;
+        [SerializeField, FormerlySerializedAs("RangeMetersMax")]
+        float m_RangeMetersMax = 1000;
+        [SerializeField, FormerlySerializedAs("ScanAngleStartDegrees")]
+        float m_ScanAngleStartDegrees = -45;
+        [SerializeField, FormerlySerializedAs("ScanAngleEndDegrees")]
+        float m_ScanAngleEndDegrees = 45;
         // Change the scan start and end by this amount after every publish
-        public float ScanOffsetAfterPublish = 0f;
-        public int NumMeasurementsPerScan = 10;
-        public float TimeBetweenMeasurementsSeconds = 0.01f;
-        public string LayerMaskName = "TurtleBot3Manual";
-        public string FrameId = "base_scan";
+        [SerializeField]
+        float m_ScanOffsetAfterPublish;
+        [SerializeField, FormerlySerializedAs("NumMeasurementsPerScan")]
+        int m_NumMeasurementsPerScan = 10;
+        [SerializeField]
+        string m_FrameId = "base_scan";
 
         float m_CurrentScanAngleStart;
         float m_CurrentScanAngleEnd;
         ROSConnection m_Ros;
         double m_TimeNextScanSeconds = -1;
         int m_NumMeasurementsTaken;
-        List<float> ranges = new List<float>();
+        List<float> m_Measurements = new List<float>();
 
-        bool isScanning = false;
+        bool m_IsScanning;
         double m_TimeLastScanBeganSeconds = -1;
 
         void Start()
         {
             m_Ros = ROSConnection.GetOrCreateInstance();
-            m_Ros.RegisterPublisher<LaserScanMsg>(topic);
+            m_Ros.RegisterPublisher<LaserScanMsg>(m_Topic);
 
-            m_CurrentScanAngleStart = ScanAngleStartDegrees;
-            m_CurrentScanAngleEnd = ScanAngleEndDegrees;
+            m_CurrentScanAngleStart = m_ScanAngleStartDegrees;
+            m_CurrentScanAngleEnd = m_ScanAngleEndDegrees;
 
-            m_TimeNextScanSeconds = Clock.Now + PublishPeriodSeconds;
+            m_TimeNextScanSeconds = Clock.Now + m_PublishPeriodSeconds;
         }
 
         void BeginScan()
         {
-            isScanning = true;
+            m_IsScanning = true;
             m_TimeLastScanBeganSeconds = Clock.Now;
-            m_TimeNextScanSeconds = m_TimeLastScanBeganSeconds + PublishPeriodSeconds;
+            m_TimeNextScanSeconds = m_TimeLastScanBeganSeconds + m_PublishPeriodSeconds;
             m_NumMeasurementsTaken = 0;
         }
 
         void EndScan()
         {
-            if (ranges.Count == 0)
+            if (m_Measurements.Count == 0)
             {
                 Debug.LogWarning($"Took {m_NumMeasurementsTaken} measurements but found no valid ranges");
             }
-            else if (ranges.Count != m_NumMeasurementsTaken || ranges.Count != NumMeasurementsPerScan)
+            else if (m_Measurements.Count != m_NumMeasurementsTaken || m_Measurements.Count != m_NumMeasurementsPerScan)
             {
-                Debug.LogWarning($"Expected {NumMeasurementsPerScan} measurements. Actually took {m_NumMeasurementsTaken}" +
-                    $"and recorded {ranges.Count} ranges.");
+                Debug.LogWarning($"Expected {m_NumMeasurementsPerScan} measurements. Actually took {m_NumMeasurementsTaken}" +
+                    $"and recorded {m_Measurements.Count} ranges.");
             }
 
             var timestamp = new TimeStamp(Clock.time);
@@ -76,36 +82,37 @@ namespace Unity.Robotics.Nav2SlamExample
                 var temp = angleEndRos;
                 angleEndRos = angleStartRos;
                 angleStartRos = temp;
-                ranges.Reverse();
+                m_Measurements.Reverse();
             }
 
             var msg = new LaserScanMsg
             {
                 header = new HeaderMsg
                 {
-                    frame_id = FrameId,
+                    frame_id = m_FrameId,
                     stamp = new TimeMsg
                     {
                         sec = timestamp.Seconds,
                         nanosec = timestamp.NanoSeconds,
                     }
                 },
-                range_min = RangeMetersMin,
-                range_max = RangeMetersMax,
+                range_min = m_RangeMetersMin,
+                range_max = m_RangeMetersMax,
                 angle_min = angleStartRos,
                 angle_max = angleEndRos,
-                angle_increment = (angleEndRos - angleStartRos) / NumMeasurementsPerScan,
-                time_increment = TimeBetweenMeasurementsSeconds,
-                scan_time = (float)PublishPeriodSeconds,
-                intensities = new float[ranges.Count],
-                ranges = ranges.ToArray(),
+                angle_increment = (angleEndRos - angleStartRos) / m_NumMeasurementsPerScan,
+                // This is an ideal LIDAR, so it takes all its measurements instantaneously
+                time_increment = 0,
+                scan_time = (float)m_PublishPeriodSeconds,
+                intensities = new float[m_Measurements.Count],
+                ranges = m_Measurements.ToArray(),
             };
 
-            m_Ros.Publish(topic, msg);
+            m_Ros.Publish(m_Topic, msg);
 
             m_NumMeasurementsTaken = 0;
-            ranges.Clear();
-            isScanning = false;
+            m_Measurements.Clear();
+            m_IsScanning = false;
             var now = (float)Clock.time;
             if (now > m_TimeNextScanSeconds)
             {
@@ -114,8 +121,8 @@ namespace Unity.Robotics.Nav2SlamExample
                 m_TimeNextScanSeconds = now;
             }
 
-            m_CurrentScanAngleStart += ScanOffsetAfterPublish;
-            m_CurrentScanAngleEnd += ScanOffsetAfterPublish;
+            m_CurrentScanAngleStart += m_ScanOffsetAfterPublish;
+            m_CurrentScanAngleEnd += m_ScanOffsetAfterPublish;
             if (m_CurrentScanAngleStart > 360f || m_CurrentScanAngleEnd > 360f)
             {
                 m_CurrentScanAngleStart -= 360f;
@@ -125,7 +132,7 @@ namespace Unity.Robotics.Nav2SlamExample
 
         void Update()
         {
-            if (!isScanning)
+            if (!m_IsScanning)
             {
                 if (Clock.NowTimeInSeconds < m_TimeNextScanSeconds)
                 {
@@ -136,44 +143,26 @@ namespace Unity.Robotics.Nav2SlamExample
             }
 
 
-            var measurementsSoFar = TimeBetweenMeasurementsSeconds == 0 ? NumMeasurementsPerScan :
-                1 + Mathf.FloorToInt((float)(Clock.time - m_TimeLastScanBeganSeconds) / TimeBetweenMeasurementsSeconds);
-            if (measurementsSoFar > NumMeasurementsPerScan)
-                measurementsSoFar = NumMeasurementsPerScan;
-
+            // TODO: This could be optimized by using RaycastCommand
             var yawBaseDegrees = transform.rotation.eulerAngles.y;
-            while (m_NumMeasurementsTaken < measurementsSoFar)
+            while (m_NumMeasurementsTaken < m_NumMeasurementsPerScan)
             {
-                var t = m_NumMeasurementsTaken / (float)NumMeasurementsPerScan;
+                var t = m_NumMeasurementsTaken / (float)m_NumMeasurementsPerScan;
                 var yawSensorDegrees = Mathf.Lerp(m_CurrentScanAngleStart, m_CurrentScanAngleEnd, t);
                 var yawDegrees = yawBaseDegrees + yawSensorDegrees;
                 var directionVector = Quaternion.Euler(0f, yawDegrees, 0f) * Vector3.forward;
-                var measurementStart = RangeMetersMin * directionVector + transform.position;
+                var measurementStart = m_RangeMetersMin * directionVector + transform.position;
                 var measurementRay = new Ray(measurementStart, directionVector);
-                var foundValidMeasurement = Physics.Raycast(measurementRay, out var hit, RangeMetersMax);
-                // Only record measurement if it's within the sensor's operating range
-                if (foundValidMeasurement)
-                {
-                    ranges.Add(hit.distance);
-                }
-                else
-                {
-                    ranges.Add(float.MaxValue);
-                }
+                var foundValidMeasurement = Physics.Raycast(measurementRay, out var hit, m_RangeMetersMax);
+                // Measurements outside of the sensor's max distance will be reported as MaxValue. In some cases,
+                // they may need to be filtered on the receiving end
+                m_Measurements.Add(foundValidMeasurement ? hit.distance : float.MaxValue);
 
                 // Even if Raycast didn't find a valid hit, we still count it as a measurement
                 ++m_NumMeasurementsTaken;
             }
 
-            if (m_NumMeasurementsTaken >= NumMeasurementsPerScan)
-            {
-                if (m_NumMeasurementsTaken > NumMeasurementsPerScan)
-                {
-                    Debug.LogError($"LaserScan has {m_NumMeasurementsTaken} measurements but we expected {NumMeasurementsPerScan}");
-                }
-                EndScan();
-            }
-
+            EndScan();
         }
     }
 }
