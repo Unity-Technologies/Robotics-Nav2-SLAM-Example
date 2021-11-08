@@ -45,7 +45,7 @@ namespace Unity.Robotics.Nav2SlamExample
             m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
         }
 
-        static void PopulateTFList(List<TransformStampedMsg> tfList, TransformTreeNode tfNode)
+        static void PopulateTfList(List<TransformStampedMsg> tfList, TransformTreeNode tfNode)
         {
             // TODO: Some of this could be done once and cached rather than doing from scratch every time
             // Only generate transform messages from the children, because This node will be parented to the global frame
@@ -55,7 +55,7 @@ namespace Unity.Robotics.Nav2SlamExample
 
                 if (!childTf.IsALeafNode)
                 {
-                    PopulateTFList(tfList, childTf);
+                    PopulateTfList(tfList, childTf);
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace Unity.Robotics.Nav2SlamExample
                 tfMessageList.Add(tfGlobalToGlobal);
             }
 
-            PopulateTFList(tfMessageList, m_TransformRoot);
+            PopulateTfList(tfMessageList, m_TransformRoot);
 
             var tfMessage = new TFMessageMsg(tfMessageList.ToArray());
             m_ROS.Publish(k_TfTopic, tfMessage);
