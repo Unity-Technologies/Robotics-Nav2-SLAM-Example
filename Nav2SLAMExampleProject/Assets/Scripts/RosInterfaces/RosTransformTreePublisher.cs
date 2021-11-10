@@ -10,6 +10,10 @@ using UnityEngine;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// <c>RosTransformTreePublisher</c> converts the Transform tree of the GameObject it is attached to and converts
+    /// this into a <c>TransformStampedMsg</c> which it publishes to ROS.
+    /// </summary>
     public class RosTransformTreePublisher : MonoBehaviour
     {
         const string k_TfTopic = "/tf";
@@ -106,3 +110,4 @@ namespace Unity.Robotics.Nav2SlamExample
         }
     }
 }
+

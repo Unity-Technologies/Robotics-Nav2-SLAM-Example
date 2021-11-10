@@ -4,6 +4,10 @@ using RosMessageTypes.BuiltinInterfaces;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// <c>TimeStamp</c> is a convenience wrapper meant to simplify the conversion between Unity's standard format for
+    /// time - a float measurement in seconds - and ROS's <c>TimeMsg</c> by providing implicit cast operators.
+    /// </summary>
     public readonly struct TimeStamp
     {
         const double k_NanosecondsInSecond = 1e9f;

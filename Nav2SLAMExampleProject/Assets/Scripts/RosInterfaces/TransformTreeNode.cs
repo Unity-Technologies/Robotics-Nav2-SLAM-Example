@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Unity.Robotics.Nav2SlamExample
 {
+    /// <summary>
+    /// A simple graph node which holds references to its associated GameObject in the scene and any child nodes
+    /// </summary>
     class TransformTreeNode
     {
         readonly GameObject m_SceneObject;
