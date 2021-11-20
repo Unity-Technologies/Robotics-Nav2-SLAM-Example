@@ -29,9 +29,8 @@ RUN apt-get update -q && \
     && rm -rf /var/lib/apt/lists/*
 
 # Install the immutable components BEFORE we copy in build context stuff to keep the rebuild process manageable
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
-    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
-    echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
         /etc/apt/sources.list.d/ros2-latest.list && \
     apt-get update -q && \
     apt-get install -y --no-install-recommends \
@@ -48,17 +47,14 @@ COPY --chown=${DEV_NAME} colcon_ws /home/${DEV_NAME}/colcon_ws
 COPY ros2-setup.bash /bin/ros2-setup.bash
 # Doing a second fetch of sources & apt-get update here, because these ones depend on the state of the build context
 # in our repo
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
-    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
-    echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > \
         /etc/apt/sources.list.d/ros2-latest.list && \
     apt-get update -q && \
     rosdep init && \
     chmod +x /bin/ros2-setup.bash && \
     gosu ${DEV_NAME} /bin/ros2-setup.bash && \
-    runuser -u ${DEV_NAME} ros2-setup.bash && \
     rm /bin/ros2-setup.bash && \
-    rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo ". /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
     echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc
