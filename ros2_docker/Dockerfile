@@ -1,4 +1,6 @@
-# adapted from: https://github.com/Tiryoh/docker-ros2-desktop-vnc
+# Adapted from: https://github.com/Tiryoh/docker-ros2-desktop-vnc
+# Originally licensed under Apache 2.0, Copyright 2020 Tiryoh
+# Modifications Copyright 2020-2021 Unity Technologies
 FROM dorowu/ubuntu-desktop-lxde-vnc:focal
 LABEL maintainer="Unity Robotics <unity-robotics@unity3d.com>"
 
