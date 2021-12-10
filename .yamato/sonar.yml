@@ -4,6 +4,11 @@ csharp:
         type: Unity::metal::macmini
         image: package-ci/mac
         flavor: m1.mac
+    variables:
+        PROJECT_PATH: Nav2SLAMExampleProject
+        SONARQUBE_PROJECT_KEY: ai-robotics-nav2-slam-example-c#
+        SONARQUBE_PROJECT_BASE_DIR: /Users/bokken/build/output/Unity-Technologies/Unity-Robotics-Hub/Robotics-Nav2-SLAM-Example/Nav2SLAMExampleProject
+        MSBUILD_SLN_PATH: ./Nav2SLAMExampleProject/Nav2SLAMExampleProject.sln
     commands:
         - npm install upm-ci-utils@stable -g --registry https://artifactory.prd.it.unity3d.com/artifactory/api/npm/upm-npm
         - unity-downloader-cli -u 2020.3.11f1 -c Editor
@@ -11,13 +16,13 @@ csharp:
         - curl https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/5.2.1.31210/sonar-scanner-msbuild-5.2.1.31210-net46.zip -o sonar-scanner-msbuild-net46.zip -L
         - unzip sonar-scanner-msbuild-net46.zip -d ~/sonar-scanner-msbuild
         - chmod a+x ~/sonar-scanner-msbuild/sonar-scanner-4.6.1.2450/bin/sonar-scanner
-        - .Editor/Unity.app/Contents/MacOS/Unity -projectPath ./Nav2SLAMExampleProject -batchmode -quit -nographics -logFile - -executeMethod "UnityEditor.SyncVS.SyncSolution"
+        - .Editor/Unity.app/Contents/MacOS/Unity -projectPath $PROJECT_PATH -batchmode -quit -nographics -logFile - -executeMethod "UnityEditor.SyncVS.SyncSolution"
         - command: |
-            cd Nav2SLAMExampleProject
+            cd $PROJECT_PATH
             for file in *.csproj; do sed -i.backup "s/^[[:blank:]]*<ReferenceOutputAssembly>false<\/ReferenceOutputAssembly>/<ReferenceOutputAssembly>true<\/ReferenceOutputAssembly>/g" $file; rm $file.backup; done
             cd ../
-        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe begin /k:"ai-robotics-nav2-slam-example-c#" /d:sonar.host.url=$SONARQUBE_ENDPOINT_URL_STG /d:sonar.login=$SONARQUBE_TOKEN_STG /d:sonar.projectBaseDir=/Users/bokken/build/output/Unity-Technologies/Unity-Robotics-Hub/Nav2SLAMExampleProject
-        - msbuild ./Nav2SLAMExampleProject/Nav2SLAMExampleProject.sln
+        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe begin /k:$SONARQUBE_PROJECT_KEY /d:sonar.host.url=$SONARQUBE_ENDPOINT_URL_STG /d:sonar.login=$SONARQUBE_TOKEN_STG /d:sonar.projectBaseDir=$SONARQUBE_PROJECT_BASE_DIR
+        - msbuild $MSBUILD_SLN_PATH
         - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe end /d:sonar.login=$SONARQUBE_TOKEN_STG
     triggers:
         cancel_old_ci: true
@@ -32,10 +37,12 @@ python:
         type: Unity::metal::macmini
         image: package-ci/mac
         flavor: m1.mac
+    variables:
+        SONARQUBE_PROJECT_KEY: ai-robotics-nav2-slam-example-python
     commands:
         - curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-macosx.zip -o sonar-scanner-macosx.zip -L
         - unzip sonar-scanner-macosx.zip -d ~/sonar-scanner
-        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=ai-robotics-nav2-slam-example-python -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_STG -Dsonar.login=$SONARQUBE_TOKEN_STG
+        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_BASE_DIR -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_STG -Dsonar.login=$SONARQUBE_TOKEN_STG
     triggers:
         cancel_old_ci: true
         expression: |
