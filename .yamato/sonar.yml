@@ -6,7 +6,7 @@ csharp:
         flavor: m1.mac
     variables:
         PROJECT_PATH: Nav2SLAMExampleProject
-        SONARQUBE_PROJECT_KEY: ai-robotics-nav2-slam-example-c#
+        SONARQUBE_PROJECT_KEY: ai-robotics-nav2-slam-example-csharp
         SONARQUBE_PROJECT_BASE_DIR: /Users/bokken/build/output/Unity-Technologies/Unity-Robotics-Hub/Robotics-Nav2-SLAM-Example/Nav2SLAMExampleProject
         MSBUILD_SLN_PATH: ./Nav2SLAMExampleProject/Nav2SLAMExampleProject.sln
     commands:
