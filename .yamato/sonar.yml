@@ -42,7 +42,7 @@ python:
     commands:
         - curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-macosx.zip -o sonar-scanner-macosx.zip -L
         - unzip sonar-scanner-macosx.zip -d ~/sonar-scanner
-        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_BASE_DIR -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_STG -Dsonar.login=$SONARQUBE_TOKEN_STG
+        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_STG -Dsonar.login=$SONARQUBE_TOKEN_STG
     triggers:
         cancel_old_ci: true
         expression: |
