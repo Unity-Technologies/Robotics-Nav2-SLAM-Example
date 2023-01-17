@@ -8,6 +8,8 @@ ENV ROS_DISTRO=galactic
 ENV GROUP_NAME=ros
 ENV WS_NAME=colcon_ws
 
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
 RUN apt-get update -q && \
     apt-get upgrade -yq && \
