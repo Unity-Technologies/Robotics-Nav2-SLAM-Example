@@ -7,6 +7,6 @@ python3 -m pip install --no-warn-script-location \
 
 source /opt/ros/${ROS_DISTRO}/setup.bash
 cd ~/$WS_NAME
-rosdep update
+rosdep update --rosdistro $ROS_DISTRO
 rosdep install -yrq --from-paths src --ignore-src --rosdistro $ROS_DISTRO
 colcon build
