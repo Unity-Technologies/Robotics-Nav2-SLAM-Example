@@ -2,13 +2,17 @@
 FROM dorowu/ubuntu-desktop-lxde-vnc:focal
 LABEL maintainer="Unity Robotics <unity-robotics@unity3d.com>"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV DEV_NAME=rosdev
 ENV ROS_DISTRO=galactic
 ENV GROUP_NAME=ros
 ENV WS_NAME=colcon_ws
 
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
+# Add Google Chrome's public key
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    
 RUN apt-get update -q && \
     apt-get upgrade -yq && \
     apt-get install -yq \
@@ -36,6 +40,9 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     apt-get update -q && \
     apt-get install -y --no-install-recommends \
       ros-${ROS_DISTRO}-ros-base \
+      ros-${ROS_DISTRO}-navigation2 \
+      ros-${ROS_DISTRO}-nav2-bringup \
+      ros-${ROS_DISTRO}-rviz2 \
       python3-rosdep \
       python3-colcon-common-extensions \
       python3-vcstool \
@@ -69,5 +76,5 @@ ENV TURTLEBOT3_MODEL=waffle_pi
 # cd catkin_ws && source install/setup.bash && ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 
 # Informs the environment that the default user is not root, but instead DEV_NAME
-ENV USER ${DEV_NAME}
+ENV USER=${DEV_NAME}
 
