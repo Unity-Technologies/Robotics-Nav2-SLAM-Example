@@ -16,6 +16,9 @@ setup(
                                                 'rviz/nav2_unity.rviz',
                                                 'launch/unity_slam_example.py',
                                                 'launch/unity_viz_example.py'
+                                                ]),
+        (os.path.join('share', package_name, 'config'), [
+                                                'config/nav2_params.yaml'
                                                 ])
     ],
     install_requires=['setuptools'],

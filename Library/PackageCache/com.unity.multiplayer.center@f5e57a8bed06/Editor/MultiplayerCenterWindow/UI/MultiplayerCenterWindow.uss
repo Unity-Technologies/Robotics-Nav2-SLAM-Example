@@ -1,0 +1,626 @@
+#root {
+    --dark-grey: var(--unity-colors-window-background);
+    --standard-grey: var(--unity-colors-app_toolbar_button-background-hover);
+    --standard-background-color: var(--unity-colors-window-background);
+    --light-grey: var(--unity-colors-dropdown-background);
+    --border-color: var(--unity-colors-dropdown-border);
+    --card-background: var(--unity-colors-inspector_titlebar-border_accent);
+    
+    --doc-separator-color: #5D5D5D;
+    
+    --tab-button-bar-height: 32px;
+    
+    --bottom-bar-height: 56px;
+    
+    --card-width: 300px;
+    --card-min-width: 200px;
+    --card-poster-icon-width: 92px;
+    --card-poster-icon-height: 64px;
+    
+    --checkmark-icon: url("Icons/Check.png");
+    --questionnaire-empty-view-icon: url('Icons/EmptyViewIcon.png');
+}
+
+.color-recommendation-badge {
+    color: var(--recommendation-badge-color);
+    border-color: var(--recommendation-badge-color);
+}
+
+.icon{
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+}
+
+Label{
+    overflow: hidden;
+    white-space: normal;
+}
+
+.view-headline{
+    font-size: 14px;
+    padding-bottom: 16px;
+}
+
+.recommendation-view-headline{
+    font-size: 14px;
+    padding-bottom: 16px;
+    margin-left: 10px;
+}
+
+.icon-package-manager{
+    background-image: var(--package-manager-icon);
+}
+
+.icon-questionmark {
+    background-image: var(--info-icon);
+}
+
+.icon-three-dots {
+    background-image: var(--three-dot-icon);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.icon-package-installed{
+    margin-left: 4px;
+    background-image: var(--package-installed-icon);
+}
+
+.icon-NGO{background-image:url('Icons/Ngo.png')}
+.icon-N4E{background-image:url('Icons/N4E.png')}
+.icon-LS{background-image:url('Icons/ClientHosted.png')}
+.icon-DS{background-image:url('Icons/DedicatedServer.png')}
+.icon-DA{background-image:url('Icons/DistributedAuthority.png')}
+.icon-CustomNetcode{background-image:url('Icons/CustomNetcode.png')}
+.icon-NoNetcode{background-image:url('Icons/NoNetcode.png')}
+.icon-CloudCode{background-image:url('Icons/CloudCode.png')}
+
+/*Utilities*/
+
+.processing{
+    background-image: var(--spinner-icon-big);
+    rotate: 360000deg;
+    transition-property: rotate;
+    transition-timing-function: linear;
+    transition-duration: 2000s;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.color-grey {
+    color: var(--badge-color-grey);
+    opacity: 0.8;
+    border-color: var(--badge-color-grey);
+}
+
+.highlight-background-color {
+    background-color: var(--standard-background-color);
+}
+
+.next-step-button {
+    padding: 6px;
+    margin-top: 6px;
+    min-height: 32px;
+    max-height: 32px;
+}
+
+.packageIcon {
+    background-image: var(--package-icon);
+    -unity-background-scale-mode: scale-to-fit;
+    margin-right: 4px;
+    background-size: 16px 16px;
+}
+
+.questionnaireIcon {
+    background-image: var(--questionnaire-icon);
+    -unity-background-scale-mode: scale-to-fit;
+    background-size: 14px 14px;
+}
+
+/* Questionnaire view  */
+
+#questionnaire-view {
+    margin: 10px;
+    padding-bottom: 4px;
+}
+
+
+#questionnaire-view Label {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#questionnaire-view Toggle {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#advanced-questions > Toggle {
+    -unity-font-style: bold;
+}
+
+/*question-view  One single question in question-view*/
+
+.question-view{
+    margin-bottom: 4px;
+}
+
+#advanced-questions .question-view > Label {
+    margin-bottom: 2px;
+}
+
+.question-view Toggle {
+    background-color: var(--dark-grey);
+}
+
+.question-view .question-text {
+    margin: 5px;
+    white-space: normal;
+}
+
+.question-view .unity-radio-button__label {
+    left: 32px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.question-view .unity-radio-button__input {
+    position: absolute;
+    left: 16px;
+}
+
+.mandatory-question Label {
+    padding-bottom: 4px;
+    -unity-font-style: bold;
+}
+
+.question-section {
+}
+
+.question-section__no-scrollbar{
+    align-content: flex-start;
+    flex-shrink: 0;
+}
+
+/*bottom bar - holding the install button, spinning icon and the package count */
+#bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-height: var(--bottom-bar-height);
+    min-height: var(--bottom-bar-height);
+    flex-direction: row;
+    border-width: 1px;
+    background-color: var(--unity-colors-window-background);
+    border-top-color: var(--border-color);
+    font-size: 14px;
+}
+
+#bottom-bar #install-package-container {
+    flex-direction: row;
+}
+
+EnumField, DropdownField {
+    margin: 0px;
+    min-height: 19px;
+}
+
+/* recommendation view*/
+
+#main-sections-container{
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.main-section{
+    background-color: var(--card-background);
+    border-width: 1px;
+    border-color: var(--border-color);
+    padding-bottom: 16px;
+    margin: 0px 8px 8px 0px;
+    width: var(--card-width);
+    min-width: var(--card-min-width);
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.main-section .recommendation-item{
+    padding: 0px;
+    margin-left: -4px;
+    margin-right: -4px;
+
+}
+
+.main-section DropdownField{
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 8px;
+}
+
+.main-section .unity-help-box{
+    margin-top: 4px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sub-section{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 8px;
+}
+
+.subsection-headline{
+    font-size: 12px;
+    -unity-font-style: bold;
+}
+
+.subsection-headline > .unity-base-field{
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+
+/*recommendation section - foldout that holds recommendations*/
+#card-headline{
+    font-size: 12px;
+    -unity-font-style: bold;
+    margin-bottom: 4px;
+}
+
+#associated-features-headline{
+    margin-top: 8px;
+}
+
+#card-poster-image{
+    margin-right: -16px;
+    margin-left: -16px;
+    min-width: 100%;
+    min-height: 92px;
+    
+    background-color: var(--card-poster-image-bg-color);
+    margin-bottom: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+#card-poster-image >*{
+    
+    min-width: var(--card-poster-icon-width);
+    max-width: var(--card-poster-icon-width);
+    min-height: var(--card-poster-icon-height);
+    max-height: var(--card-poster-icon-height);
+}
+
+#recommendation-view-section-container {
+    flex-grow: 1;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/*recommendation item - One Item that a user can select or unselect within recommendation section*/
+
+.recommendation-item {
+    border-width: 1px;
+    -unity-font-style: normal;
+    background-color: var(--card-background);
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-height: 32px;
+    margin-top: 4px;
+    padding:4px;
+}
+
+.recommendation-item #sub-info-text {
+    margin-left: 20px;
+    -unity-font-style: italic;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.recommendation-item #header {
+ 
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recommendation-item-top-left-container {
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-items: center;
+}
+
+.recommendation-item-top-left-container Label {
+    flex-shrink: 1;
+}
+
+.recommendation-item-top-right-container {
+    max-width: 64px;
+    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.badge {
+    font-size: 9px;
+    padding: 1px;
+    margin-left: 4px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-width: 1px;
+    border-radius: 3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 24px;
+    flex-shrink: 1;
+}
+
+.pre-release-badge {
+    color: var(--pre-release-badge-color);
+    background-color: var(--pre-release-badge-color-bg);
+    border-color: var(--pre-release-badge-color);
+}
+
+/*Tab views - if we are sure we will not support 2022, we should merge this with TabView uss*/
+#tab-view{
+    height: 100%;
+}
+
+#tab-zone {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: var(--tab-button-bar-height);
+    max-height: var(--tab-button-bar-height);
+}
+
+.tabs-container {
+    height: 100%;
+}
+
+.tab-content{
+    height: 100%;
+}
+
+#recommendation-tab-container
+{
+    height: 100%;
+}
+
+.main-split-view {
+    border-top-width: 1px;
+    border-top-color: var(--border-color);
+    height: 100%;
+    margin-bottom: 0px;
+}
+
+.main-split-view-right{
+    margin-top: 10px;
+}
+
+#unity-dragline-anchor{
+    background-color: var(--border-color);
+}
+
+#unity-dragline-anchor:hover{
+    background-color: white;
+    opacity: 0.3;
+}
+
+.tab-button {
+    margin: 0;
+    padding-top: 4px;
+    border-width: 0px;
+    border-bottom-width: 2px;
+    min-height: var(--tab-button-bar-height);
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-color: var(--dark-grey);
+    background-color: var(--dark-grey);
+    padding-left: 12px;
+    padding-right: 12px;
+    align-items: center;
+
+}
+
+.tab-button:hover {
+    background-color: var(--standard-grey);
+}
+
+.tab-button.selected {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--tab-button-highlight-color);
+}
+
+/* Getting started views */
+.onboarding-categories{
+    margin: 0px;
+    align-items: flex-start;
+}
+
+.onboarding-categories .unity-button-group{
+    flex-direction: column;
+    align-self: stretch;
+    margin: 0px;
+}
+
+.onboarding-category-button{
+    margin: 0px;
+    padding-left: 20px;
+    -unity-text-align: middle-left;
+    width: 100%;
+    min-height: 28px;
+    border-width: 0px;
+    background-color: transparent;
+    border-radius: 0px;
+} 
+
+.onboarding-category-button:hover {
+    background-color: var(--standard-grey);
+}
+
+.onboarding-category-button:checked {
+    background-color: var(--unity-colors-highlight-background);
+    -unity-font-style: bold;
+    color: var(--onboarding-button-selected-text-color);
+}
+
+.onboarding-section-category-container{
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 24px;
+}
+
+.onboarding-section-mainbutton{
+    max-height: 24px;
+    align-self: flex-start;
+    padding: 2px 4px 2px 4px;
+    margin-left: 0;
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+/*onboarding section*/
+.onboarding-section {
+    background-color: var(--unity-colors-inspector_titlebar-border_accent);
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+.section-foldout {
+    background-color: var(--card-background);
+    padding: 16px;
+    padding-top: 8px;
+    margin-bottom: 8px;
+}
+
+.section-foldout .unity-foldout__checkmark {
+    /* Use width instead of display: none, which results in the title being cut  */
+    width: 0;
+}
+
+.section-foldout .unity-foldout__text {
+    font-size: 14px;
+    -unity-font-style: Bold;
+    margin-bottom: 8px;
+    margin-left: -6px;
+}
+
+.section-foldout .onboarding-section-short-description {
+    margin-left: -16px;
+}
+
+.onboarding-section-title {
+    font-size: 14px;
+    -unity-font-style: Bold;
+    margin-bottom: 8px;
+}
+
+.three-dot-button {
+    background-color: transparent;
+    border-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    width: 14px;
+    height: 14px;
+}
+
+.three-dot-button:hover {
+    background-color: var(--standard-grey);
+}
+
+.onboarding-section-short-description {
+    max-width: 700px;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.horizontal-container {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.flex-spacer {
+    flex-grow: 1;
+}
+
+.doc-button {
+    border-width: 0px;
+    padding: 1px;
+    margin-left: 0px;
+    margin-right: 2px;
+    background-color: var(--card-background);
+    color: var(--link-color);
+}
+
+.doc-button:hover {
+    background-color: var(--dark-grey);
+}
+
+#doc-button-separator {
+    margin: 2px;
+    color: var(--doc-separator-color);
+}
+
+.checkmark-icon {
+    background-image: var(--checkmark-icon);
+    -unity-background-scale-mode: scale-to-fit;
+    background-size: 16px 16px;
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+}
+
+/* Empty view which is shown when no recommendations are shown*/
+
+#empty-view {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+#empty-view-content{
+    height: 100%;
+    width: 75%;
+    max-width: 400px;
+    justify-content: center;
+}
+
+#empty-view-icon {
+    min-height: 50%;
+    background-image: var(--questionnaire-empty-view-icon);
+    background-size: contain;
+    margin-bottom: 8px;
+}
+
+#empty-view-message {
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100%;
+    -unity-text-align: upper-left;
+    overflow: hidden;
+    white-space: normal;
+}
+
+

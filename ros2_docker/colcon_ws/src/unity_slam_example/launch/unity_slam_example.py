@@ -31,7 +31,8 @@ def generate_launch_description():
                 os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
             ),
             launch_arguments={
-                'use_sim_time': 'true'
+                'use_sim_time': 'true',
+                'params_file': os.path.join(package_dir, 'config', 'nav2_params.yaml')
             }.items()
         ),
 

@@ -1,0 +1,417 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3677cd9ede84e78b2fff6331c6301da, type: 3}
+  m_Name: Questionnaire
+  m_EditorClassIdentifier: Unity.Multiplayer.Center.Questionnaire.QuestionnaireObject
+  Questionnaire:
+    FormatVersion: 1.0.0
+    Version: 1.3
+    Questions:
+    - Id: PlayerCount
+      Title: Number of Players per Session
+      Description: The number of expected players in a session influences the Netcode
+        stack and the hosting model.
+      GlobalWeight: 1
+      ViewType: 3
+      Choices:
+      - Id: 2
+        Title: 2
+        Description: 
+        ScoreImpacts:
+        - Solution: 0
+          Score: 0.7
+          Comment: can be used for 2 player games
+        - Solution: 2
+          Score: 0.8
+          Comment: is possible with 2 players
+        - Solution: 4
+          Score: 0.2
+          Comment: can handle 2 players
+      - Id: 4
+        Title: 4
+        Description: 
+        ScoreImpacts:
+        - Solution: 0
+          Score: 0.7
+          Comment: can be used for 4 player games
+        - Solution: 2
+          Score: 0.7
+          Comment: is possible with 4 players
+        - Solution: 4
+          Score: 0.2
+          Comment: can handle 4 players
+      - Id: 8
+        Title: 8
+        Description: 
+        ScoreImpacts:
+        - Solution: 0
+          Score: 0.7
+          Comment: can be used for 8 player games
+        - Solution: 4
+          Score: 0.2
+          Comment: can handle 8 players
+        - Solution: 2
+          Score: 0.4
+          Comment: is possible with 8 players
+      - Id: 16
+        Title: 16
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 0.5
+          Comment: can be used for 16 player games
+        - Solution: 3
+          Score: 0.5
+          Comment: is necessary with a high number of players
+        - Solution: 4
+          Score: 0.3
+          Comment: can handle 16 players
+      - Id: 64+
+        Title: 64
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 0.5
+          Comment: can be used for 64 player games
+        - Solution: 3
+          Score: 1
+          Comment: is necessary with a high number of players
+        - Solution: 4
+          Score: 0.3
+          Comment: can handle 64 players
+      - Id: 128
+        Title: 128
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 10
+          Comment: should be used for a very high number of players
+        - Solution: 3
+          Score: 1000
+          Comment: is necessary with a high number of players
+      - Id: 256
+        Title: 256
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 10
+          Comment: should be used for a very high number of players
+        - Solution: 3
+          Score: 1000
+          Comment: is necessary with a high number of players
+      - Id: 512
+        Title: 512+
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 10
+          Comment: should be used for a very high number of players
+        - Solution: 3
+          Score: 1000
+          Comment: is necessary with a high number of players
+      IsMandatory: 1
+    - Id: Pace
+      Title: Gameplay Pace
+      Description: Gameplay pace indicates how sensitive gameplay is to latency.
+        The amount of latency you expect impacts Netcode stacks and hosting models.
+      GlobalWeight: 1
+      ViewType: 0
+      Choices:
+      - Id: Slow
+        Title: Slow
+        Description: 
+        ScoreImpacts:
+        - Solution: 0
+          Score: 0.7
+          Comment: can be used for slow-paced games
+        - Solution: 2
+          Score: 0.25
+          Comment: is sufficient for Slow Games
+        - Solution: 4
+          Score: 0.25
+          Comment: works well with slow games
+      - Id: Fast
+        Title: Fast
+        Description: 
+        ScoreImpacts:
+        - Solution: 1
+          Score: 0.75
+          Comment: tends to be better for fast paced games
+        - Solution: 3
+          Score: 1
+          Comment: is recommended for fast games
+        - Solution: 4
+          Score: 0.65
+          Comment: can handle fast gameplay
+      IsMandatory: 0
+    - Id: Cheating
+      Title: Cheating / Modding Prevention
+      Description: The most common anti-cheating approach is to hide a part of your
+        gameplay implementation from clients using a server-authoritative hosting
+        model
+      GlobalWeight: 1
+      ViewType: 0
+      Choices:
+      - Id: CheatingNotImportant
+        Title: Not so important
+        Description: 
+        ScoreImpacts:
+        - Solution: 2
+          Score: 0.2
+          Comment: is more cost-effective if cheating is not very important
+        - Solution: 0
+          Score: 0.6
+          Comment: is preferred if cheating prevention is not so important
+      - Id: CheatingImportant
+        Title: Very important
+        Description: 
+        ScoreImpacts:
+        - Solution: 3
+          Score: 1000
+          Comment: is required if cheating prevention is important
+        - Solution: 1
+          Score: 0.5
+          Comment: is preferred if cheating prevention is important
+      IsMandatory: 0
+    - Id: CostSensitivity
+      Title: Cost Sensitivity
+      Description: Depending on your player monetization, your sensitivity to costs
+        will vary and influence the recommended hosting model.
+      GlobalWeight: 1
+      ViewType: 0
+      Choices:
+      - Id: BestExperience
+        Title: Favor best player experience
+        Description: When the game monetization heavily depends on the best possible player experience, often for e-sport competitive titles, backend solutions tend to be more expensive.
+        ScoreImpacts:
+        - Solution: 3
+          Score: 1.5
+          Comment: offers great performance
+        - Solution: 4
+          Score: 1.2
+          Comment: offers good performance
+        - Solution: 1
+          Score: 0.85
+          Comment: offers good performance
+      - Id: BestMargin
+        Title: Favor best operating costs
+        Description: At the expense of some degradation of the player experience, smart relay solutions can provide a cost-effective solution before adopting dedicated cloud-hosted servers.
+        ScoreImpacts:
+        - Solution: 4
+          Score: 1
+          Comment: is cost-effective
+        - Solution: 0
+          Score: 0.5
+          Comment: is a good compromise if you want to optimize your operating costs
+      - Id: NoCost
+        Title: As little cost as possible
+        Description: Avoiding backend costs usually involves implementing a client-hosted solution.
+        ScoreImpacts:
+        - Solution: 3
+          Score: -100
+          Comment: costs money
+        - Solution: 4
+          Score: 1
+          Comment: is cost-effective
+        - Solution: 1
+          Score: 0.5
+          Comment: is performant and enables you to reduce compute costs
+      IsMandatory: 0
+    - Id: NetcodeArchitecture
+      Title: Netcode Architecture
+      Description: Specific game genres often require very specialized netcode architectures.
+        In that case, the netcode stack recommendation might suggest a custom or third-party netcode that can be implemented on top of a Unity netcode, or with
+        the help of a third-party solution.
+      GlobalWeight: 1
+      ViewType: 0
+      Choices:
+      - Id: ClientServer
+        Title: Client / Server
+        Description: The most common netcode architecture is client-server. This architecture can be used with a client-hosted or cloud-hosted model. 
+        ScoreImpacts: []
+      - Id: LockstepSimulation
+        Title: Deterministic Lockstep
+        Description: Synchronization method in multiplayer games where each player's computer processes the same game inputs in the same order to maintain consistency in the game state.
+        ScoreImpacts:
+        - Solution: 5
+          Score: 5000
+          Comment: is necessary for Lockstep simulation
+        - Solution: 2
+          Score: 5000
+          Comment: is necessary for Lockstep simulation
+      - Id: MultiServerSessions
+        Title: Multi-Server Sessions
+        Description: Massively multiplayer online titles often require complex and tailored multi-server netcode and backend solutions.
+        ScoreImpacts:
+        - Solution: 5
+          Score: 100
+          Comment: is required for Multi-Server Sessions
+        - Solution: 3
+          Score: 1000
+          Comment: is required for Multi-Server Sessions
+      - Id: NoNetcode
+        Title: No netcode
+        Description: Netcode frameworks are usually meant to support interactive multiplayer gameplay. If the multiplayer experience relies on asynchronous social features or waits for someone's turn, there is often no netcode involved.
+        ScoreImpacts:
+        - Solution: 6
+          Score: 1000
+          Comment: is necessary
+        - Solution: 7
+          Score: 3000
+          Comment: enables you to run your game logic in the cloud as serverless functions
+      IsMandatory: 0
+    PresetData:
+      Presets: 0200000005000000030000000600000007000000010000000800000004000000090000000a0000000b000000
+      Answers:
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Fast
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestExperience
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingNotImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - NoCost
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Fast
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestExperience
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - LockstepSimulation
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Fast
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestExperience
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - MultiServerSessions
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingNotImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - NoNetcode
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - NoNetcode
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Fast
+        - QuestionId: Cheating
+          Answers:
+          - CheatingNotImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - NoCost
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - LockstepSimulation
+      - Answers:
+        - QuestionId: Pace
+          Answers:
+          - Slow
+        - QuestionId: Cheating
+          Answers:
+          - CheatingNotImportant
+        - QuestionId: CostSensitivity
+          Answers:
+          - BestMargin
+        - QuestionId: NetcodeArchitecture
+          Answers:
+          - ClientServer

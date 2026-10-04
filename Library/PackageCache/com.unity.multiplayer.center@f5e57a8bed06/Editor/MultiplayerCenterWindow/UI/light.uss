@@ -1,0 +1,28 @@
+/*
+ * CSS variables specific to light mode 
+ */
+:root {
+    --package-icon: url('Icons/Package.png');
+    --questionnaire-icon: url('Icons/Questionnaire.png');
+    --package-manager-icon: url('Icons/PackageManager.png');
+    --package-installed-icon: url('Icons/PackageInstalled.png');
+    --info-icon: resource('_Help');
+    --colors-incompatible-background: #C99700;
+    --comment-color: darkgray;
+    --highlight-background-color: #f2f2f2;
+    --card-poster-image-bg-color: #555555;
+    --recommendation-badge-color: #00876A;
+    --theme-slider-background-color: #8F8F8F; /* From Default common light uss */
+    --badge-color-grey:#555555; /* From Default common light uss, feedback color */
+    --pre-release-badge-color: #C99700;
+    --pre-release-badge-color-bg: #F0F0F0;
+    --link-color: #0000f5;
+    --tab-button-highlight-color: black;
+    --onboarding-button-selected-text-color: white;
+    --three-dot-icon: resource("UIBuilderPackageResources/Icons/Light/Inspector/Status/Settings.png");
+    --spinner-icon-big: url('Icons/Loading.png');
+}
+
+.color-recommendation-badge {
+   background-color: #eeeeee;
+}
